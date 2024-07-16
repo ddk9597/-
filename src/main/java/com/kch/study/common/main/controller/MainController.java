@@ -2,6 +2,7 @@ package com.kch.study.common.main.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller // bean 등록하여 springContainer가 생성하고 관리하게 함
@@ -23,4 +24,5 @@ public class MainController {
 	public String showRealtorMain() {
 		return "realtor/rMain";
 	}
+	
 }
