@@ -1,28 +1,248 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>서울시내 공인중개사 검색기</title>
+  <title>부동산 중개업소 정보</title>
+  <style>
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    table, th, td {
+      border: 1px solid black;
+    }
+
+    th, td {
+      padding: 10px;
+      text-align: left;
+    }
+
+    .pagination {
+      display: flex;
+      justify-content: center;
+      margin-top: 20px;
+    }
+
+    .pagination button {
+      margin: 0 5px;
+      padding: 5px 10px;
+    }
+
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgb(0,0,0);
+      background-color: rgba(0,0,0,0.4);
+      justify-content: center;
+      align-items: center;
+    }
+
+    .modal-content {
+      background-color: #fefefe;
+      margin: auto;
+      padding: 20px;
+      border: 1px solid #888;
+      width: 80%;
+      text-align: center;
+    }
+  </style>
 </head>
+
 <body>
-  <h1>서울시내 공인중개사 검색기</h1>
+  <h1>부동산 중개업소 정보</h1>
 
-  업체명 : <input type="text" id="rOfficeName">
-  <button>구 선택(강남구 등..)</button>
-  대표 공인중개사 검색 : <input type="text" id="realtorName">
-
-
-  <!-- 구 선택 모달 창 -->
-  <div id="selectAreaModal">
-    <div class="areaBtn"></div>
-    <div class="areaBtn"></div>
-    <div class="areaBtn"></div>
-    <div class="areaBtn"></div>
-    <div class="areaBtn"></div>
-    <div class="areaBtn"></div>
-
-
+  <div>
+    <label for="searchCggCd">구명: </label>
+    <input type="text" id="searchCggCd" placeholder="구명을 입력하세요">
+    <label for="searchBzmnConm">업체명: </label>
+    <input type="text" id="searchBzmnConm" placeholder="업체명을 입력하세요">
+    <label for="searchMdtBsnsNm">대표명: </label>
+    <input type="text" id="searchMdtBsnsNm" placeholder="대표명을 입력하세요">
+    <button onclick="fetchAndFilterData()">검색</button>
   </div>
+
+  <table id="landBizInfoTable">
+    <thead>
+      <tr>
+        <th>구명</th>
+        <th>법정동명</th>
+        <th>주소</th>
+        <th>담당자명</th>
+        <th>업체명</th>
+        <th>전화번호</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- JSON 데이터가 여기에 삽입됩니다 -->
+    </tbody>
+  </table>
+
+  <div class="pagination" id="pagination">
+    <!-- 페이지네이션 버튼이 여기에 삽입됩니다 -->
+  </div>
+
+  <div id="loadingModal" class="modal">
+    <div class="modal-content">
+      <p>데이터를 로딩 중입니다. 잠시만 기다려 주세요...</p>
+    </div>
+  </div>
+
+  <script>
+    let originalData = [];
+    let filteredData = [];
+    const pageSize = 20;
+    let currentPage = 1;
+    let totalPages = 0;
+
+    function showLoadingModal() {
+      document.getElementById('loadingModal').style.display = 'flex';
+    }
+
+    function hideLoadingModal() {
+      document.getElementById('loadingModal').style.display = 'none';
+    }
+
+    function fetchAndFilterData() {
+      showLoadingModal();
+      const searchCggCd = document.getElementById('searchCggCd').value.toLowerCase();
+      const searchBzmnConm = document.getElementById('searchBzmnConm').value.toLowerCase();
+      const searchMdtBsnsNm = document.getElementById('searchMdtBsnsNm').value.toLowerCase();
+
+      const apiUrlTemplate = 'http://openapi.seoul.go.kr:8088/574345677664646b31303243637a7778/json/landBizInfo/{start}/{end}/';
+      const totalDataCount = 25874;
+      const promises = [];
+
+      for (let i = 1; i <= totalDataCount; i += pageSize) {
+        const apiUrl = apiUrlTemplate.replace('{start}', i).replace('{end}', i + pageSize - 1);
+        promises.push(fetch(apiUrl).then(response => response.json()));
+      }
+
+      Promise.all(promises).then(results => {
+        originalData = results.flatMap(result => result.landBizInfo.row);
+        filteredData = originalData.filter(function (item) {
+          return (searchCggCd === '' || item.CGG_CD.toLowerCase().includes(searchCggCd)) &&
+            (searchBzmnConm === '' || item.BZMN_CONM.toLowerCase().includes(searchBzmnConm)) &&
+            (searchMdtBsnsNm === '' || item.MDT_BSNS_NM.toLowerCase().includes(searchMdtBsnsNm));
+        });
+        currentPage = 1;
+        totalPages = Math.ceil(filteredData.length / pageSize);
+        displayData(filteredData.slice(0, pageSize));
+        setupPagination(filteredData.length);
+        hideLoadingModal();
+      }).catch(error => {
+        console.error("Error fetching data: ", error);
+        hideLoadingModal();
+      });
+    }
+
+    function displayData(data) {
+      const tableBody = document.getElementById('landBizInfoTable').getElementsByTagName('tbody')[0];
+      tableBody.innerHTML = '';
+
+      data.forEach(function (item) {
+        const row = document.createElement('tr');
+
+        const fields = ['CGG_CD', 'LGL_DONG_NM', 'ADDR', 'MDT_BSNS_NM', 'BZMN_CONM', 'TELNO'];
+
+        fields.forEach(function (field) {
+          const cell = document.createElement('td');
+          cell.textContent = item[field] || '';
+          row.appendChild(cell);
+        });
+
+        tableBody.appendChild(row);
+      });
+    }
+
+    function setupPagination(totalItems) {
+      const pagination = document.getElementById('pagination');
+      pagination.innerHTML = '';
+
+      totalPages = Math.ceil(totalItems / pageSize);
+
+      const maxVisiblePages = 20;
+      let startPage = Math.max(1, currentPage - Math.floor(maxVisiblePages / 2));
+      let endPage = Math.min(totalPages, startPage + maxVisiblePages - 1);
+
+      if (endPage - startPage < maxVisiblePages - 1) {
+        startPage = Math.max(1, endPage - maxVisiblePages + 1);
+      }
+
+      if (startPage > 1) {
+        const firstButton = document.createElement('button');
+        firstButton.textContent = '<<';
+        firstButton.onclick = function () {
+          currentPage = 1;
+          updatePagination();
+        };
+        pagination.appendChild(firstButton);
+      }
+
+      if (startPage > 1) {
+        const prevButton = document.createElement('button');
+        prevButton.textContent = '<';
+        prevButton.onclick = function () {
+          currentPage = Math.max(1, currentPage - 1);
+          updatePagination();
+        };
+        pagination.appendChild(prevButton);
+      }
+
+      for (let i = startPage; i <= endPage; i++) {
+        const button = document.createElement('button');
+        button.textContent = i;
+        if (i === currentPage) {
+          button.disabled = true;
+        }
+        button.onclick = function () {
+          currentPage = i;
+          const start = (currentPage - 1) * pageSize;
+          const end = start + pageSize;
+          displayData(filteredData.slice(start, end));
+          setupPagination(totalItems);
+        };
+        pagination.appendChild(button);
+      }
+
+      if (endPage < totalPages) {
+        const nextButton = document.createElement('button');
+        nextButton.textContent = '>';
+        nextButton.onclick = function () {
+          currentPage = Math.min(totalPages, currentPage + 1);
+          updatePagination();
+        };
+        pagination.appendChild(nextButton);
+      }
+
+      if (endPage < totalPages) {
+        const lastButton = document.createElement('button');
+        lastButton.textContent = '>>';
+        lastButton.onclick = function () {
+          currentPage = totalPages;
+          updatePagination();
+        };
+        pagination.appendChild(lastButton);
+      }
+    }
+
+    function updatePagination() {
+      const start = (currentPage - 1) * pageSize;
+      const end = start + pageSize;
+      displayData(filteredData.slice(start, end));
+      setupPagination(filteredData.length);
+    }
+
+    fetchAndFilterData();
+  </script>
 </body>
+
 </html>
