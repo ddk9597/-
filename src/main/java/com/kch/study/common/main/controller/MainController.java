@@ -14,15 +14,23 @@ public class MainController {
 		// common/main.html로 forward
 		return "common/main";
 	}
-	
+
+	// 개업 공인중개사 검색기
 	@GetMapping("/realtorSearch/rSearch")
 	public String realtorSearch() {
 		return "realtorSearch/rSearch";
 	}
 
+	// 가짜 부동산 중개 사이트로 이동
 	@GetMapping("/realtor/rMain")
-	public String showRealtorMain() {
+	public String getRMain() {
 		return "realtor/rMain";
+	}
+	
+	// 동호회 사이트로 이동
+	@GetMapping("hg/main")
+	public String getHgMain() {
+		return "hg/main";
 	}
 	
 }

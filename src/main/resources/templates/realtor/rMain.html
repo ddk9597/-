@@ -1,12 +1,82 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<html lang="ko">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>가짜 부동산 사이트</title>
+  <title>부동산 중개 사이트</title>
+  <link rel="stylesheet" href="/css/rMain.css">
 </head>
+
 <body>
-  <h1> 가짜 부동산 사이트</h1>
+  <header>
+    <div class="container">
+      <h1>부동산 중개</h1>
+      <nav>
+        <ul>
+          <li><a href="#home">홈</a></li>
+          <li><a href="#listings">매물 목록</a></li>
+          <li><a href="#contact">문의하기</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <section id="home" class="hero">
+    <div class="container">
+      <h2>당신의 꿈의 집을 찾으세요</h2>
+      <p>우리는 최고의 매물을 제공합니다</p>
+    </div>
+  </section>
+
+  <section id="listings" class="listings">
+    <div class="container">
+      <h2>매물 목록</h2>
+      <div class="property">
+        <img src="property1.jpg" alt="Property 1">
+        <h3>강남구 아파트</h3>
+        <p>3억 5천만원</p>
+      </div>
+      <div class="property">
+        <img src="property2.jpg" alt="Property 2">
+        <h3>서초구 빌라</h3>
+        <p>4억 2천만원</p>
+      </div>
+      <!-- 추가 매물 항목을 여기에 추가 -->
+    </div>
+  </section>
+
+  <section id="contact" class="contact">
+    <div class="container">
+      <h2>문의하기</h2>
+      <form>
+        <label for="name">이름:</label>
+        <input type="text" id="name" name="name" required>
+        <label for="email">이메일:</label>
+        <input type="email" id="email" name="email" required>
+        <label for="message">메시지:</label>
+        <textarea id="message" name="message" required></textarea>
+        <button type="submit">전송</button>
+      </form>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <p>&copy; 2024 부동산 중개 사이트. 모든 권리 보유.</p>
+    </div>
+  </footer>
+
+  <!-- 이 사이트가 연습용 가짜 사이트임을 알리는 모달 설정 -->
+  <div id="myModal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h2 style="color: red;">알림</h2>
+      <p>이 사이트는 강찬혁의 코딩 연습용 가짜 사이트입니다. 실제 부동산 정보를 제공하지 않습니다.</p>
+    </div>
+  </div>
 
 </body>
+<script src="/js/rMain.js"></script>
+
 </html>
