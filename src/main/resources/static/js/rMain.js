@@ -18,3 +18,9 @@
             }
         }
     }
+
+// 회원 가입 페이지로 이동하기
+
+function toJoinRealtor(){
+  window.location.href = '/rMain/member/join';
+}
