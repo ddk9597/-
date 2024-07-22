@@ -20,7 +20,6 @@ public class rMainController {
 	// 회원가입 페이지로 이동하기
 	@GetMapping("member/join")
 	public String getMethodName() {
-		log.info("페이지 이동 요청");
 		return "realtor/member/join";
 	}
 	
