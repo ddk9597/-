@@ -14,7 +14,7 @@ import lombok.Setter;
 public class rMember {
 
 	private int memberNo; 		// 회원 번호
-	private int memberKind;		// 회원 종류 -> 신규임차인 : 0 임대인 : 1, 기존임차인 : 2, 중개업자 :3
+	private int memberKind;		// 회원 종류 -> 신규임차인 :0, 임대인 : 1, 기존임차인 : 2, 중개업자 :3
 	private String memberPw;	// 회원 비밀번호
 	private String memberName;  // 회원 이름
 	private String memberEmail; // 회원 이메일
