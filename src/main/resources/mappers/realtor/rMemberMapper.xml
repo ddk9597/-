@@ -1,0 +1,14 @@
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper
+	namespace="com.kch.study.realtor.member.model.mapper.rMemberMapper">
+
+	<select id="checkEmail">
+		SELECT COUNT(*) FROM REALTOR_MEMBER
+		WHERE MEMBER_EMAIL = #{inputMember};
+	</select>
+
+
+</mapper>
