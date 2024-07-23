@@ -15,7 +15,7 @@ const memberName = document.getElementById("memberName");
 
 // 2. 이메일 유효성 검사
 const memberEmail = document.getElementById("memberEmail");
-
+const emailMessage = document.getElementById("emailMessage");
 memberEmail.addEventListener("input", e=>{
 
   // 1) 입력된 이메일 값 얻어오기
@@ -33,6 +33,14 @@ memberEmail.addEventListener("input", e=>{
   const regExp = /^[a-zA-Z0-9._%+-]+@(naver\.com|gmail\.com|hanmail\.net)$/;
 
   // 3.2.) 정규식과 일치하지 않을 경우
+  if(regExp.test(inputEmail)){
+    emailMessage.innerText = "올바른 이메일을 입력해 주세요";
+    checkObj.memberEmail = false;
+    return;
+  }
+
+  // 3.3.) 유효한 이메일일 경우
+  // 3.3.1. 이메일 중복검사 실행
   
 });
 

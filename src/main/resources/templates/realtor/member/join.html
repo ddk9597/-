@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,44 +15,46 @@
   <div class="container">
     <h1>회원가입</h1>
     <form action="/realtor/member/signUp" method="post">
-        <div class="form-group">
-            <label for="username">회원 이름</label>
-            <input type="text" id="memberName" name="memberName">
-        </div>
-        <div class="form-group">
-          <label for="memberPhone">전화번호</label>
-          <input type="text" id="memberPhone" name="memberPhone">
-        </div>
-        <div class="form-group">
-            <label for="email">이메일</label>
-            <input type="email" id="memberEmail" name="memberEmail" >
-            <span class="signUpMessage" id="emailMessage">사용 가능한 메일을 입력해 주세요</span>
-        </div>
-        <div class="form-group">
-            <label for="password">비밀번호</label>
-            <input type="password" id="password" name="memberPw" >
-        </div>
-        <div class="form-group">
-            <label for="confirm-password">비밀번호 확인</label>
-            <input type="password" id="confirm-password" name="confirmPw" >
-        </div>
+      <div class="form-group">
+        <label for="username">회원 이름</label>
+        <input type="text" id="memberName" name="memberName">
+      </div>
+      <div class="form-group">
+        <label for="memberPhone">전화번호</label>
+        <input type="text" id="memberPhone" name="memberPhone">
+      </div>
+      <div class="form-group">
+        <label for="email">이메일</label>
+        <input type="email" id="memberEmail" name="memberEmail">
+        <span class="signUpMessage" id="emailMessage">
+          사용 가능한 메일을 입력해 주세요(naver, gmail, hanmail)</span>
+      </div>
+      <div class="form-group">
+        <label for="password">비밀번호</label>
+        <input type="password" id="password" name="memberPw">
+      </div>
+      <div class="form-group">
+        <label for="confirm-password">비밀번호 확인</label>
+        <input type="password" id="confirm-password" name="confirmPw">
+      </div>
 
-          <!-- 회원 종류 -->
-          <div class="form-group">
-            <label for="memberKind">회원 종류</label>
-            <select id="memberKind" name="memberKind" >
-              <option value="0">기존 임차인</option>
-              <option value="1">신규 임차인</option>
-              <option value="2">부동산 소유주</option>
-              <option value="3">중개업 종사자</option>
-            </select>
-          </div>
-        <button type="submit" class="btn">가입하기</button>
+      <!-- 회원 종류 -->
+      <div class="form-group">
+        <label for="memberKind">회원 종류</label>
+        <select id="memberKind" name="memberKind">
+          <option value="0">기존 임차인</option>
+          <option value="1">신규 임차인</option>
+          <option value="2">부동산 소유주</option>
+          <option value="3">중개업 종사자</option>
+        </select>
+      </div>
+      <button type="submit" class="btn">가입하기</button>
     </form>
 
-</div>
+  </div>
 
 </body>
 
 <script src="/js/realtor/member/join.js"></script>
+
 </html>
