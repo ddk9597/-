@@ -33,31 +33,34 @@ memberEmail.addEventListener("input", e => {
   const regExp = /^[a-zA-Z0-9._%+-]+@(naver\.com|gmail\.com|hanmail\.net)$/;
 
   // 3.2.) 정규식과 일치하지 않을 경우
-  if (regExp.test(inputEmail)) {
-    emailMessage.innerText = "올바른 이메일을 입력해 주세요";
+  if (!regExp.test(inputEmail)) {
+    emailMessage.innerText = "올바른 이메일을 입력해주세요";
     checkJoin.memberEmail = false;
     return;
   }
 
   // 3.3.) 유효한 이메일일 경우
   // 3.3.1. 이메일 중복검사 실행
-  fetch("/realtor/member/checkEmail?memberEmail=" + inputEmail)
-    .then(resp => resp.text())
-    .then(count => {
-      // count = 1 -> 중복
-      if (count == 1) { // 중복일 경우
-        emailMessage.innerText = "이미 사용중인 이메일 입니다."
-        checkJoin.memberEmail = false;
-        return;
-      }
+  if (regExp.test(inputEmail)) {
+    fetch("/realtor/member/checkEmail?memberEmail=" + inputEmail)
+      .then(resp => resp.text())
+      .then(count => {
+        // count = 1 -> 중복
+        if (count == 1) { // 중복일 경우
+          emailMessage.innerText = "이미 사용중인 이메일입니다."
+          checkJoin.memberEmail = false;
+          return;
+        }
 
-      if (count == 0) { // 중복이 아닐 경우
-        emailMessage.innerText = "사용 가능한 이메일 입니다."
-        checkJoin.memberEmail = true;
-      }
-    }).catch(e => {
-      console.log(e);
-    });
+        if (count == 0) { // 중복이 아닐 경우
+          emailMessage.innerText = "사용 가능한 이메일입니다."
+          checkJoin.memberEmail = true;
+        }
+      }).catch(e => {
+        console.log(e);
+      });
+  }
+
 });
 
 
