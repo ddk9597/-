@@ -12,10 +12,12 @@ import com.kch.study.realtor.member.model.dto.rMember;
 import com.kch.study.realtor.member.model.service.rMemberService;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 @Controller
 @RequestMapping("realtor/member")
 @RequiredArgsConstructor
+@Slf4j
 public class rMemberController {
 
 	private final rMemberService service;
@@ -31,6 +33,9 @@ public class rMemberController {
 	@ResponseBody
 	@GetMapping("checkEmail")
 	public int checkEmail(@RequestParam("memberEmail") String memberEmail) {
+		
+		log.info("memberEmail : " + memberEmail);
+		
 		return service.checkEmail(memberEmail);
 	}
 }

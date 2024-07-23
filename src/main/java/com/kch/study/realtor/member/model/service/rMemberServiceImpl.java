@@ -5,11 +5,13 @@ import org.springframework.stereotype.Service;
 
 import com.kch.study.realtor.member.model.mapper.rMemberMapper;
 
+import lombok.RequiredArgsConstructor;
+
 @Service
+@RequiredArgsConstructor
 public class rMemberServiceImpl implements rMemberService {
 
-	@Autowired
-	private rMemberMapper mapper;
+	private final rMemberMapper mapper;
 	
 	
 	@Override
