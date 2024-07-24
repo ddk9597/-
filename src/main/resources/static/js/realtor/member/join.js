@@ -60,8 +60,11 @@ memberEmail.addEventListener("input", e => {
         console.log(e);
       });
   }
-
 });
+
+// 3.4. 유효한 이메일 인증 보내기
+const sendAuthKey = document.getElementById("sendAuthKey");
+
 
 
 // 3. 비밀번호 유효성 검사
@@ -70,3 +73,5 @@ memberEmail.addEventListener("input", e => {
 
 // 4.1. 중개업 종사자일 경우
 // 4.1.1. 근무중인 중개업소 확인하기
+
+

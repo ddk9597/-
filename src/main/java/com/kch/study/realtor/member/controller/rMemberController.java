@@ -31,8 +31,17 @@ public class rMemberController {
 		String path = null;
 		String message = null;
 		
+		// 회원가입 성공 시
+		if(result > 0) {
+			message = inputMember.getMemberName() + "님! 환영합니다!";
+			path = "/";
+		} else {
+			message = " 회원가입 실패.";
+			path = "signUp";
+		}
 		
-		return null;
+		ra.addFlashAttribute("message", message);
+		return "redirect:" + path;
 	}
 
 	// 이메일 중복검사
