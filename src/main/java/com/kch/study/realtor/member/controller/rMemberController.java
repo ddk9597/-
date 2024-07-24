@@ -25,7 +25,13 @@ public class rMemberController {
 	// 회원 가입하기
 	@PostMapping("signUp")
 	public String signUp(rMember inputMember, RedirectAttributes ra) {
-		// 로직을 여기에 추가하세요
+		
+		int result = service.signUp(inputMember);
+		
+		String path = null;
+		String message = null;
+		
+		
 		return null;
 	}
 
