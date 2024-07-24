@@ -31,8 +31,19 @@
           <button id="sendAuthKey" type="button">이메일 인증 받기</button>
       </div>
 
+      <!-- 이메일 인증 번호 입력하기 -->
       <div>
-        <input type="text">
+        <label for="emailChekc">
+          <span>인증번호</span>
+        </label>
+
+        <div>
+          <input type="text" name="authKey" id="authKey" placeholder="인증번호를 입력해 주세요" maxlength="5" autocomplete="off">
+
+          <button id="checkAuthKeyBtn" type="button">인증하기</button>
+        </div>
+        <!-- 인증번호 메세지 출력 -->
+        <span class="signUpMessage" id="authKeyMessage"></span>
       </div>
 
         
@@ -49,10 +60,11 @@
       <div class="form-group">
         <label for="memberKind">회원 종류</label>
         <select id="memberKind" name="memberKind">
-          <option value="0">기존 임차인</option>
-          <option value="1">신규 임차인</option>
-          <option value="2">부동산 소유주</option>
-          <option value="3">중개업 종사자</option>
+          <option value="99">사이트 이용 목적을 선택해주세요</option>
+          <option value="0">기존 임차인 : 가게 내놓고 싶어요</option>
+          <option value="1">신규 임차인 : 매장을 구하고 싶어요</option>
+          <option value="2">부동산 소유주 : 신규 임차인을 구하고싶어요</option>
+          <option value="3">중개업 종사자 : 고객 유치 및 광고 등록</option>
         </select>
       </div>
       <button type="submit" class="btn">가입하기</button>

@@ -6,6 +6,7 @@
 const checkJoin = {
   "memberName": false,
   "memberEmail": false,
+  "authKey": false,
   "memberPw": false,
   "memberKind": false
 }
@@ -62,9 +63,41 @@ memberEmail.addEventListener("input", e => {
   }
 });
 
-// 3.4. 유효한 이메일 인증 보내기
+// 3.4. 유효한 이메일에 인증 메세지 보내기
+// 3.4.0. 필요한 변수 선언
 const sendAuthKey = document.getElementById("sendAuthKey");
+const authKey = document.querySelector("#authKey");
+const authKeyMessage = document.querySelector("#authKeyMessage");
 
+// 3.4.1. 타이머 설정
+let authTimer;
+let authMin = 4;
+let authSec = 59;
+const initTimeSet = "5:00"; // 맨 처음 화면에 보여질 숫자
+
+// 실제 줄어드는 시간을 저장할 함수
+let min = authMin;
+let sec = authSec;
+
+// 인증번호 받기 버튼 클릭 시 메일로 인증번호 보내기
+sendAuthKey.addEventListener("click", e => {
+  
+  // checkJoin.memberEmail = false;
+  document.querySelector("#emailMessage").innerText = "";
+
+  // 유효한 메일 입력 시에만 확인 메일 전송하기
+  if(!checkJoin.memberEmail){
+    alert("올바른 메일을 작성해 주세요");
+    return;
+  }
+
+  // 클릭 시 타이머 숫자 초기화
+  min = initMin;	
+	sec = initSec;	
+	checkJoin.authKey = false; // 인증 유효성 검사 여부 false
+
+
+})
 
 
 // 3. 비밀번호 유효성 검사
@@ -74,4 +107,3 @@ const sendAuthKey = document.getElementById("sendAuthKey");
 // 4.1. 중개업 종사자일 경우
 // 4.1.1. 근무중인 중개업소 확인하기
 
-//what is Going On?!!
