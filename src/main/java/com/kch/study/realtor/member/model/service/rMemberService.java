@@ -8,9 +8,10 @@ public interface rMemberService {
 	int signUp(rMember inputMember);
 	
 	// 회원 가입 시 입력한 이메일 확인하기
-	int checkEmail(String memberEmail);
+	int checkEmail(String memberEmail, String htmlName);
 
 	String sendAuthKey(String memberEmail, String htmlName);
+
 
 
 }
