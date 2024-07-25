@@ -25,21 +25,21 @@ public class rMemberController {
 	// 회원 가입하기
 	@PostMapping("signUp")
 	public String signUp(rMember inputMember, RedirectAttributes ra) {
-		
+
 		int result = service.signUp(inputMember);
-		
+
 		String path = null;
 		String message = null;
-		
+
 		// 회원가입 성공 시
-		if(result > 0) {
+		if (result > 0) {
 			message = inputMember.getMemberName() + "님! 환영합니다!";
 			path = "/";
 		} else {
 			message = " 회원가입 실패.";
 			path = "signUp";
 		}
-		
+
 		ra.addFlashAttribute("message", message);
 		return "redirect:" + path;
 	}
@@ -48,9 +48,19 @@ public class rMemberController {
 	@ResponseBody
 	@GetMapping("checkEmail")
 	public int checkEmail(@RequestParam("memberEmail") String memberEmail) {
-		
+
 		log.info("memberEmail : " + memberEmail);
-		
+
 		return service.checkEmail(memberEmail);
+	}
+
+	// 인증 메일 보내기
+	@ResponseBody
+	@PostMapping("checkEmail")
+	public int sendAuthKey(@RequestParam("memberEmail") String memberEmail,
+			String htmlName) {
+
+		String authKey = service.sendAuthKey(memberEmail);
+		return 0;
 	}
 }

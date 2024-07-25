@@ -95,7 +95,23 @@ sendAuthKey.addEventListener("click", e => {
   min = initMin;	
 	sec = initSec;	
 	checkJoin.authKey = false; // 인증 유효성 검사 여부 false
+  
+  // 중복 클릭 시 이전 동작중인 제한시간 초기화\
+  clearInterval(authTimer);
 
+  // 비동기로 서버에서 메일 보내기
+  fetch("/realtor/member/checkEmail", {
+    method: "POST",
+    headers: {"Content-Type": "application/json"},
+    body : memberEmail.value
+  }).then(resp => resp.text())
+  .then(result=>{
+    if(result == 1){
+      console.log("인증번호 발송 성공");
+    } else{
+      console.log("인증번호 발송 실패..");
+    }
+  })
 
 })
 
