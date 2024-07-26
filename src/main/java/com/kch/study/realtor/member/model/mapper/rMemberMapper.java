@@ -22,6 +22,7 @@ public interface rMemberMapper {
 	String insertAuthKey(Map<String, String> map);
 
 	
+	
 
 	
 }

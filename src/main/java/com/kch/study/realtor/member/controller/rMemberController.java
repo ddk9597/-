@@ -1,5 +1,8 @@
 package com.kch.study.realtor.member.controller;
 
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -60,7 +63,12 @@ public class rMemberController {
 	public int sendAuthKey(@RequestParam("memberEmail") String memberEmail,
 			String htmlName) {
 
-		String authKey = service.sendAuthKey(memberEmail);
+//		String authKey = service.sendAuthKey(memberEmail);
+		
+		
 		return 0;
 	}
+	
+	
+	
 }

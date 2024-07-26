@@ -12,6 +12,9 @@ public interface rMemberService {
 
 	String sendAuthKey(String memberEmail, String htmlName);
 
+	// 이메일 입력 확인하기
+	int checkEmail(String memberEmail);
+
 
 
 }
