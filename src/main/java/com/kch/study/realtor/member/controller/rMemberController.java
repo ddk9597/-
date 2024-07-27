@@ -6,6 +6,7 @@ import java.util.Map;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -63,12 +64,21 @@ public class rMemberController {
 	public int sendAuthKey(@RequestParam("memberEmail") String memberEmail,
 			String htmlName) {
 
-//		String authKey = service.sendAuthKey(memberEmail);
+		String authKey = service.sendAuthKey(memberEmail, htmlName);
 		
-		
+		if(authKey != null) {
+			return 1;
+		}
+		// 인증메일 보내기 실패할 경우
 		return 0;
 	}
 	
+	@ResponseBody
+	@PostMapping("checkAuthKey")
+	public int checkAuthKey(@RequestBody Map<String, Object> map) {
+		
+		return service.checkAuthKey(map);
+	}
 	
 	
 }

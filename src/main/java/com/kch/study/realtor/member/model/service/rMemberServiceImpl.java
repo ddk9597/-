@@ -41,7 +41,7 @@ public class rMemberServiceImpl implements rMemberService {
 
 	// 회원 가입 시 이메일 확인하기
 	@Override
-	public int checkEmail(String memberEmail, String htmlName) {
+	public int checkEmail(String memberEmail) {
 		return mapper.checkEmail(memberEmail);
 	}
 
@@ -50,66 +50,66 @@ public class rMemberServiceImpl implements rMemberService {
 	public String sendAuthKey(String memberEmail, String htmlName) {
 
 		String authKey = createAuthKey();
-		
+
 		try {
 			String subject = null;
-			switch(htmlName) {
-			case "signUp" : subject =  "강찬혁의 가짜 부동산 사이트 인증번호입니다.";
-			break;
+			switch (htmlName) {
+			case "signUp":
+				subject = "강찬혁의 가짜 부동산 사이트 인증번호입니다.";
+				break;
 			}
-			
+
 			// 인증 메일 보내기
-			
+
 			MimeMessage mimeMessage = mailSender.createMimeMessage();
 			MimeMessageHelper mimeHelper = new MimeMessageHelper(mimeMessage, true, "UTF-8");
-			
+
 			mimeHelper.setTo(memberEmail);
 			mimeHelper.setSubject(subject);
 			mimeHelper.setText(loadHtml(authKey, htmlName), true); // 타임리프가 적용된 html
-			
+
 			mailSender.send(mimeMessage);
-			return authKey;
 		} catch (Exception e) {
 			e.printStackTrace();
 			return null;
 		}
 
 		// 인증번호를 비교할 수 있도록 인증번호 전용 테이블에 전송한 인증번호를 저장
-		Map<String, String> map = new HashMap<>();
+		Map<String, Object> map = new HashMap();
 		map.put("memberEmail", memberEmail);
 		map.put("authKey", authKey);
-		
+
 		// 1차 시도
 		int result = mapper.updateAuthKey(map);
-		
+
 		// 2차 시도
-		if(result == 0) {
+		if (result == 0) {
 			return mapper.insertAuthKey(map);
 		}
-		
+
 		// 수정, 삭제 후에도 result가 0이면
 		// 그만두고 null을 반환해라.
-		if(result == 0) {
+		if (result == 0) {
 			return null;
 		}
-		
+
 		// 오류없이 전송될 경우 authKey를 반환함
 		return authKey;
 	}
-	
+
 	public String loadHtml(String authKey, String htmlName) {
-		
+
 		// org.thymeleaf.context 선택!!!!!
 		// forward하는 용도가 아닌 자바에서 쓰고싶을 때 쓰는 thymeleaf 객체
 		Context context = new Context();
-		
+
 		// 타임리프가 적용된 html에서 사용할 값
 		context.setVariable("authKey", authKey);
-		
+
 		// templates/email 폴더에서 htmlName과 같은 .html 파일 내용을 읽어와
 		// String으로 변환을 시킨다
 		return templateEngine.process("email/" + htmlName, context);
-		
+
 	}
 
 	// 인증번호 생성
@@ -137,6 +137,13 @@ public class rMemberServiceImpl implements rMemberService {
 		}
 
 		return key;
+	}
+
+	// 입력한 인증메일이 보낸 인증메일과 동일한지 확인하기
+	@Override
+	public int checkAuthKey(Map<String, Object> map) {
+
+		return mapper.checkAuthKey(map);
 	}
 
 }

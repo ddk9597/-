@@ -16,7 +16,13 @@
 		INSERT INTO REALTOR_MEMBER (MEMBER_KIND, MEMBER_EMAIL, MEMBER_PW)
 		VALUES (#{memberKind}, #{memberEmail}, #{memberPw})
 	</insert>
-
+	
+	
+	<select id="checkAuthKey">
+		SELECT COUNT(*) FROM AUTHKEY a 
+		WHERE MEMBER_EMAIL = #{memberEmail}
+		AND AUTHKEY = #{authKey}
+	</select>
 
 
 
