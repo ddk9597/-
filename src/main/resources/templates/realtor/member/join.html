@@ -16,28 +16,22 @@
         <input type="text" id="memberName" name="memberName" required>
       </div>
       <div class="form-group">
-        <label for="memberPhone">전화번호</label>
-        <input type="text" id="memberPhone" name="memberPhone" required>
-      </div>
-      <div class="form-group">
         <label for="email">이메일</label>
         <input type="email" id="memberEmail" name="memberEmail" required>
-        <span class="signUpMessage" id="emailMessage">
-          사용 가능한 메일을 입력해 주세요(naver, gmail, hanmail)
-        </span>
+        <span class="signUpMessage" id="emailMessage">사용 가능한 메일을 입력해 주세요(naver, gmail, hanmail)</span>
         <button type="button" id="sendAuthKey">이메일 인증 받기</button>
       </div>
       <!-- 이메일 인증 번호 입력하기 -->
       <div>
-        <label for="emailCheck">
-          <span>인증번호</span>
-        </label>
+        <label for="emailCheck"><span>인증번호</span></label>
         <div>
           <input type="text" name="authKey" id="authKey" placeholder="인증번호를 입력해 주세요" maxlength="5" autocomplete="off">
           <button type="button" id="checkAuthKeyBtn">인증하기</button>
         </div>
         <!-- 인증번호 메세지 출력 -->
         <span class="signUpMessage" id="authKeyMessage"></span>
+        <!-- 타이머 표시 -->
+        <div id="timer" style="font-size: 20px; color: red; margin-top: 10px;"></div>
       </div>
       <div class="form-group">
         <label for="password">비밀번호</label>
