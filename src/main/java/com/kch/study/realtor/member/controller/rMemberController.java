@@ -24,61 +24,46 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class rMemberController {
 
-	private final rMemberService service;
+    private final rMemberService service;
 
-	// 회원 가입하기
-	@PostMapping("signUp")
-	public String signUp(rMember inputMember, RedirectAttributes ra) {
+    // 이메일 중복 검사
+    @ResponseBody
+    @GetMapping("checkEmail")
+    public int checkEmail(@RequestParam("memberEmail") String memberEmail) {
+        log.info("memberEmail : " + memberEmail);
+        return service.checkEmail(memberEmail);
+    }
 
-		int result = service.signUp(inputMember);
+    // 인증 메일 보내기
+    @ResponseBody
+    @PostMapping("sendAuthKey")
+    public int sendAuthKey(@RequestBody Map<String, String> request) {
+        String memberEmail = request.get("memberEmail");
+        String htmlName = request.get("htmlName");
 
-		String path = null;
-		String message = null;
-
-		// 회원가입 성공 시
-		if (result > 0) {
-			message = inputMember.getMemberName() + "님! 환영합니다!";
-			path = "/";
-		} else {
-			message = " 회원가입 실패.";
-			path = "signUp";
-		}
-
-		ra.addFlashAttribute("message", message);
-		return "redirect:" + path;
-	}
-
-	// 이메일 중복검사
-	@ResponseBody
-	@GetMapping("checkEmail")
-	public int checkEmail(@RequestParam("memberEmail") String memberEmail) {
-
-		log.info("memberEmail : " + memberEmail);
-
-		return service.checkEmail(memberEmail);
-	}
-
-	// 인증 메일 보내기
-	@ResponseBody
-	@PostMapping("checkEmail")
-	public int sendAuthKey(@RequestParam("memberEmail") String memberEmail,
-			String htmlName) {
-
-		String authKey = service.sendAuthKey(memberEmail, htmlName);
-		
-		if(authKey != null) {
-			return 1;
-		}
-		// 인증메일 보내기 실패할 경우
-		return 0;
-	}
-	
-	@ResponseBody
-	@PostMapping("checkAuthKey")
-	public int checkAuthKey(@RequestBody Map<String, Object> map) {
-		
-		return service.checkAuthKey(map);
-	}
-	
-	
+        String authKey = service.sendAuthKey(memberEmail, htmlName);
+        
+        if (authKey != null) {
+            return 1;
+        }
+        // 인증메일 보내기 실패
+        return 0;
+    }
+    
+    @ResponseBody
+    @PostMapping("checkAuthKey")
+    public int checkAuthKey(@RequestBody Map<String, Object> map) {
+        return service.checkAuthKey(map);
+    }
+    
+    // 회원 가입
+    @ResponseBody
+    @PostMapping("signUp")
+    public int signUp(@RequestBody rMember inputMember) {
+        return service.signUp(inputMember);
+    }
 }
+
+
+
+

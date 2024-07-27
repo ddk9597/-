@@ -2,29 +2,33 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper
-	namespace="com.kch.study.realtor.member.model.mapper.rMemberMapper">
+<mapper namespace="com.kch.study.realtor.member.model.mapper.rMemberMapper">
 
-	<select id="checkEmail" parameterType="String" resultType="int">
-		SELECT COUNT(*) FROM REALTOR_MEMBER
-		WHERE MEMBER_EMAIL = #{memberEmail}
-	</select>
+    <select id="checkEmail" parameterType="String" resultType="int">
+        SELECT COUNT(*) FROM REALTOR_MEMBER
+        WHERE MEMBER_EMAIL = #{memberEmail}
+    </select>
 
-	
-	<!-- memberNo seq 트리거 생성으로 따로 지정해주지 않아도 자동으로 nextVal insert됨 -->
-	<insert id="signUp">
-		INSERT INTO REALTOR_MEMBER (MEMBER_KIND, MEMBER_EMAIL, MEMBER_PW)
-		VALUES (#{memberKind}, #{memberEmail}, #{memberPw})
-	</insert>
-	
-	
-	<select id="checkAuthKey">
-		SELECT COUNT(*) FROM AUTHKEY a 
-		WHERE MEMBER_EMAIL = #{memberEmail}
-		AND AUTHKEY = #{authKey}
-	</select>
+    <insert id="signUp">
+        INSERT INTO REALTOR_MEMBER (MEMBER_KIND, MEMBER_EMAIL, MEMBER_PW, MEMBER_NAME, MEMBER_PHONE)
+        VALUES (#{memberKind}, #{memberEmail}, #{memberPw}, #{memberName}, #{memberPhone})
+    </insert>
+    
+    <!-- 인증 키를 AUTHKEY 테이블에 삽입 -->
+    <insert id="insertAuthKey" parameterType="map">
+        INSERT INTO AUTHKEY (MEMBER_EMAIL, AUTHKEY)
+        VALUES (#{memberEmail}, #{authKey})
+    </insert>
 
+    <update id="updateAuthKey" parameterType="map">
+        UPDATE AUTHKEY SET AUTHKEY = #{authKey}
+        WHERE MEMBER_EMAIL = #{memberEmail}
+    </update>
 
-
+    <select id="checkAuthKey" parameterType="map" resultType="int">
+        SELECT COUNT(*) FROM AUTHKEY 
+        WHERE MEMBER_EMAIL = #{memberEmail}
+        AND AUTHKEY = #{authKey}
+    </select>
 
 </mapper>

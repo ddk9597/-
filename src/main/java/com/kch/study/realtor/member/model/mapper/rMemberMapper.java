@@ -19,7 +19,7 @@ public interface rMemberMapper {
 	int updateAuthKey(Map<String, Object> map);
 
 	// 2차로 인증번호 저장
-	String insertAuthKey(Map<String, Object> map);
+	int insertAuthKey(Map<String, Object> map);
 
 	// 입력한 인증메일이 보낸 인증메일과 동일한지 확인하기.
 	int checkAuthKey(Map<String, Object> map);
