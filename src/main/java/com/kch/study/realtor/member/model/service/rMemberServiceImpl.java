@@ -108,6 +108,21 @@ public class rMemberServiceImpl implements rMemberService {
     public int checkLoginEmail(String email) {
     	return mapper.checkLoginEmail(email);
     }
+    
+    // 로그인 비밀번호 확인
+    @Override
+    public int checkLoginPw(Map<String, Object> map) {
+    	
+    	String bcryptPw = bcrypt.encode(map.get("memberPw").toString());
+    	
+		map.put("memberPw", bcryptPw);
+		
+		int result = mapper.checkLoginPw(map);
+		
+		
+    	
+    	return 0;
+    }
 }
 
 

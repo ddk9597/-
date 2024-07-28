@@ -85,6 +85,8 @@ public class rMemberController {
 			
 			int checkPw = service.checkLoginPw(map);
 			
+			
+			
 			if (user != null && passwordEncoder.matches(inputPw, user.getEncryptedPassword())) {
 				model.addAttribute("message", "로그인 성공!");
 				return "welcome"; // 로그인 성공 시 보여줄 페이지
