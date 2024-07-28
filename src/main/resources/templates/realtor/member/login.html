@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>realtor로그인 페이지</title>
+</head>
+
+<body>
+
+  <h1>강찬혁의 가짜 부동산 사이트 로그인 페이지</h1>
+
+
+  <!-- 로그인 요청 보내기 -->
+  <form action="/realtor/member/login" method="POST">
+    <input type="text" name="memberEmail" placeholder="이메일을 입력해주세요">
+    <input type="password" name="inputPw" placeholder="비밀번호를 입력해주세요">
+    <button type="submit">로그인하기</button>
+  </form>
+
+  <div>
+    <span>아이디 찾기</span>
+    <span>비밀번호 변경</span>
+  </div>
+
+
+</body>
+
+  <script>
+  // 페이지 로드 시 에러 메시지가 있으면 alert 표시
+  window.onload = function() {
+            const errorMessage = [[${errorMessage}]];
+            if (errorMessage) {
+                alert(errorMessage);
+            }
+        }
+</script>
+
+
+
+</html>

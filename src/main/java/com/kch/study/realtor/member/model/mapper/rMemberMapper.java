@@ -23,6 +23,9 @@ public interface rMemberMapper {
 
 	// 입력한 인증메일이 보낸 인증메일과 동일한지 확인하기.
 	int checkAuthKey(Map<String, Object> map);
+	
+	// 로그인시 입력한 이메일로 가입된 아이디 있는지 확인
+	int checkLoginEmail(String email);
 
 	
 

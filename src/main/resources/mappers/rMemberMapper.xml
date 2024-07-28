@@ -31,4 +31,9 @@
         AND AUTHKEY = #{authKey}
     </select>
 
+	<select id="checkLoginEmail">
+		SELECT COUNT(*) FROM REALTOR_MEMBER rm
+		WHERE MEMBER_EMAIL = #{email}
+	</select>
+
 </mapper>

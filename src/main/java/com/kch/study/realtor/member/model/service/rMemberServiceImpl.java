@@ -102,6 +102,12 @@ public class rMemberServiceImpl implements rMemberService {
     public int checkAuthKey(Map<String, Object> map) {
         return mapper.checkAuthKey(map);
     }
+    
+    // 로그인시 입력한 이메일로 가입된 아이디 있는지 확인
+    @Override
+    public int checkLoginEmail(String email) {
+    	return mapper.checkLoginEmail(email);
+    }
 }
 
 

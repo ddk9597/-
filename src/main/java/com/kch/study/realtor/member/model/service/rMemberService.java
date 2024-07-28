@@ -9,6 +9,8 @@ public interface rMemberService {
     int checkEmail(String memberEmail);
     String sendAuthKey(String memberEmail, String htmlName);
     int checkAuthKey(Map<String, Object> map);
+	int checkLoginEmail(String email);
+	int checkLoginPw(Map<String, Object> map);
 }
 
 
