@@ -52,7 +52,7 @@ memberEmail.addEventListener("input", e => {
     fetch("/realtor/member/checkEmail?memberEmail=" + inputEmail)
       .then(resp => resp.text())
       .then(count => {
-        if (count == 1) {
+        if (count => 1) {
           emailMessage.innerText = "이미 사용중인 이메일입니다.";
           checkJoin.memberEmail = false;
         } else {
