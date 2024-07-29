@@ -1,5 +1,6 @@
 package com.kch.study.realtor.member.controller;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -79,20 +80,20 @@ public class rMemberController {
 			model.addAttribute("errorMessage", "이메일을 확인해 주세요.");
 			return "login"; // 로그인 페이지로 돌아감
 		} else {
-			Map<String, Object> map;
+			// 입력한 이메일로 가입한 아이디가 있을 경우 비밀번호 확인
+			Map<String, Object> map = new HashMap<>();
 			map.put("memberEmail", email);
 			map.put("inputPw", inputPw);
-			
-			int checkPw = service.checkLoginPw(map);
-			
-			
-			
-			if (user != null && passwordEncoder.matches(inputPw, user.getEncryptedPassword())) {
-				model.addAttribute("message", "로그인 성공!");
-				return "welcome"; // 로그인 성공 시 보여줄 페이지
+
+			boolean isPasswordCorrect = service.checkLoginPw(map);
+
+			if (isPasswordCorrect) {
+				// 비밀번호가 일치하는 경우
+				return "redirect:/home"; // 홈 페이지로 이동 (예시)
 			} else {
+				// 비밀번호가 일치하지 않는 경우
 				model.addAttribute("errorMessage", "비밀번호를 확인해 주세요.");
-				return "login"; // 비밀번호가 틀릴 경우 다시 로그인 페이지로
+				return "login"; // 로그인 페이지로 돌아감
 			}
 		}
 	}

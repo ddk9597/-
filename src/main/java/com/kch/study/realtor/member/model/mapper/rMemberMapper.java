@@ -26,6 +26,9 @@ public interface rMemberMapper {
 	
 	// 로그인시 입력한 이메일로 가입된 아이디 있는지 확인
 	int checkLoginEmail(String email);
+	
+	// 저장된 비밀번호 가져오기
+	String getStoredPassword(String email);
 
 	
 

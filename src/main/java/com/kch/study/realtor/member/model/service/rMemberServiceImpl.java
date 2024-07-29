@@ -6,6 +6,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.thymeleaf.context.Context;
@@ -110,18 +111,20 @@ public class rMemberServiceImpl implements rMemberService {
     }
     
     // 로그인 비밀번호 확인
+    // map : memberEmail, inputPw
     @Override
-    public int checkLoginPw(Map<String, Object> map) {
-    	
-    	String bcryptPw = bcrypt.encode(map.get("memberPw").toString());
-    	
-		map.put("memberPw", bcryptPw);
-		
-		int result = mapper.checkLoginPw(map);
-		
-		
-    	
-    	return 0;
+    public boolean checkLoginPw(Map<String, Object> map) {
+        String email = (String) map.get("memberEmail");
+        String inputPw = (String) map.get("inputPw");
+
+        // 데이터베이스에서 이메일에 해당하는 저장된 비밀번호 가져오기
+        String storedPw = mapper.getStoredPassword(email);
+        
+        if (storedPw != null && BCrypt.checkpw(inputPw, storedPw)) {
+            return true; // 비밀번호 일치
+        } else {
+            return false; // 비밀번호 불일치
+        }
     }
 }
 

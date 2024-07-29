@@ -10,8 +10,8 @@
     </select>
 
     <insert id="signUp">
-        INSERT INTO REALTOR_MEMBER (MEMBER_KIND, MEMBER_EMAIL, MEMBER_PW, MEMBER_NAME, MEMBER_PHONE)
-        VALUES (#{memberKind}, #{memberEmail}, #{memberPw}, #{memberName}, #{memberPhone})
+        INSERT INTO REALTOR_MEMBER (MEMBER_KIND, MEMBER_EMAIL, MEMBER_PW, MEMBER_NAME)
+        VALUES (#{memberKind}, #{memberEmail}, #{memberPw}, #{memberName})
     </insert>
     
     <!-- 인증 키를 AUTHKEY 테이블에 삽입 -->
@@ -32,8 +32,13 @@
     </select>
 
 	<select id="checkLoginEmail">
-		SELECT COUNT(*) FROM REALTOR_MEMBER rm
+		SELECT COUNT(*) FROM REALTOR_MEMBER
 		WHERE MEMBER_EMAIL = #{email}
 	</select>
+	
+	 <select id="getStoredPassword" parameterType="String" resultType="String">
+      	SELECT MEMBER_PW FROM REALTOR_MEMBER rm
+		WHERE MEMBER_EMAIL = #{email}
+    </select>
 
 </mapper>
