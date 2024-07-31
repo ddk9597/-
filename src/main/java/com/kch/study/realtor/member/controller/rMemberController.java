@@ -18,6 +18,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.kch.study.realtor.member.model.dto.rMember;
 import com.kch.study.realtor.member.model.service.rMemberService;
 
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -70,7 +72,8 @@ public class rMemberController {
 	// 로그인하기
 	@PostMapping("login")
 	public String login(@RequestParam(name = "memberEmail") String email,
-			@RequestParam(name = "inputPw") String inputPw, Model model) {
+			@RequestParam(name = "inputPw") String inputPw, Model model,
+			HttpServletRequest request) {
 
 		// 입력한 이메일로 가입한 아이디가 있는지 확인
 		int checkEmail = service.checkLoginEmail(email);
@@ -87,9 +90,16 @@ public class rMemberController {
 
 			boolean isPasswordCorrect = service.checkLoginPw(map);
 
+			// 비밀번호가 일치하는 경우
 			if (isPasswordCorrect) {
-				// 비밀번호가 일치하는 경우
-				return "redirect:/home"; // 홈 페이지로 이동 (예시)
+				
+				// 회원번호 가져오기
+				int memberNo = service.getMemberNo(email);
+				
+				// 여기에 세션에 로그인 한 회원 올리기
+				HttpSession session = request.getSession();
+				session.setAttribute("loginEmail", memberNo);
+				return "realtor/rMain";
 			} else {
 				// 비밀번호가 일치하지 않는 경우
 				model.addAttribute("errorMessage", "비밀번호를 확인해 주세요.");

@@ -30,6 +30,9 @@ public interface rMemberMapper {
 	// 저장된 비밀번호 가져오기
 	String getStoredPassword(String email);
 
+	// 로그인한 회원 번호 가져오기
+	int getMemberNo(String email);
+
 	
 
 	

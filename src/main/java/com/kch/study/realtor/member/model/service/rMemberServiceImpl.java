@@ -126,6 +126,12 @@ public class rMemberServiceImpl implements rMemberService {
             return false; // 비밀번호 불일치
         }
     }
+    
+    // 로그인한 회원 번호 가져오기
+    @Override
+    public int getMemberNo(String email) {
+    	return mapper.getMemberNo(email);
+    }
 }
 
 

@@ -20,7 +20,16 @@
     }
 
 // 회원 가입 페이지로 이동하기
-
 function toJoinRealtor(){
   window.location.href = '/rMain/member/join';
+}
+
+// 로그인 페이지로 이동하기
+function toRealtorLogin(){
+    window.location.href = '/rMain/member/login';
+}
+
+// 마이페이지로 이동하기
+function toRealtorMyPage(){
+    window.location.href = '/realtor/member/myPage'
 }

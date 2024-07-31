@@ -17,7 +17,18 @@
           <li><a href="#home">홈</a></li>
           <li><a href="#listings">매물 목록</a></li>
           <li><a href="#contact">문의하기</a></li>
-          <li onclick="toJoinRealtor()">회원가입</li>
+          <!-- 로그인 안된 경우 -->
+          <th:block th:if="${loginMember == null}">
+            <li onclick="toJoinRealtor()">회원가입</li>
+            <li onclick="toRealtorLogin()">로그인</li>
+          </th:block>
+
+          <!-- 로그인 된 경우 -->
+          <th:block th:if="${loginMember != null}">
+            <li>로그인되었습니다.</li>
+            <li onclick="toRealtorMyPage()">마이페이지 이동</li>
+          </th:block>
+          
         </ul>
       </nav>
     </div>

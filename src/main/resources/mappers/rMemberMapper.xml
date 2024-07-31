@@ -40,5 +40,11 @@
       	SELECT MEMBER_PW FROM REALTOR_MEMBER rm
 		WHERE MEMBER_EMAIL = #{email}
     </select>
+    
+    <select id="getMemberNo">
+		SELECT MEMBER_NO
+		FROM REALTOR_MEMBER
+		WHERE MEMBER_EMAIL = #{email}
+    </select>
 
 </mapper>

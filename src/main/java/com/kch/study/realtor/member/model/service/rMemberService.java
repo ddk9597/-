@@ -11,6 +11,7 @@ public interface rMemberService {
     int checkAuthKey(Map<String, Object> map);
 	int checkLoginEmail(String email);
 	boolean checkLoginPw(Map<String, Object> map);
+	int getMemberNo(String email);
 }
 
 
