@@ -15,6 +15,13 @@
         <label for="username">회원 이름</label>
         <input type="text" id="memberName" name="memberName" required>
       </div>
+
+      <div>
+        <label for="userPhone">휴대폰 번호</label>
+        <input type="number" id="userPhone" name="userPhone" required>
+        <span class="signUpMessage" id="userPhoneMessage">- 제외 숫자만 입력하세요</span>
+      </div>
+
       <div class="form-group">
         <label for="email">이메일</label>
         <input type="text" id="memberEmail" name="memberEmail" required>
@@ -55,6 +62,8 @@
       <button type="submit" class="btn">가입하기</button>
     </form>
   </div>
+
+
   <script src="/js/realtor/member/join.js"></script>
 </body>
 </html>

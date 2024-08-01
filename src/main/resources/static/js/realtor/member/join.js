@@ -4,7 +4,9 @@ const checkJoin = {
   "memberEmail": false,
   "authKey": false,
   "memberPw": false,
+  "memberPhone": false,
   "memberKind": false
+  
 }
 
 // 1. 이름 유효성 검사
@@ -52,7 +54,7 @@ memberEmail.addEventListener("input", e => {
     fetch("/realtor/member/checkEmail?memberEmail=" + inputEmail)
       .then(resp => resp.text())
       .then(count => {
-        if (count => 1) {
+        if (count >= 1) {
           emailMessage.innerText = "이미 사용중인 이메일입니다.";
           checkJoin.memberEmail = false;
         } else {
@@ -163,7 +165,20 @@ function validatePassword() {
 password.addEventListener("input", validatePassword);
 confirmPassword.addEventListener("input", validatePassword);
 
-// 5. 회원 종류 설정했는지 검사
+// 5. 전화번호 올바르게 입력했는지 검사
+const memberPhone = document.getElementById("userPhone");
+const userPhoneMessage = document.getElementById("userPhoneMessage");
+
+memberPhone.addEventListener("change", e => {
+  if (memberPhone.value.length == 11) {
+    userPhoneMessage.innerText = "휴대폰번호 입력 확인";
+  } else {
+    userPhoneMessage.innerText = "올바른 전화번호를 입력해 주세요";
+  }
+});
+
+
+// 6. 회원 종류 설정했는지 검사
 const memberKind = document.getElementById("memberKind");
 const memberKindMessage = document.createElement("span");
 memberKindMessage.className = "signUpMessage";
@@ -199,13 +214,14 @@ signUpForm.addEventListener("submit", e => {
       memberName: document.getElementById("memberName").value,
       memberEmail: document.getElementById("memberEmail").value,
       memberPw: document.getElementById("password").value,
-      memberKind: document.getElementById("memberKind").value
+      memberKind: document.getElementById("memberKind").value,
+      memberPhone:document.getElementById("userPhone").value
     })
   }).then(resp => resp.text())
   .then(result => {
     if (result == 1) {
       alert("회원 가입 성공");
-      window.location.href = "/realtor/member/login";
+      window.location.href = "/rMain/member/login";
     } else {
       alert("회원 가입 실패");
     }

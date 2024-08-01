@@ -10,8 +10,8 @@
     </select>
 
     <insert id="signUp">
-        INSERT INTO REALTOR_MEMBER (MEMBER_KIND, MEMBER_EMAIL, MEMBER_PW, MEMBER_NAME)
-        VALUES (#{memberKind}, #{memberEmail}, #{memberPw}, #{memberName})
+        INSERT INTO REALTOR_MEMBER (MEMBER_KIND, MEMBER_EMAIL, MEMBER_PW, MEMBER_NAME, MEMBER_PHONE)
+        VALUES (#{memberKind}, #{memberEmail}, #{memberPw}, #{memberName}, #{memberPhone})
     </insert>
     
     <!-- 인증 키를 AUTHKEY 테이블에 삽입 -->

@@ -20,10 +20,21 @@
   </form>
 
   <div>
-    <span>아이디 찾기</span>
-    <span>비밀번호 변경</span>
+
+    <span onclick="rFindID()">아이디 찾기</span>
+    <span onclick="rChangePw()">비밀번호 변경</span>
   </div>
 
+
+
+  <!-- 아이디 찾기 모달 -->
+  <div>
+    
+
+
+  </div>
+
+  <!-- 비밀번호 찾기 모달 -->
 
 </body>
 
@@ -34,6 +45,13 @@
     if (errorMessage && errorMessage.trim() !== '') {
       alert(errorMessage);
     }
+  }
+
+  function rFindID(){
+    window.location.href='/realtor/member/findID'
+  }
+  function rChangePw(){
+    window.location.href='/realtor/member/findID'
   }
 </script>
 
