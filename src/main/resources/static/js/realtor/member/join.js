@@ -202,7 +202,7 @@ signUpForm.addEventListener("submit", e => {
 
   // 유효성 검사를 통과했는지 확인
   if (!checkJoin.memberName || !checkJoin.memberEmail || !checkJoin.authKey || !checkJoin.memberPw || !checkJoin.memberKind) {
-    alert("모든 필드를 올바르게 입력해 주세요.");
+    alert("모든 wjdqhfmf 올바르게 입력해 주세요.");
     return;
   }
 

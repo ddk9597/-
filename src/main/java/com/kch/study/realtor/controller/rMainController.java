@@ -51,4 +51,12 @@ public class rMainController {
 		return "realtor/member/login";
 	}
 	
+	// 로그아웃 실행하기
+	
+	// 매물 목록 페이지로 이동하기
+	@GetMapping("list")
+	public String toList() {
+		return "realtor/list/list";
+	}
+	
 }
