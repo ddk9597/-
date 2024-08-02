@@ -18,12 +18,84 @@
 
   <!-- list 전용 상단네비게이션 바 -->
   <section id="listTopNav">
-    <button> 금액별 </button>
-    <button> 평형별 </button>
-    <button> 종류별 </button>
-    <button> 상세 필터 </button>
-    <button> 검색하기 </button>
+    <div onclick="openCostModal(event)"> 금액별 </div>
+    <div onclick="openAreaModal(event)"> 면적별 </div>
+    <div onclick="openTypeModal(event)"> 종류별 </div>
+    <div onclick="openDetailModal(event)"> 상세 필터 </div>
   </section>
+
+  <!-- 상단 navBar Modal -->
+
+  <!-- 금액 모달 -->
+  <div id="costModal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <span class="close" onclick="closeModal('costModal')">&times;</span>
+        <div>임대 금액 선택</div>
+      </div>
+      <div class="modal-body">
+        <div> 
+          <div>보증금</div>
+          <div>최소 : <input type="number"> 만원 ~ 최대 : <input type="number"> 만원</div>
+
+          <div> 월세 </div>
+          <div>최소 : <input type="number"> 만원 ~ 최대 : <input type="number"> 만원</div>
+          
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button onclick="closeModal('costModal')">확인</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 평형 모달 -->
+  <div id="areaModal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <span class="close" onclick="closeModal('areaModal')">&times;</span>
+        <div>면적별 선택</div>
+      </div>
+      <div class="modal-body">
+        <!-- 면적별 모달 내용 -->
+      </div>
+      <div class="modal-footer">
+        <button onclick="closeModal('areaModal')">확인</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 종류 모달 -->
+  <div id="typeModal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <span class="close" onclick="closeModal('typeModal')">&times;</span>
+        <div>종류별 선택</div>
+      </div>
+      <div class="modal-body">
+        <!-- 종류별 모달 내용 -->
+      </div>
+      <div class="modal-footer">
+        <button onclick="closeModal('typeModal')">확인</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 상세 모달 -->
+  <div id="detailModal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <span class="close" onclick="closeModal('detailModal')">&times;</span>
+        <div>상세 필터 선택</div>
+      </div>
+      <div class="modal-body">
+        <!-- 상세 필터 모달 내용 -->
+      </div>
+      <div class="modal-footer">
+        <button onclick="closeModal('detailModal')">확인</button>
+      </div>
+    </div>
+  </div>
 
   <!-- 메인 내용이 들어갈 자리 -->
   <div id="realtorListMainContent">
@@ -49,9 +121,10 @@
     </div>
   </footer>
 
-  
+
 </body>
 <script src="/js/realtor/list/listMain.js"></script>
-  <!-- 헤더 js -->
-  <script src="/js/realtor/common/realtorHeader.js"></script>
+<!-- 헤더 js -->
+<script src="/js/realtor/common/realtorHeader.js"></script>
+
 </html>
