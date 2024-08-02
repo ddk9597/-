@@ -3,33 +3,48 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="/css/list/listMain.css">
+  <link rel="stylesheet" href="/css/realtor/list/listMain.css">
   <title>가짜 매물 목록 리스트</title>
 </head>
 <body>
   <h1>가짜 매물 목록</h1>
   
   <header>
+    <div class="container">
+      <h1>부동산 중개</h1>
+      <nav>
+        <ul>
+          <li><a href="#home">홈</a></li>
+          <li onclick="toAllList()">매물 목록</li>
+          <li><a href="#contact">문의하기</a></li>
+          <!-- 로그인 안된 경우 -->
+          <th:block th:if="${loginMember == null}">
+            <li onclick="toJoinRealtor()">회원가입</li>
+            <li onclick="toRealtorLogin()">로그인</li>
+          </th:block>
+
+          <!-- 로그인 된 경우 -->
+          <th:block th:if="${loginMember != null}">
+            <li>로그인되었습니다.</li>
+            <li onclick="toRealtorMyPage()">마이페이지 이동</li>
+          </th:block>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+
+  <header>
     <!-- 매물 목록 고정 헤더 -->
     <div>
-      <div onclick="toRealtorMain()">메인</div>
-      <div onclick="toAllList()">전체매물보기</div>
-      <div onclick="toRealtorRequest()">임대 임차 의뢰</div>
-      <div></div>
+      <div class="active" onclick="toRealtorMain()">메인</div>
+      <div class="active" onclick="toAllList()">전체매물보기</div>
     </div>
   </header>
 
   <!-- 문의 섹션 -->
   <section>
   
-    <div>
-      <p>빠른 중개를 위해 직접 문의해 주세요</p>
-      <p>최고의 중개사들이 고객님을 기다리고 있습니다</p>
-    </div>
-
-    <div>
-
-    </div>
 
 
   </section>
@@ -42,6 +57,6 @@
     </div>
   </footer>
 
-  <script src="/js/realtor/list/list.js"></script>
+  <script src="/js/realtor/list/listMain.js"></script>
 </body>
 </html>
