@@ -44,6 +44,6 @@ function openTypeModal(event) {
   openModal('typeModal', event.target);
 }
 
-function openDetailModal(event) {
-  openModal('detailModal', event.target);
+function openPremiumlModal(event) {
+  openModal('premeiumModal', event.target);
 }
