@@ -52,6 +52,12 @@ public class rMainController {
 	}
 	
 	// 로그아웃 실행하기
+	@GetMapping("member/logout")
+	public String logout(HttpSession session) {
+		session.removeAttribute("loginMember");
+		return "redirect:/rMain";
+	}
+	
 	
 	// 매물 목록 페이지로 이동하기
 	@GetMapping("list")

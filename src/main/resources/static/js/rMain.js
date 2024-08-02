@@ -39,3 +39,25 @@ function toRealtorMyPage() {
 function toAllList() {
   window.location.href = '/rMain/list';
 }
+
+function toLogOut() {
+  fetch('/rMain/member/logout', {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    redirect: 'follow'
+  })
+    .then(response => {
+      if (response.redirected) {
+        window.location.href = response.url;
+      } else {
+        // 로그아웃 실패 시 처리할 작업
+        console.error('로그아웃 실패');
+      }
+    })
+    .catch(error => {
+      // 네트워크 에러 시 처리할 작업
+      console.error('네트워크 에러:', error);
+    });
+}
