@@ -1,3 +1,19 @@
+body {
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  width: 80%;
+  margin: auto;
+  overflow: hidden;
+}
+
+#home > .container > *{
+  color: white;
+}
 
 header {
   background: #333;
@@ -12,7 +28,7 @@ header h1 {
 
 header nav {
   float: right;
-  margin-top: 10px;
+  margin: 0px 10px;
 }
 
 header nav ul {

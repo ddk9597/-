@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.kch.study.realtor.member.model.dto.rMember;
 import com.kch.study.realtor.model.service.rServiceImpl;
 
 import jakarta.servlet.http.HttpSession;
@@ -23,18 +24,11 @@ public class rMainController {
 
 	private final rServiceImpl service;
 	
-	 // 메인 페이지로 이동하기
+	// 메인 페이지로 이동하기
     @GetMapping
     public String mainPage(Model model, HttpSession session) {
-        Integer loginMember = (Integer) session.getAttribute("loginMember");
-        
-        if (loginMember != null) {
-            model.addAttribute("loginMember", loginMember);
-        } else {
-            // 로그인되지 않은 상태 처리
-            model.addAttribute("loginMember", null);
-        }
-        
+        rMember loginMember = (rMember) session.getAttribute("loginMember");
+        model.addAttribute("loginMember", loginMember);
         return "realtor/rMain";
     }
 	

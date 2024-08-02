@@ -91,9 +91,10 @@ public class rMemberController {
 	        boolean isPasswordCorrect = service.checkLoginPw(map);
 
 	        if (isPasswordCorrect) {
-	            int memberNo = service.getMemberNo(email);
+	            rMember memberInfo = service.getMemberInfoByEmail(email); // 회원 정보를 가져오는 서비스 메서드
+
 	            HttpSession session = request.getSession();
-	            session.setAttribute("loginMember", memberNo);
+	            session.setAttribute("loginMember", memberInfo);
 	            log.info("로그인 성공: {}", email);
 	            return "redirect:/rMain";
 	        } else {

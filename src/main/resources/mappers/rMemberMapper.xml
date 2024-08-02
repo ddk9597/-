@@ -46,5 +46,12 @@
 		FROM REALTOR_MEMBER
 		WHERE MEMBER_EMAIL = #{email}
     </select>
+    
+    <select id="getMemberInfoByEmail">
+    	SELECT MEMBER_NO, MEMBER_KIND, MEMBER_EMAIL, MEMBER_NAME, MEMBER_PHONE
+		FROM REALTOR_MEMBER rm 
+		WHERE MEMBER_EMAIL = #{email}
+    
+    </select>
 
 </mapper>

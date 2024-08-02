@@ -1,14 +1,16 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="/css/realtor/list/listMain.css">
   <title>가짜 매물 목록 리스트</title>
 </head>
+
 <body>
-  <h1>가짜 매물 목록</h1>
-  
+
+  <!-- 공통 헤더 -->
   <header>
     <div class="container">
       <h1>부동산 중개</h1>
@@ -25,33 +27,48 @@
 
           <!-- 로그인 된 경우 -->
           <th:block th:if="${loginMember != null}">
-            <li>로그인되었습니다.</li>
             <li onclick="toRealtorMyPage()">마이페이지 이동</li>
+            <!-- 로그인한 회원이 중개사 회원인 경우 -->
+            <th:block th:if="${loginMember}"></th:block>
+
+            <li onclick="toLogOut()">로그아웃</li>
+
           </th:block>
+
         </ul>
       </nav>
     </div>
   </header>
 
+  <!-- 상단네비게이션 바 -->
+  <section id="listTopNav">
+    <button> 금액별 </button>
+    <button> 평형별 </button>
+    <button> 종류별 </button>
+    <button> 상세 필터 </button>
 
-  <header>
-    <!-- 매물 목록 고정 헤더 -->
-    <div>
-      <div class="active" onclick="toRealtorMain()">메인</div>
-      <div class="active" onclick="toAllList()">전체매물보기</div>
-    </div>
-
-
-  </header>
-
-  <!-- 문의 섹션 -->
-  <section>
-  
+    <button> 검색하기 </button>
 
 
   </section>
 
+  <!-- 메인 내용이 들어갈 자리 -->
+  <div id="realtorListMainContent">
 
+    <!-- 좌측 네비게이션바 -->
+    <section id="listLeftNav">
+
+
+
+    </section>
+
+    <!-- 검색한 매물이 보여질 자릭 -->
+    <section id="listSearchContent">
+
+
+    </section>
+
+  </div>
   <footer>
     <div class="container">
       <p>&copy; 2024 부동산 중개 사이트. 모든 권리 보유. 제작자 : 강찬혁 </p>
@@ -61,4 +78,5 @@
 
   <script src="/js/realtor/list/listMain.js"></script>
 </body>
+
 </html>

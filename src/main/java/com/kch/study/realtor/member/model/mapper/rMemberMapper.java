@@ -32,6 +32,9 @@ public interface rMemberMapper {
 
 	// 로그인한 회원 번호 가져오기
 	int getMemberNo(String email);
+	
+	// 로그인한 회원 정보 가져오기
+	rMember getMemberInfoByEmail(String email);
 
 	
 

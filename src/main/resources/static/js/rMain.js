@@ -19,7 +19,7 @@ window.onload = function () {
   }
 }
 
-
+// ------------ 헤더에서 사용하는 기능 ---------- //
 
 // 회원 가입 페이지로 이동하기
 function toJoinRealtor() {
@@ -40,6 +40,7 @@ function toAllList() {
   window.location.href = '/rMain/list';
 }
 
+// 로그아웃 기능
 function toLogOut() {
   fetch('/rMain/member/logout', {
     method: 'GET',
@@ -61,3 +62,5 @@ function toLogOut() {
       console.error('네트워크 에러:', error);
     });
 }
+
+// ------------ 헤더에서 사용하는 기능 ---------- //

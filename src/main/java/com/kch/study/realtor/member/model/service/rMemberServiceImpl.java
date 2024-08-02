@@ -132,6 +132,12 @@ public class rMemberServiceImpl implements rMemberService {
     public int getMemberNo(String email) {
     	return mapper.getMemberNo(email);
     }
+    
+    
+    @Override
+    public rMember getMemberInfoByEmail(String email) {
+    	return mapper.getMemberInfoByEmail(email);
+    }
 }
 
 
