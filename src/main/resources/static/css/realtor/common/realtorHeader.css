@@ -52,3 +52,16 @@ header nav ul li a:hover,
 header nav ul li:hover {
   text-decoration: underline;
 }
+
+
+footer {
+  background: #333;
+  color: #fff;
+  text-align: center;
+  padding: 20px 0;
+  margin-top: 20px;
+}
+
+footer p {
+  margin: 0;
+}

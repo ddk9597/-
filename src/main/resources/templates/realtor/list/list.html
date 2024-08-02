@@ -5,8 +5,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="/css/realtor/list/listMain.css">
-  <!-- 헤더 스타일 -->
+  <!-- 헤더, 푸터 스타일 -->
   <link rel="stylesheet" href="/css/realtor/common/realtorHeader.css">
+
 
   <title>가짜 매물 목록 리스트</title>
 </head>
@@ -24,7 +25,34 @@
     <div onclick="openDetailModal(event)"> 상세 필터 </div>
   </section>
 
-  <!-- 상단 navBar Modal -->
+
+
+
+  <!-- 메인 내용이 들어갈 자리 -->
+  <div id="realtorListMainContent">
+
+    <!-- 좌측 네비게이션바 -->
+    <section id="listLeftNav">
+
+
+
+    </section>
+
+    <!-- 검색한 매물이 보여질 자릭 -->
+    <section id="listSearchContent">
+
+
+    </section>
+
+  </div>
+  <div th:replace="realtor/common/realtorFooter :: footer"></div>
+
+
+
+
+  <!-- 모달 모음 -->
+
+  <!-- 상단 navBar 모달 -->
 
   <!-- 금액 모달 -->
   <div id="costModal" class="modal">
@@ -34,13 +62,13 @@
         <div>임대 금액 선택</div>
       </div>
       <div class="modal-body">
-        <div> 
+        <div>
           <div>보증금</div>
           <div>최소 : <input type="number"> 만원 ~ 최대 : <input type="number"> 만원</div>
 
           <div> 월세 </div>
           <div>최소 : <input type="number"> 만원 ~ 최대 : <input type="number"> 만원</div>
-          
+
         </div>
       </div>
       <div class="modal-footer">
@@ -97,32 +125,11 @@
     </div>
   </div>
 
-  <!-- 메인 내용이 들어갈 자리 -->
-  <div id="realtorListMainContent">
-
-    <!-- 좌측 네비게이션바 -->
-    <section id="listLeftNav">
-
-
-
-    </section>
-
-    <!-- 검색한 매물이 보여질 자릭 -->
-    <section id="listSearchContent">
-
-
-    </section>
-
-  </div>
-  <footer>
-    <div class="container">
-      <p>&copy; 2024 부동산 중개 사이트. 모든 권리 보유. 제작자 : 강찬혁 </p>
-      <p>027620@naver.com</p>
-    </div>
-  </footer>
-
+  <!-- 상단 navBar 모달 끝 -->
 
 </body>
+
+
 <script src="/js/realtor/list/listMain.js"></script>
 <!-- 헤더 js -->
 <script src="/js/realtor/common/realtorHeader.js"></script>
