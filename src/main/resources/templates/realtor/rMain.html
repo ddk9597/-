@@ -6,39 +6,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>부동산 중개 사이트</title>
   <link rel="stylesheet" href="/css/rMain.css">
+  <!-- 헤더 스타일 -->
+  <link rel="stylesheet" href="/css/realtor/common/realtorHeader.css">
 </head>
 
 <body>
-  <header>
-    <div class="container">
-      <h1>부동산 중개</h1>
-      <nav>
-        <ul>
-          <li><a href="#home">홈</a></li>
-          <li onclick="toAllList()">매물 목록</li>
-          <li><a href="#contact">문의하기</a></li>
-          <!-- 로그인 안된 경우 -->
-          <th:block th:if="${loginMember == null}">
-            <li onclick="toJoinRealtor()">회원가입</li>
-            <li onclick="toRealtorLogin()">로그인</li>
-          </th:block>
 
-          <!-- 로그인 된 경우 -->
-          <th:block th:if="${loginMember != null}">
-            <li onclick="toRealtorMyPage()">마이페이지 이동</li>
-            <!-- 로그인한 회원이 중개사 회원인 경우 -->
-             <th:block th:if="${session.loginMember != null and session.loginMember.memberKind == 3}">
-              매물 등록하기
-             </th:block>
-            
-            <li onclick="toLogOut()">로그아웃</li>
-
-          </th:block>
-          
-        </ul>
-      </nav>
-    </div>
-  </header>
+  <!-- 헤더 조각이 들어간 자리 -->
+  <div th:replace="realtor/common/realtorHeader :: header"></div>
 
   <section id="home" class="hero">
     <div class="container">
@@ -97,5 +72,7 @@
 
 </body>
 <script src="/js/rMain.js"></script>
+<!-- 헤더 js -->
+<script src="/js/realtor/common/realtorHeader.js"></script>
 
 </html>

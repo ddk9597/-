@@ -5,51 +5,24 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="/css/realtor/list/listMain.css">
+  <!-- 헤더 스타일 -->
+  <link rel="stylesheet" href="/css/realtor/common/realtorHeader.css">
+
   <title>가짜 매물 목록 리스트</title>
 </head>
 
 <body>
 
   <!-- 공통 헤더 -->
-  <header>
-    <div class="container">
-      <h1>부동산 중개</h1>
-      <nav>
-        <ul>
-          <li><a href="#home">홈</a></li>
-          <li onclick="toAllList()">매물 목록</li>
-          <li><a href="#contact">문의하기</a></li>
-          <!-- 로그인 안된 경우 -->
-          <th:block th:if="${loginMember == null}">
-            <li onclick="toJoinRealtor()">회원가입</li>
-            <li onclick="toRealtorLogin()">로그인</li>
-          </th:block>
+  <div th:replace="realtor/common/realtorHeader :: header"></div>
 
-          <!-- 로그인 된 경우 -->
-          <th:block th:if="${loginMember != null}">
-            <li onclick="toRealtorMyPage()">마이페이지 이동</li>
-            <!-- 로그인한 회원이 중개사 회원인 경우 -->
-            <th:block th:if="${loginMember}"></th:block>
-
-            <li onclick="toLogOut()">로그아웃</li>
-
-          </th:block>
-
-        </ul>
-      </nav>
-    </div>
-  </header>
-
-  <!-- 상단네비게이션 바 -->
+  <!-- list 전용 상단네비게이션 바 -->
   <section id="listTopNav">
     <button> 금액별 </button>
     <button> 평형별 </button>
     <button> 종류별 </button>
     <button> 상세 필터 </button>
-
     <button> 검색하기 </button>
-
-
   </section>
 
   <!-- 메인 내용이 들어갈 자리 -->
@@ -76,7 +49,9 @@
     </div>
   </footer>
 
-  <script src="/js/realtor/list/listMain.js"></script>
+  
 </body>
-
+<script src="/js/realtor/list/listMain.js"></script>
+  <!-- 헤더 js -->
+  <script src="/js/realtor/common/realtorHeader.js"></script>
 </html>

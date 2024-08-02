@@ -1,0 +1,54 @@
+body {
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  width: 80%;
+  margin: auto;
+  overflow: hidden;
+}
+
+#home > .container > *{
+  color: white;
+}
+
+header {
+  background: #333;
+  color: #fff;
+  padding: 20px 0;
+}
+
+header h1 {
+  margin: 0;
+  padding-left: 20px;
+}
+
+header nav {
+  float: right;
+  margin: 0px10px;
+}
+
+header nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+header nav ul li {
+  display: inline;
+  margin-left: 20px;
+}
+
+header nav ul li a, 
+header nav ul li {
+  color: #fff;
+  text-decoration: none;
+}
+
+header nav ul li a:hover, 
+header nav ul li:hover {
+  text-decoration: underline;
+}
