@@ -510,7 +510,7 @@ function filterResults() {
   filteredAreaData.forEach(item => {
     const div = document.createElement('div');
     div.textContent = `${item.name} (${item.code})`;
-    div.addEventListener('click', function() {
+    div.addEventListener('click', function () {
       document.getElementById('searchInput').value = item.name;
       resultsDiv.innerHTML = '';
     });
@@ -518,13 +518,16 @@ function filterResults() {
   });
 }
 
-// 공실 아닌 경우에만 상호명 입력하게 하기
+// 공실 아닌 상가인 경우에만 상호명 입력하게 하기
 const radios = document.getElementsByName('tennantStatus');
 const productNameInput = document.getElementById('productName');
 
 radios.forEach(radio => {
   radio.addEventListener('change', function () {
-    if (document.getElementById('owner').checked) {
+    const isNotVacant = document.getElementById('ownerIs').checked;
+    const isStoreOrBoth = document.getElementById('typeStore').checked || document.getElementById('typeBoth').checked;
+
+    if (isNotVacant && isStoreOrBoth) {
       productNameInput.disabled = false;
     } else {
       productNameInput.disabled = true;
@@ -533,6 +536,20 @@ radios.forEach(radio => {
   });
 });
 
+const propertyTypeRadios = document.getElementsByName('propertyType');
+propertyTypeRadios.forEach(radio => {
+  radio.addEventListener('change', function () {
+    const isNotVacant = document.getElementById('ownerIs').checked;
+    const isStoreOrBoth = document.getElementById('typeStore').checked || document.getElementById('typeBoth').checked;
+
+    if (isNotVacant && isStoreOrBoth) {
+      productNameInput.disabled = false;
+    } else {
+      productNameInput.disabled = true;
+      productNameInput.value = '';  // Clear the input if disabled
+    }
+  });
+});
 // 면적계산기
 function openCalcModal() {
   const modalBackground = document.getElementById('modalBackground');
@@ -562,7 +579,7 @@ function closeModal() {
 }
 
 // 모달 외부 클릭 시 닫기
-window.addEventListener('click', function(event) {
+window.addEventListener('click', function (event) {
   const modalBackground = document.getElementById('modalBackground');
   const pyCalcModal = document.getElementById('pyCalcModal');
   if (event.target === modalBackground && !pyCalcModal.contains(event.target)) {
