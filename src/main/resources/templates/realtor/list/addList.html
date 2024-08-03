@@ -92,13 +92,13 @@
       <div class="budgetBox">
         <div class="budgetInput">
           <p>권리금 입력 <span style="color: red;">*</span> </p>
-          <div><input type="text" class="budget"> 만원</div>
+          <div><input type="text" class="budget"> &nbsp; 만원</div>
           <input type="hidden" class="formattedBudget" name="formattedBudget">
         </div>
 
         <div class="budgetInput">
           <p>보증금 입력</p>
-          <div><input type="text" class="budget"> 만원</div>
+          <div><input type="text" class="budget"> &nbsp; 만원</div>
           <input type="hidden" class="formattedBudget" name="formattedDeposit">
         </div>
       </div>
@@ -106,21 +106,25 @@
       <div class="budgetBox">
         <div class="budgetInput">
           <p>월세 입력</p>
-          <div><input type="text" class="budget"> 만원</div>
+          <div><input type="text" class="budget"> &nbsp; 만원</div>
           <input type="hidden" class="formattedBudget" name="formattedMonthlyRent">
         </div>
 
         <div class="budgetInput">
           <p>관리비 입력</p>
-          <div><input type="text" class="budget"> 만원</div>
+          <div><input type="text" class="budget"> &nbsp; 만원</div>
           <input type="hidden" class="formattedBudget" name="formattedMaintenanceFee">
         </div>
       </div>
+
+      <br>
+
+      <!-- 사진등록 모달 열기 -->
+      <div onclick="openPicModal()" id="regPicBtn"> <p>사진 등록하기</p> </div>
     </div>
 
 
-    <!-- 사진등록 모달 열기 -->
-    <div onclick="openPicModal()"> 사진 등록하기 </div>
+
 
     <!-- 사진등록 모달 -->
     <div id="picUploadModal">

@@ -631,3 +631,16 @@ window.onclick = function(event) {
       closePicModal();
   }
 }
+
+// budgetInput 클릭 시 클래스 추가 및 다른 budgetInput의 클래스 제거
+const budgetBoxes = document.querySelectorAll('.budgetInput');
+
+budgetBoxes.forEach(budgetBox => {
+  budgetBox.addEventListener('click', function () {
+    // 모든 budgetInput 요소에서 'budgetSelected' 클래스를 제거
+    budgetBoxes.forEach(box => box.classList.remove('budgetSelected'));
+    
+    // 현재 클릭된 요소에 'budgetSelected' 클래스 추가
+    this.classList.add('budgetSelected');
+  });
+});

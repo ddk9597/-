@@ -22,6 +22,7 @@ input[type="text"], input[type="radio"] {
   box-sizing: border-box;
 }
 
+
 .budgetInputContainer {
   display: flex;
   flex-direction: column;
@@ -36,15 +37,22 @@ input[type="text"], input[type="radio"] {
   margin: 5px 10px;
 }
 
-.budgetInput{
 
+.budgetInput{
+  transition: border 0.3s ease, background-color 0.3s ease;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   width: 45%;
   border: 1px solid black;
-  margin: 3px 5px;
+  border-radius: 10px;
+  margin: 2.5px 5px;
+}
+
+.budgetSelected{
+  border : 1px solid orange;
+  background-color: rgba(255, 165, 0, 0.1);
 }
 
 .budgetInput > div{
@@ -113,6 +121,23 @@ label {
 
 .results div:hover {
   background-color: #f0f0f0;
+}
+
+#regPicBtn{
+  border: 1px solid black;
+  user-select: none;
+  border-radius: 10px;
+}
+
+#regPicBtn > p{
+  margin: 3px;
+  padding: 3px;
+}
+
+#regPicBtn:hover{
+  background-color: rgba(255, 166, 0, 0.589);
+  transition: 0.3s;
+  cursor: pointer;
 }
 
 /* 사진 등록 모달 */
