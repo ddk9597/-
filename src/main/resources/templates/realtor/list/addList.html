@@ -4,6 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/css/realtor/list/addList.css">
   <!-- 헤더, 푸터 스타일 -->
   <link rel="stylesheet" href="/css/realtor/common/realtorHeader.css">
   <title>가짜 매물 등록하기</title>
@@ -19,29 +20,42 @@
   <div class="productInfoContainer">
     <div>
       <p>법정동 입력</p>
+      <input type="text" id="searchInput" placeholder="법정동명 검색" oninput="filterResults()">
+      <div id="results" class="results"></div>
     </div>
   
     <div>
       <p>번지수 입력*</p>
+      <input type="text" placeholder="번지수 입력">
     </div>
   
     <div>
-      <p>매물 종류 입력</span>
-      <p>상가</p>
-      <p>사무실</p>
-      <p>상가 및 사무실</p>
+      <div>
+        <p>매물 종류 입력</p>
+        <input type="radio" id="typeStore" name="propertyType" value="1">
+        <label for="typeStore">상가</label>
+  
+        <input type="radio" id="typeOffice" name="propertyType" value="2">
+        <label for="typeOffice">사무실</label>
+  
+        <input type="radio" id="typeBoth" name="propertyType" value="3">
+        <label for="typeBoth">상가 및 사무실</label>
+      </div>
     </div>
   
     <div>
       <p>공실여부 입력</p>
-      <p>공실</p>
-      <p>공실 아님</p>
+      <input type="radio" id="owner" name="tennantStatus" value="1">
+      <label for="owner">공실 아님</label>
+  
+      <input type="radio" id="renter" name="tennantStatus" value="2">
+      <label for="renter">현재 공실</label>
     </div>
   
     <div>
       <p>상호 *</p>
       <p>공실 아닌 상가인 경우에만 입력 가능</p>
-      <input type="text">
+      <input type="text" id="productName" disabled placeholder="상호를 입력하세요">
     </div>
   
     <!-- 연락처 입력 -->
@@ -58,29 +72,43 @@
   
     <div>
       <p>면적 입력</p>
-      <input type="number">
+      <input type="text" id="pyInput"> 평
+      <div onclick="openCalcModal()">면적 계산기 열기</div>
+  
+      <div id="modalBackground">
+        <div id="pyCalcModal">
+          <p>제곱미터 입력</p>
+          <input type="text" id="meterSquare"> 제곱미터
+          <div>
+            <p>계산된 면적</p>
+            <span id="pyCalcResult"></span> 평
+          </div>
+          <div onclick="applyCalculation()">입력하기</div>
+        </div>
+      </div>
     </div>
   
-    <div>
+    <div class="budgetInput">
       <p>권리금 입력*</p>
-      <input type="number"> 만원
+      <input type="text" class="budget"> 만원
     </div>
   
-    <div>
+    <div class="budgetInput">
       <p>보증금 입력</p>
-      <input type="number"> 만원
+      <input type="text" class="budget"> 만원
     </div>
   
-    <div>
+    <div class="budgetInput">
       <p>월세 입력</p>
-      <input type="number"> 만원
+      <input type="text" class="budget"> 만원
     </div>
   
-    <div>
+    <div class="budgetInput">
       <p>관리비 입력</p>
-      <input type="number"> 만원
+      <input type="text" class="budget"> 만원
     </div>
   </div>
+
 
   <!-- 사진등록 -->
 
