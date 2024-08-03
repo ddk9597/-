@@ -22,8 +22,40 @@ input[type="text"], input[type="radio"] {
   box-sizing: border-box;
 }
 
-.budgetInput > .budget{
-  width: calc(30% - 10px); 
+.budgetInputContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.budgetBox{
+  display: flex;
+  flex-direction: row;
+  width: 90%;
+  margin: 5px 10px;
+}
+
+.budgetInput{
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 45%;
+  border: 1px solid black;
+  margin: 3px 5px;
+}
+
+.budgetInput > div{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.budgetInput > div > .budget{
+  width: calc(50% - 10px); 
 }
 
 input[type="radio"] {

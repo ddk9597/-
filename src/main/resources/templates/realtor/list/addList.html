@@ -88,56 +88,61 @@
     </div>
 
     <div class="budgetInputContainer">
-      <div class="budgetInput">
-        <p>권리금 입력 <span style="color: red;">*</span> </p>
-        <input type="text" class="budget"> 만원
-        <input type="hidden" class="formattedBudget" name="formattedBudget">
+
+      <div class="budgetBox">
+        <div class="budgetInput">
+          <p>권리금 입력 <span style="color: red;">*</span> </p>
+          <div><input type="text" class="budget"> 만원</div>
+          <input type="hidden" class="formattedBudget" name="formattedBudget">
+        </div>
+
+        <div class="budgetInput">
+          <p>보증금 입력</p>
+          <div><input type="text" class="budget"> 만원</div>
+          <input type="hidden" class="formattedBudget" name="formattedDeposit">
+        </div>
       </div>
 
-      <div class="budgetInput">
-        <p>보증금 입력</p>
-        <input type="text" class="budget"> 만원
-        <input type="hidden" class="formattedBudget" name="formattedDeposit">
-      </div>
+      <div class="budgetBox">
+        <div class="budgetInput">
+          <p>월세 입력</p>
+          <div><input type="text" class="budget"> 만원</div>
+          <input type="hidden" class="formattedBudget" name="formattedMonthlyRent">
+        </div>
 
-      <div class="budgetInput">
-        <p>월세 입력</p>
-        <input type="text" class="budget"> 만원
-        <input type="hidden" class="formattedBudget" name="formattedMonthlyRent">
-      </div>
-
-      <div class="budgetInput">
-        <p>관리비 입력</p>
-        <input type="text" class="budget"> 만원
-        <input type="hidden" class="formattedBudget" name="formattedMaintenanceFee">
+        <div class="budgetInput">
+          <p>관리비 입력</p>
+          <div><input type="text" class="budget"> 만원</div>
+          <input type="hidden" class="formattedBudget" name="formattedMaintenanceFee">
+        </div>
       </div>
     </div>
 
 
     <!-- 사진등록 모달 열기 -->
     <div onclick="openPicModal()"> 사진 등록하기 </div>
-    
+
     <!-- 사진등록 모달 -->
     <div id="picUploadModal">
-        <div class="modal-content">
-            <span class="close" onclick="closePicModal()">&times;</span>
-            <form action="">
-                <!-- 업로드 할 사진 드래그 할 공간 -->
-                <div id="pictureUploadArea"></div>
+      <div class="modal-content">
+        <span class="close" onclick="closePicModal()">&times;</span>
+        <form action="">
+          <!-- 업로드 할 사진 드래그 할 공간 -->
+          <div id="pictureUploadArea"></div>
 
-                <!-- 업로드 된 사진 나열할 작은 div 반복 -->
-                <th:block></th:block>
+          <!-- 업로드 된 사진 나열할 작은 div 반복 -->
+          <th:block></th:block>
 
-                <div class="uploadedPictureContainer">
-                    <!-- 업로드된 사진 -->
-                    <!-- 사진이 업로드 될 때 마다 가로로 추가됨 -->
-                    <div class="uploadedPic"></div>
-                </div>
+          <div class="uploadedPictureContainer">
+            <!-- 업로드된 사진 -->
+            <!-- 사진이 업로드 될 때 마다 가로로 추가됨 -->
+            <div class="uploadedPic"></div>
+          </div>
 
-                <button> 사진 등록완료 </button>
+          <button> 사진 등록완료 </button>
 
-            </form>
-        </div>
+        </form>
+      </div>
     </div>
   </div>
 
