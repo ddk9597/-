@@ -72,7 +72,7 @@ public class rMainController {
 	    }
 	    
 	    int memberKind = loginMember.getMemberKind();
-	    // 3 : 중개사 회원임
+	    // 3 : 중개사 회원만 접근 가능
 	    if (memberKind != 3) {
 	        response.sendError(HttpServletResponse.SC_FORBIDDEN, "중개사 회원만 이용 가능합니다.");
 	        return null;

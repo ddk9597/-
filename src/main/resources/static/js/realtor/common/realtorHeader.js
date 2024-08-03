@@ -48,13 +48,12 @@ function toRegisterProperty() {
       return response.text();
   })
   .then(html => {
-      // 성공적으로 응답을 받았을 때, 받은 HTML을 처리합니다.
       document.open();
       document.write(html);
       document.close();
   })
   .catch(error => {
-      console.error('There was a problem with the fetch operation:', error);
+      console.error('fetch 과정에서 오류 발생:', error);
   });
 }
 
