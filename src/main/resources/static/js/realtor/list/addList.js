@@ -531,7 +531,7 @@ radios.forEach(radio => {
       productNameInput.disabled = false;
     } else {
       productNameInput.disabled = true;
-      productNameInput.value = '';  // Clear the input if disabled
+      productNameInput.value = '';
     }
   });
 });
@@ -546,11 +546,11 @@ propertyTypeRadios.forEach(radio => {
       productNameInput.disabled = false;
     } else {
       productNameInput.disabled = true;
-      productNameInput.value = '';  // Clear the input if disabled
+      productNameInput.value = '';
     }
   });
 });
-// 면적계산기
+// 면적계산기 기능 및 모달
 function openCalcModal() {
   const modalBackground = document.getElementById('modalBackground');
   modalBackground.style.display = 'block';
@@ -586,3 +586,48 @@ window.addEventListener('click', function (event) {
     closeModal();
   }
 });
+
+// 금액 입력 시 콤마 추가하기
+function formatNumberWithCommas(event) {
+  let input = event.target;
+  let value = input.value.replace(/,/g, '');
+
+  if (!isNaN(value) && value !== '') {
+      value = parseInt(value, 10).toLocaleString();
+      input.value = value;
+  }
+  
+  // 서버에 보낼 때 콤마 제거하기
+  let hiddenInput = input.nextElementSibling;
+  hiddenInput.value = value.replace(/,/g, '');
+}
+
+document.querySelectorAll('.budget').forEach(budgetInput => {
+  budgetInput.addEventListener('input', formatNumberWithCommas);
+  budgetInput.addEventListener('blur', formatNumberWithCommas);
+});
+
+// 사진 등록 모달 열기
+function openPicModal() {
+  const modal = document.getElementById('picUploadModal');
+  modal.style.display = 'block';
+  setTimeout(() => {
+      modal.classList.add('show');
+  }, 10); // Slight delay to allow the display property to take effect
+}
+
+function closePicModal() {
+  const modal = document.getElementById('picUploadModal');
+  modal.classList.remove('show');
+  setTimeout(() => {
+      modal.style.display = 'none';
+  }, 300); 
+}
+
+// 모달 외부 클릭 시 닫기
+window.onclick = function(event) {
+  const modal = document.getElementById('picUploadModal');
+  if (event.target == modal) {
+      closePicModal();
+  }
+}
