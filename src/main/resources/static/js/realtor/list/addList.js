@@ -593,10 +593,10 @@ function formatNumberWithCommas(event) {
   let value = input.value.replace(/,/g, '');
 
   if (!isNaN(value) && value !== '') {
-      value = parseInt(value, 10).toLocaleString();
-      input.value = value;
+    value = parseInt(value, 10).toLocaleString();
+    input.value = value;
   }
-  
+
   // 서버에 보낼 때 콤마 제거하기
   let hiddenInput = input.nextElementSibling;
   hiddenInput.value = value.replace(/,/g, '');
@@ -612,23 +612,24 @@ function openPicModal() {
   const modal = document.getElementById('picUploadModal');
   modal.style.display = 'block';
   setTimeout(() => {
-      modal.classList.add('show');
+    modal.classList.add('show');
   }, 10); // Slight delay to allow the display property to take effect
 }
 
+// 사진 등록 모달 닫기
 function closePicModal() {
   const modal = document.getElementById('picUploadModal');
   modal.classList.remove('show');
   setTimeout(() => {
-      modal.style.display = 'none';
-  }, 300); 
+    modal.style.display = 'none';
+  }, 300);
 }
 
 // 모달 외부 클릭 시 닫기
-window.onclick = function(event) {
+window.onclick = function (event) {
   const modal = document.getElementById('picUploadModal');
   if (event.target == modal) {
-      closePicModal();
+    closePicModal();
   }
 }
 
@@ -639,8 +640,28 @@ budgetBoxes.forEach(budgetBox => {
   budgetBox.addEventListener('click', function () {
     // 모든 budgetInput 요소에서 'budgetSelected' 클래스를 제거
     budgetBoxes.forEach(box => box.classList.remove('budgetSelected'));
-    
+
     // 현재 클릭된 요소에 'budgetSelected' 클래스 추가
     this.classList.add('budgetSelected');
   });
 });
+
+// 연락처 조합 : 관련인 + 번호
+const contactWho = document.getElementById('contactWho');
+const contactNumber = document.getElementById('contactNumber');
+const contactInfo = document.getElementById('contactInfo');
+
+contactWho.addEventListener('change', function () {
+
+});
+
+
+// 제출용 버튼 관련 Js
+const prdInfoRealSubmit = document.getElementById('prdInfoRealSubmit');
+const
+// 1. 진짜 버튼 기능 숨기기
+
+// 2. 내용 제출 버튼
+// 3. 사진 제출 버튼
+
+// 4. 둘이 합치기

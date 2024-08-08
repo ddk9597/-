@@ -22,7 +22,27 @@ input[type="text"], input[type="radio"] {
   box-sizing: border-box;
 }
 
+#pyInput, #floorInput{
+  width: 50%;
+}
 
+/* 면적계산기 버튼 */
+#pyCalcBtn{
+  border: 1px solid black;
+  margin: 5px;
+  padding: 5px;
+
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+#pyCalcBtn:hover{
+  background-color: rgba(0, 0, 0, 0.1);
+  transition: all 0.3s;
+}
+
+
+/* 가격 입력 모달 */
 .budgetInputContainer {
   display: flex;
   flex-direction: column;
@@ -85,6 +105,8 @@ label {
   z-index: 1000;
 }
 
+/* 면적계산기 모달 */
+
 #pyCalcModal {
   position: absolute;
   top: 50%;
@@ -101,6 +123,10 @@ label {
 
 #pyCalcModal p {
   margin: 10px 0;
+}
+
+#meterSquare{
+  width: 50%;
 }
 
 #pyCalcModal input[type="text"] {
@@ -140,6 +166,9 @@ label {
   cursor: pointer;
 }
 
+
+
+
 /* 사진 등록 모달 */
 #picUploadModal {
   display: none;
@@ -151,7 +180,6 @@ label {
   height: 100%;
   overflow: auto;
   background-color: rgba(0,0,0,0.4);
-  transition: opacity 0.3s ease, transform 0.3s ease;
   opacity: 0;
   transform: scale(0.9);
 }

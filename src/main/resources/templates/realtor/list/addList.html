@@ -14,140 +14,148 @@
 
   <!-- 공통 헤더 -->
   <div th:replace="realtor/common/realtorHeader :: header"></div>
+  
+  <form action="realtor/list/addList" method="POST">
+    <div class="productInfoContainer">
+      <span style="color: red;"> * 표시는 나에게만 보여지는 정보입니다.</span>
 
-  <div class="productInfoContainer">
-    <span style="color: red;"> * 표시는 나에게만 보여지는 정보입니다.</span>
-
-    <div>
-      <p>법정동 입력</p>
-      <input type="text" id="searchInput" placeholder="법정동명 검색" oninput="filterResults()">
-      <div id="results" class="results"></div>
-    </div>
-
-    <div>
-      <p>번지수 입력 <span style="color: red;">*</span> </p>
-      <input type="text" placeholder="번지수 입력">
-    </div>
-
-    <div>
       <div>
-        <p>매물 종류 입력</p>
-        <input type="radio" id="typeStore" name="propertyType" value="1">
-        <label for="typeStore">상가</label>
-
-        <input type="radio" id="typeOffice" name="propertyType" value="2">
-        <label for="typeOffice">사무실</label>
-
-        <input type="radio" id="typeBoth" name="propertyType" value="3">
-        <label for="typeBoth">상가 및 사무실</label>
+        <p>법정동 입력</p>
+        <input type="text" id="searchInput" name="locationTitle" placeholder="법정동명 검색" oninput="filterResults()">
+        <div id="results" class="results"></div>
       </div>
-    </div>
 
-    <div>
-      <p>공실여부 입력</p>
-      <input type="radio" id="ownerIs" name="tennantStatus" value="1">
-      <label for="ownerIs">공실 아님</label>
+      <div>
+        <p>번지수 입력 <span style="color: red;">*</span> </p>
+        <input type="text" name="addresNo" placeholder="번지수 입력">
+      </div>
 
-      <input type="radio" id="ownerNone" name="tennantStatus" value="2">
-      <label for="ownerNone">현재 공실</label>
-    </div>
+      <div>
+        <div>
+          <p>매물 종류 입력</p>
+          <input type="radio" id="typeStore" name="category" value="1">
+          <label for="typeStore">상가</label>
 
-    <div>
-      <p>상호<span style="color: red;">*</span></p>
-      <input type="text" id="productName" disabled placeholder="공실 아닌 상가인 경우에만 입력 가능">
-    </div>
+          <input type="radio" id="typeOffice" name="category" value="2">
+          <label for="typeOffice">사무실</label>
 
-    <!-- 연락처 입력 -->
-    <div>
-      <p>연락처 입력 <span style="color: red;">*</span> </p>
-      <input type="text" placeholder="관련인 정보(임차인, 임대인 등)">
-      <input type="text" placeholder="연락처 입력">
-    </div>
+          <input type="radio" id="typeBoth" name="category" value="3">
+          <label for="typeBoth">상가 및 사무실</label>
+        </div>
+      </div>
 
-    <div>
-      <p>층수 입력</p>
-      <input type="text" placeholder="지하일 경우 - 입력 ex:지하1층 -> -1">
-    </div>
+      <div>
+        <p>공실여부 입력</p>
+        <input type="radio" id="ownerIs" name="isTenant" value="1">
+        <label for="ownerIs">공실 아님</label>
 
-    <div>
-      <p>면적 입력</p>
-      <input type="text" id="pyInput"> 평
-      <div onclick="openCalcModal()" id="pyCalcBtn">면적 계산기 열기</div>
+        <input type="radio" id="ownerNone" name="isTenant" value="0">
+        <label for="ownerNone">현재 공실</label>
+      </div>
 
-      <div id="modalBackground">
-        <div id="pyCalcModal">
-          <p>제곱미터 입력</p>
-          <input type="text" id="meterSquare"> 제곱미터
-          <div>
-            <p>계산된 면적</p>
-            <span id="pyCalcResult"></span> 평
+      <div>
+        <p>상호<span style="color: red;">*</span></p>
+        <input type="text" name="shopName" id="productName" disabled placeholder="공실 아닌 상가인 경우에만 입력 가능">
+      </div>
+
+      <!-- 연락처 입력 -->
+      <div>
+        <p>연락처 입력 <span style="color: red;">*</span> </p>
+        <input type="text" id="contactWho" placeholder="관련인 정보(임차인, 임대인 등)">
+        <input type="text" id="contactPhone" placeholder="연락처 입력">
+        <input type="hiden" name="contactInfo" id="contactInfo">
+      </div>
+
+      <div>
+        <p>층수 입력</p>
+        <input type="text" id="floorInput" name="floor" placeholder="지하일 경우 - 입력 ex:지하1층 -> -1"> 층
+      </div>
+
+      <div>
+        <p>면적 입력</p>
+        <input type="text" name="py" id="pyInput"> 평
+        <div onclick="openCalcModal()" id="pyCalcBtn">면적 계산기 열기</div>
+
+        <div id="modalBackground">
+          <div id="pyCalcModal">
+            <p>제곱미터 입력</p>
+            <input type="text" id="meterSquare"> 제곱미터
+            <div>
+              <p>계산된 면적</p>
+              <span id="pyCalcResult"></span> 평
+            </div>
+            <div onclick="applyCalculation()">입력하기</div>
           </div>
-          <div onclick="applyCalculation()">입력하기</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="budgetInputContainer">
-
-      <div class="budgetBox">
-        <div class="budgetInput">
-          <p>권리금 입력 <span style="color: red;">*</span> </p>
-          <div><input type="text" class="budget"> &nbsp; 만원</div>
-          <input type="hidden" class="formattedBudget" name="formattedBudget">
-        </div>
-
-        <div class="budgetInput">
-          <p>보증금 입력</p>
-          <div><input type="text" class="budget"> &nbsp; 만원</div>
-          <input type="hidden" class="formattedBudget" name="formattedDeposit">
         </div>
       </div>
 
-      <div class="budgetBox">
-        <div class="budgetInput">
-          <p>월세 입력</p>
-          <div><input type="text" class="budget"> &nbsp; 만원</div>
-          <input type="hidden" class="formattedBudget" name="formattedMonthlyRent">
-        </div>
+      <div class="budgetInputContainer">
 
-        <div class="budgetInput">
-          <p>관리비 입력</p>
-          <div><input type="text" class="budget"> &nbsp; 만원</div>
-          <input type="hidden" class="formattedBudget" name="formattedMaintenanceFee">
-        </div>
-      </div>
-
-      <br>
-
-      <!-- 사진등록 모달 열기 -->
-      <div onclick="openPicModal()" id="regPicBtn"> <p>사진 등록하기</p> </div>
-    </div>
-
-
-
-
-    <!-- 사진등록 모달 -->
-    <div id="picUploadModal">
-      <div class="modal-content">
-        <span class="close" onclick="closePicModal()">&times;</span>
-        <form action="">
-          <!-- 업로드 할 사진 드래그 할 공간 -->
-          <div id="pictureUploadArea"></div>
-
-          <!-- 업로드 된 사진 나열할 작은 div 반복 -->
-          <th:block></th:block>
-
-          <div class="uploadedPictureContainer">
-            <!-- 업로드된 사진 -->
-            <!-- 사진이 업로드 될 때 마다 가로로 추가됨 -->
-            <div class="uploadedPic"></div>
+        <div class="budgetBox">
+          <div class="budgetInput">
+            <p>권리금 입력 <span style="color: red;">*</span> </p>
+            <div><input type="text" class="budget"> &nbsp; 만원</div>
+            <input type="hidden" class="formattedBudget" name="premium">
           </div>
 
-          <button> 사진 등록완료 </button>
+          <div class="budgetInput">
+            <p>보증금 입력</p>
+            <div><input type="text" class="budget"> &nbsp; 만원</div>
+            <input type="hidden" class="formattedBudget" name="deposit">
+          </div>
+        </div>
 
-        </form>
-      </div>
+        <div class="budgetBox">
+          <div class="budgetInput">
+            <p>월세 입력</p>
+            <div><input type="text" class="budget"> &nbsp; 만원</div>
+            <input type="hidden" class="formattedBudget" name="rent">
+          </div>
+
+          <div class="budgetInput">
+            <p>관리비 입력</p>
+            <div><input type="text" class="budget"> &nbsp; 만원</div>
+            <input type="hidden" class="formattedBudget" name="adminCost">
+          </div>
+        </div>
+
+        <button id="prdInfoRealSubmit" type="submit"> 작성하기 </button>
+  </form>
+
+  <br>
+
+  <!-- 사진등록 모달 열기 -->
+  <div onclick="openPicModal()" id="regPicBtn">
+    <p>사진 등록하기</p>
+  </div>
+
+
+  <!-- 사진등록 모달 -->
+  <div id="picUploadModal">
+    <div class="modal-content">
+      <span class="close" onclick="closePicModal()">&times;</span>
+      <form action="">
+        <!-- 업로드 할 사진 드래그 할 공간 -->
+        <div id="pictureUploadArea">
+
+
+        </div>
+
+        <!-- 업로드 된 사진 나열할 작은 div 반복 -->
+        <th:block></th:block>
+
+        <div class="uploadedPictureContainer">
+          <!-- 업로드된 사진 -->
+          <!-- 사진이 업로드 될 때 마다 가로로 추가됨 -->
+          <div class="uploadedPic"></div>
+        </div>
+
+        <button type="submit"> 사진 등록완료 </button>
+
+      </form>
     </div>
+  </div>
+
   </div>
 
   </div>
