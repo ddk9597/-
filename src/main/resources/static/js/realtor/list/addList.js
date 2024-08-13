@@ -651,14 +651,17 @@ const contactWho = document.getElementById('contactWho');
 const contactNumber = document.getElementById('contactNumber');
 const contactInfo = document.getElementById('contactInfo');
 
+// 관련인 정보 추가하기
 contactWho.addEventListener('change', function () {
+
+  contactInfo
+
 
 });
 
 
 // 제출용 버튼 관련 Js
 const prdInfoRealSubmit = document.getElementById('prdInfoRealSubmit');
-const
 // 1. 진짜 버튼 기능 숨기기
 
 // 2. 내용 제출 버튼

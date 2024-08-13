@@ -14,22 +14,22 @@ import lombok.ToString;
 @ToString
 @Builder
 public class ProductInfoDTO {
-	private int productNo;
-	private int memberNo;
+	private Integer productNo;
+	private Integer memberNo;
+	private Integer areaCode;
 	private String locationTitle;
-	private int areaCode;
-	private String address;
+	private String addressNo;
+	private String category;
+	private Integer isTenant; // 공실여부 - 0:공실, 1:공실아님
 	private String shopName;
-	private int category;
 	private String contactInfo;
 	private String floor;
 	private String py;
-	private int premium;
-	private int deposit;
-	private int rent;
-	private int adminCost;
+	private Integer premium;
+	private Integer deposit;
+	private Integer rent;
+	private Integer adminCost;
 	private String note;
-	private int isTenant; // 공실여부 - 0:공실, 1:공실아님
 	
 	
 }

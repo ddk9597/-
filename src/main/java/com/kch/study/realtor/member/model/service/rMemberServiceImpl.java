@@ -46,7 +46,7 @@ public class rMemberServiceImpl implements rMemberService {
             String subject = "인증번호입니다.";
 
             if ("signUp".equals(htmlName)) {
-                subject = "강찬혁의 가짜 부동산 사이트 인증번호입니다.";
+                subject = "안녕하세요 비바이노베이션 면접 일정 안내드립니다.";
             }
 
             MimeMessage mimeMessage = mailSender.createMimeMessage();

@@ -14,7 +14,7 @@
 
   <!-- 공통 헤더 -->
   <div th:replace="realtor/common/realtorHeader :: header"></div>
-  
+
   <form action="realtor/list/addList" method="POST">
     <div class="productInfoContainer">
       <span style="color: red;"> * 표시는 나에게만 보여지는 정보입니다.</span>
@@ -27,19 +27,19 @@
 
       <div>
         <p>번지수 입력 <span style="color: red;">*</span> </p>
-        <input type="text" name="addresNo" placeholder="번지수 입력">
+        <input type="text" name="addressNo" placeholder="번지수 입력">
       </div>
 
       <div>
         <div>
           <p>매물 종류 입력</p>
-          <input type="radio" id="typeStore" name="category" value="1">
+          <input type="radio" id="typeStore" name="category" value="상가">
           <label for="typeStore">상가</label>
 
-          <input type="radio" id="typeOffice" name="category" value="2">
+          <input type="radio" id="typeOffice" name="category" value="사무실">
           <label for="typeOffice">사무실</label>
 
-          <input type="radio" id="typeBoth" name="category" value="3">
+          <input type="radio" id="typeBoth" name="category" value="상가 및 사무실">
           <label for="typeBoth">상가 및 사무실</label>
         </div>
       </div>
@@ -62,7 +62,7 @@
         <p>연락처 입력 <span style="color: red;">*</span> </p>
         <input type="text" id="contactWho" placeholder="관련인 정보(임차인, 임대인 등)">
         <input type="text" id="contactPhone" placeholder="연락처 입력">
-        <input type="hiden" name="contactInfo" id="contactInfo">
+        <input type="hidden" name="contactInfo" id="contactInfo">
       </div>
 
       <div>
@@ -118,10 +118,15 @@
           </div>
         </div>
 
-        <button id="prdInfoRealSubmit" type="submit"> 작성하기 </button>
-  
-  <!-- 매물정보를 보내는 form 태그 종료 -->
-      </form> 
+        <div>
+          <p>기타 매물 특이사항 입력 <span style="color: red;">*</span> </p>
+          <textarea name="note" rows="4" cols="50"></textarea>
+        </div>
+
+        <button id="prdInfoRealSubmit" type="submit"> 작성 aa하기 </button>
+
+        <!-- 매물정보를 보내는 form 태그 종료 -->
+  </form>
 
   <br>
 
@@ -147,7 +152,7 @@
 
         <div class="uploadedPictureContainer">
           <!-- 업로드된 사진 -->
-          <!-- 사진이 업로드 될 때 마다 가로로 추가됨 -->
+          <!-- 사진이 업로드 될 때 마다 가로로 추가됨 -->te
           <div class="uploadedPic"></div>
         </div>
 
