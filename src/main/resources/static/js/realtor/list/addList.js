@@ -1,4 +1,3 @@
-
 // 법정동 코드와 법정동 이름
 const areaData = [
   { code: 1100000000, name: '서울특별시' },
@@ -496,6 +495,169 @@ const areaData = [
   { code: 1174011000, name: '서울특별시 강동구 강일동' }
 ];
 
+
+// 값들이 제대로 입력 되었는지 체크
+
+const checkAdd = {
+  "locationTitle": false,
+  "addressNo": false,
+  "category": false,
+  "isTenant": false,
+  "shopName": false,
+  "contactInfo": false,
+  "floor": false,
+  "py": false,
+  "premium": false,
+  "deposit": false,
+  "rent": false,
+  "adminCost": false,
+  "note": false
+}
+
+// 법정동 유효성 검사 함수
+const isLocationValid = (location) => areaData.some(area => area.name === location);
+
+const searchInput = document.getElementById('searchInput');
+searchInput.addEventListener('input', () => {
+  const locationTitle = searchInput.value.trim();
+  checkAdd.locationTitle = isLocationValid(locationTitle);
+  searchInput.style.borderColor = checkAdd.locationTitle ? '' : 'red';
+});
+
+// 상세주소 유효성 검사
+const addressInput = document.getElementById('addressInput').value.trim();
+
+if (addressInput.length !== 0) {
+  checkAdd.addressNo = true;
+} else {
+  checkAdd.addressNo = false;
+}
+
+// 매물 종류 입력되었는지 확인
+const selectedCategory = document.querySelector('input[name="category"]:checked');
+if (selectedCategory) {
+  checkAdd.category = true;
+} else {
+  checkAdd.category = false
+}
+
+// 공실여부 입력 확인
+const isTenantCheck = document.querySelector('input[name="isTenant"]:checked');
+if (isTenantCheck) {
+  checkAdd.isTenant = true;
+} else {
+  checkAdd.isTenant = false
+}
+
+// 상호가 입력되었는지 확인
+// 공실 여부와 매물 종류 라디오 버튼들
+const isTenantSelected = document.querySelector('input[name="isTenant"]:checked');
+const categorySelected = document.querySelector('input[name="category"]:checked');
+const shopNameInput = document.getElementById('productName');
+
+// 조건을 만족하는지 확인
+if (isTenantSelected && categorySelected) {
+  if (isTenantSelected.value === '1' && categorySelected.value !== '사무실') {
+    // 공실이 아니고, 매물 종류가 사무실이 아닌 경우
+    if (shopNameInput.value.trim() !== '') {
+      checkAdd.shopName = true;
+    } else {
+      checkAdd.shopName = false;
+    }
+  } else {
+    checkAdd.shopName = true;
+  }
+} else {
+  console.log('공실 여부와 매물 종류를 먼저 선택해야 합니다.');
+  checkAdd.shopName = false;
+}
+
+// 연락처 입력 검사
+const contactInfoCheck = document.getElementById('contactInfo').value.trim();
+if (contactInfoCheck.length != 0) {
+  checkAdd.contactInfo = true;
+} else {
+  checkAdd.contactInfo = false;
+}
+
+// 층수 입력 검사
+const floorInput = document.getElementById('floorInput').value.trim();
+if (floorInput.length != 0) {
+  checkAdd.floor = true;
+} else {
+  checkAdd.floor = false;
+}
+
+// 면적 입력 검사
+const pyInput = document.getElementById('pyInput').value.trim();
+if (pyInput.length != 0) {
+  checkAdd.py = true;
+} else {
+  checkAdd.py = false;
+}
+
+// 권리금 입력 검사
+const premiumInput = document.getElementById('premiumInput').value.trim();
+if (premiumInput.length != 0) {
+  checkAdd.premium = true;
+} else {
+  checkAdd.premium = false;
+}
+
+// 보증금 입력 검사
+const depositInput = document.getElementById('depositInput').value.trim();
+if (depositInput.length != 0) {
+  checkAdd.deposit = true;
+} else {
+  checkAdd.deposit = false;
+}
+
+// 월세 입력 검사
+const rentInput = document.getElementById('rentInput').value.trim();
+if (rentInput.length != 0) {
+  checkAdd.rent = true;
+} else {
+  checkAdd.rent = false;
+}
+
+// 관리비 입력 검사
+const adminCostInput = document.querySelector('.budget');
+const formattedBudgetInput = document.getElementById('adminCostInput');
+
+// 관리비 입력 여부 확인
+const adminCostCheck = adminCostInput.value.trim();
+if (adminCostCheck.length !== 0) {
+  // 관리비가 입력된 경우
+  formattedBudgetInput.value = adminCostCheck;
+  checkAdd.adminCost = true;
+} else {
+  // 관리비가 입력되지 않은 경우
+  formattedBudgetInput.value = '0';
+  checkAdd.adminCost = true;
+}
+
+// 기타 매물 특이사항 입력 검사
+const noteInput = document.getElementById('noteInput').value.trim();
+if (noteInput.length != 0) {
+  checkAdd.note = true;
+} else {
+
+
+
+}
+
+// 모든 필드가 올바르게 입력되었을 때 폼 제출 하기
+const form = document.querySelector('form');
+form.addEventListener('submit', (event) => {
+  if (!validateForm()) {
+    event.preventDefault();
+    alert('모든 필드를 올바르게 입력하세요.');
+  }
+});
+
+
+
+
 function filterResults() {
   const input = document.getElementById('searchInput').value.toLowerCase();
   const resultsDiv = document.getElementById('results');
@@ -647,18 +809,22 @@ budgetBoxes.forEach(budgetBox => {
 });
 
 // 연락처 조합 : 관련인 + 번호
-const contactWho = document.getElementById('contactWho');
-const contactNumber = document.getElementById('contactNumber');
-const contactInfo = document.getElementById('contactInfo');
+document.addEventListener('DOMContentLoaded', function () {
+  const contactWho = document.getElementById('contactWho');
+  const contactPhone = document.getElementById('contactPhone');
+  const realContactInfo = document.getElementById('contactInfo');
 
-// 관련인 정보 추가하기
-contactWho.addEventListener('change', function () {
+  // 함수: 두 입력 값을 결합하여 realContactInfo에 업데이트
+  function updateContactInfo() {
+    realContactInfo.value = `${contactWho.value} ${contactPhone.value}`;
+  }
 
-  contactInfo
+  // 관련인 정보가 변경될 때
+  contactWho.addEventListener('input', updateContactInfo);
 
-
+  // 연락처 정보가 변경될 때
+  contactPhone.addEventListener('input', updateContactInfo);
 });
-
 
 // 제출용 버튼 관련 Js
 const prdInfoRealSubmit = document.getElementById('prdInfoRealSubmit');

@@ -218,3 +218,13 @@ label {
   text-decoration: none;
   cursor: pointer;
 }
+
+#noteInput{
+  border: 1px solid black;
+  border-radius: 10px;
+  padding: 10px;
+  margin: 10px;
+  width: 80%;
+  height: 100px;
+  resize: none;
+}
