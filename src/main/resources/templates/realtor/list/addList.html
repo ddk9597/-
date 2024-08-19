@@ -139,28 +139,24 @@
   <!-- 사진등록 모달 -->
   <div id="picUploadModal">
     <div class="modal-content">
-      <span class="close" onclick="closePicModal()">&times;</span>
-      <form action="">
-        <!-- 업로드 할 사진 드래그 할 공간 -->
-        <div id="pictureUploadArea">
+        <span class="close" onclick="closePicModal()">&times;</span>
+        <form action="relator/list/addPicture" method="POST" id="pictureUploadForm" enctype="multipart/form-data">
+            <!-- 업로드 할 사진 드래그 할 공간 -->
+            <div id="pictureUploadArea">
+                <input type="file" name="picture" id="fileInput" accept="image/*" multiple>
+                <p>사진을 여기에 드래그하거나 클릭하여 선택하세요.</p>
+            </div>
 
+            <!-- 업로드된 사진 나열할 작은 div -->
+            <div class="uploadedPictureContainer" id="uploadedPictureContainer">
+                <!-- 업로드된 사진 -->
+                <!-- 사진이 업로드 될 때마다 가로로 추가됨 -->
+            </div>
 
-        </div>
-
-        <!-- 업로드 된 사진 나열할 작은 div 반복 -->
-        <th:block></th:block>
-
-        <div class="uploadedPictureContainer">
-          <!-- 업로드된 사진 -->
-          <!-- 사진이 업로드 될 때 마다 가로로 추가됨 -->te
-          <div class="uploadedPic"></div>
-        </div>
-
-        <button type="submit"> 사진 등록완료 </button>
-
-      </form>
+            <button type="submit">사진 등록완료</button>
+        </form>
     </div>
-  </div>
+</div>
 
   </div>
 
