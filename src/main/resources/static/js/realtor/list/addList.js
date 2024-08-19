@@ -496,167 +496,169 @@ const areaData = [
 ];
 
 
-// 값들이 제대로 입력 되었는지 체크
+// 제출 시 값들이 제대로 입력 되었는지 체크
+const listInfoForm = document.getElementById('listInfoForm');
+listInfoForm.addEventListener('submit', (event) => {
 
-const checkAdd = {
-  "locationTitle": false,
-  "addressNo": false,
-  "category": false,
-  "isTenant": false,
-  "shopName": false,
-  "contactInfo": false,
-  "floor": false,
-  "py": false,
-  "premium": false,
-  "deposit": false,
-  "rent": false,
-  "adminCost": false,
-  "note": false
-}
 
-// 법정동 유효성 검사 함수
-const isLocationValid = (location) => areaData.some(area => area.name === location);
+  const checkAdd = {
+    "locationTitle": false,
+    "addressNo": false,
+    "category": false,
+    "isTenant": false,
+    "shopName": false,
+    "contactInfo": false,
+    "floor": false,
+    "py": false,
+    "premium": false,
+    "deposit": false,
+    "rent": false,
+    "adminCost": false,
+    "note": false
+  }
 
-const searchInput = document.getElementById('searchInput');
-searchInput.addEventListener('input', () => {
-  const locationTitle = searchInput.value.trim();
-  checkAdd.locationTitle = isLocationValid(locationTitle);
-  searchInput.style.borderColor = checkAdd.locationTitle ? '' : 'red';
-});
+  // 법정동 유효성 검사 함수
+  const isLocationValid = (location) => areaData.some(area => area.name === location);
 
-// 상세주소 유효성 검사
-const addressInput = document.getElementById('addressInput').value.trim();
+  const searchInput = document.getElementById('searchInput');
+  searchInput.addEventListener('input', () => {
+    const locationTitle = searchInput.value.trim();
+    checkAdd.locationTitle = isLocationValid(locationTitle);
+    searchInput.style.borderColor = checkAdd.locationTitle ? '' : 'red';
+  });
 
-if (addressInput.length !== 0) {
-  checkAdd.addressNo = true;
-} else {
-  checkAdd.addressNo = false;
-}
+  // 상세주소 유효성 검사
+  const addressInput = document.getElementById('addressInput').value.trim();
 
-// 매물 종류 입력되었는지 확인
-const selectedCategory = document.querySelector('input[name="category"]:checked');
-if (selectedCategory) {
-  checkAdd.category = true;
-} else {
-  checkAdd.category = false
-}
+  if (addressInput.length !== 0) {
+    checkAdd.addressNo = true;
+  } else {
+    checkAdd.addressNo = false;
+  }
 
-// 공실여부 입력 확인
-const isTenantCheck = document.querySelector('input[name="isTenant"]:checked');
-if (isTenantCheck) {
-  checkAdd.isTenant = true;
-} else {
-  checkAdd.isTenant = false
-}
+  // 매물 종류 입력되었는지 확인
+  const selectedCategory = document.querySelector('input[name="category"]:checked');
+  if (selectedCategory) {
+    checkAdd.category = true;
+  } else {
+    checkAdd.category = false
+  }
 
-// 상호가 입력되었는지 확인
-// 공실 여부와 매물 종류 라디오 버튼들
-const isTenantSelected = document.querySelector('input[name="isTenant"]:checked');
-const categorySelected = document.querySelector('input[name="category"]:checked');
-const shopNameInput = document.getElementById('productName');
+  // 공실여부 입력 확인
+  const isTenantCheck = document.querySelector('input[name="isTenant"]:checked');
+  if (isTenantCheck) {
+    checkAdd.isTenant = true;
+  } else {
+    checkAdd.isTenant = false
+  }
 
-// 조건을 만족하는지 확인
-if (isTenantSelected && categorySelected) {
-  if (isTenantSelected.value === '1' && categorySelected.value !== '사무실') {
-    // 공실이 아니고, 매물 종류가 사무실이 아닌 경우
-    if (shopNameInput.value.trim() !== '') {
-      checkAdd.shopName = true;
+  // 상호가 입력되었는지 확인
+  // 공실 여부와 매물 종류 라디오 버튼들
+  const isTenantSelected = document.querySelector('input[name="isTenant"]:checked');
+  const categorySelected = document.querySelector('input[name="category"]:checked');
+  const shopNameInput = document.getElementById('productName');
+
+  // 조건을 만족하는지 확인
+  if (isTenantSelected && categorySelected) {
+    if (isTenantSelected.value === '1' && categorySelected.value !== '사무실') {
+      // 공실이 아니고, 매물 종류가 사무실이 아닌 경우
+      if (shopNameInput.value.trim() !== '') {
+        checkAdd.shopName = true;
+      } else {
+        checkAdd.shopName = false;
+      }
     } else {
-      checkAdd.shopName = false;
+      checkAdd.shopName = true;
     }
   } else {
-    checkAdd.shopName = true;
+    console.log('공실 여부와 매물 종류를 먼저 선택해야 합니다.');
+    checkAdd.shopName = false;
   }
-} else {
-  console.log('공실 여부와 매물 종류를 먼저 선택해야 합니다.');
-  checkAdd.shopName = false;
-}
 
-// 연락처 입력 검사
-const contactInfoCheck = document.getElementById('contactInfo').value.trim();
-if (contactInfoCheck.length != 0) {
-  checkAdd.contactInfo = true;
-} else {
-  checkAdd.contactInfo = false;
-}
+  // 연락처 입력 검사
+  const contactInfoCheck = document.getElementById('contactInfo').value.trim();
+  if (contactInfoCheck.length != 0) {
+    checkAdd.contactInfo = true;
+  } else {
+    checkAdd.contactInfo = false;
+  }
 
-// 층수 입력 검사
-const floorInput = document.getElementById('floorInput').value.trim();
-if (floorInput.length != 0) {
-  checkAdd.floor = true;
-} else {
-  checkAdd.floor = false;
-}
+  // 층수 입력 검사
+  const floorInput = document.getElementById('floorInput').value.trim();
+  if (floorInput.length != 0) {
+    checkAdd.floor = true;
+  } else {
+    checkAdd.floor = false;
+  }
 
-// 면적 입력 검사
-const pyInput = document.getElementById('pyInput').value.trim();
-if (pyInput.length != 0) {
-  checkAdd.py = true;
-} else {
-  checkAdd.py = false;
-}
+  // 면적 입력 검사
+  const pyInput = document.getElementById('pyInput').value.trim();
+  if (pyInput.length != 0) {
+    checkAdd.py = true;
+  } else {
+    checkAdd.py = false;
+  }
 
-// 권리금 입력 검사
-const premiumInput = document.getElementById('premiumInput').value.trim();
-if (premiumInput.length != 0) {
-  checkAdd.premium = true;
-} else {
-  checkAdd.premium = false;
-}
+  // 권리금 입력 검사
+  const premiumInput = document.getElementById('premiumInput').value.trim();
+  if (premiumInput.length != 0) {
+    checkAdd.premium = true;
+  } else {
+    checkAdd.premium = false;
+  }
 
-// 보증금 입력 검사
-const depositInput = document.getElementById('depositInput').value.trim();
-if (depositInput.length != 0) {
-  checkAdd.deposit = true;
-} else {
-  checkAdd.deposit = false;
-}
+  // 보증금 입력 검사
+  const depositInput = document.getElementById('depositInput').value.trim();
+  if (depositInput.length != 0) {
+    checkAdd.deposit = true;
+  } else {
+    checkAdd.deposit = false;
+  }
 
-// 월세 입력 검사
-const rentInput = document.getElementById('rentInput').value.trim();
-if (rentInput.length != 0) {
-  checkAdd.rent = true;
-} else {
-  checkAdd.rent = false;
-}
+  // 월세 입력 검사
+  const rentInput = document.getElementById('rentInput').value.trim();
+  if (rentInput.length != 0) {
+    checkAdd.rent = true;
+  } else {
+    checkAdd.rent = false;
+  }
 
-// 관리비 입력 검사
-const adminCostInput = document.querySelector('.budget');
-const formattedBudgetInput = document.getElementById('adminCostInput');
+  // 관리비 입력 검사
+  const adminCostInput = document.querySelector('.budget');
+  const formattedBudgetInput = document.getElementById('adminCostInput');
 
-// 관리비 입력 여부 확인
-const adminCostCheck = adminCostInput.value.trim();
-if (adminCostCheck.length !== 0) {
-  // 관리비가 입력된 경우
-  formattedBudgetInput.value = adminCostCheck;
-  checkAdd.adminCost = true;
-} else {
-  // 관리비가 입력되지 않은 경우
-  formattedBudgetInput.value = '0';
-  checkAdd.adminCost = true;
-}
+  // 관리비 입력 여부 확인
+  const adminCostCheck = adminCostInput.value.trim();
+  if (adminCostCheck.length !== 0) {
+    // 관리비가 입력된 경우
+    formattedBudgetInput.value = adminCostCheck;
+    checkAdd.adminCost = true;
+  } else {
+    // 관리비가 입력되지 않은 경우
+    formattedBudgetInput.value = '0';
+    checkAdd.adminCost = true;
+  }
 
-// // 기타 매물 특이사항 입력 검사
-// const noteInput = document.getElementById('noteInput').value.trim();
-// if (noteInput.length != 0) {
-//   checkAdd.note = true;
-// } else {
-//   const result = confirm("매물 특이사항을 적지 않으시겠습니까?");
-//   if (confirm) {
-//     checkAdd.note = true;
+  // 기타 매물 특이사항 입력 검사
+  const noteInput = document.getElementById('noteInput').value.trim();
+  if (noteInput.length != 0) {
+    checkAdd.note = true;
+  } else {
+    const result = confirm("매물 특이사항을 적지 않으시겠습니까?");
+    if (confirm) {
+      checkAdd.note = true;
 
-//   } else {
-//     checkAdd.note = false;
-//     const noteInput = document.getElementById('noteInput');
-//     noteInput.focus();
-//   }
+    } else {
+      checkAdd.note = false;
+      const noteInput = document.getElementById('noteInput');
+      noteInput.focus();
+    }
 
 
-// }
+  }
 
-// 모든 필드가 올바르게 입력되었을 때 폼 제출 하기
-const form = document.querySelector('form');
-form.addEventListener('submit', (event) => {
+  // 모든 필드가 올바르게 입력되었을 때 폼 제출 하기
+
   if (!validateForm()) {
     event.preventDefault();
     alert('모든 필드를 올바르게 입력하세요.');
@@ -720,6 +722,7 @@ propertyTypeRadios.forEach(radio => {
     }
   });
 });
+
 // 면적계산기 기능 및 모달
 function openCalcModal() {
   const modalBackground = document.getElementById('modalBackground');

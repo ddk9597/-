@@ -15,7 +15,7 @@
   <!-- 공통 헤더 -->
   <div th:replace="realtor/common/realtorHeader :: header"></div>
 
-  <form action="realtor/list/addList" method="POST">
+  <form action="realtor/list/addList" method="POST" id="listInfoForm">
     <div class="productInfoContainer">
       <span style="color: red;"> * 표시는 나에게만 보여지는 정보입니다.</span>
 
@@ -118,15 +118,15 @@
           </div>
         </div>
 
-          <div>
-            <p>기타 매물 특이사항 입력 <span style="color: red;">*</span> </p>
-            <textarea name="note" rows="4" cols="50" placeholder="매물 특이사항을 입력해 주세요" id="noteInput"></textarea>
-          </div>
+        <div>
+          <p>기타 매물 특이사항 입력 <span style="color: red;">*</span> </p>
+          <textarea name="note" rows="4" cols="50" placeholder="매물 특이사항을 입력해 주세요" id="noteInput"></textarea>
+        </div>
 
         <button id="prdInfoRealSubmit" type="submit"> 작성 aa하기 </button>
 
-        <!-- 매물정보를 보내는 form 태그 종료 -->
   </form>
+  <!-- 매물정보를 보내는 form 태그 종료 -->
 
   <br>
 
