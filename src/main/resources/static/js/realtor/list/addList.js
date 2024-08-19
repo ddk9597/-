@@ -636,15 +636,23 @@ if (adminCostCheck.length !== 0) {
   checkAdd.adminCost = true;
 }
 
-// 기타 매물 특이사항 입력 검사
-const noteInput = document.getElementById('noteInput').value.trim();
-if (noteInput.length != 0) {
-  checkAdd.note = true;
-} else {
+// // 기타 매물 특이사항 입력 검사
+// const noteInput = document.getElementById('noteInput').value.trim();
+// if (noteInput.length != 0) {
+//   checkAdd.note = true;
+// } else {
+//   const result = confirm("매물 특이사항을 적지 않으시겠습니까?");
+//   if (confirm) {
+//     checkAdd.note = true;
+
+//   } else {
+//     checkAdd.note = false;
+//     const noteInput = document.getElementById('noteInput');
+//     noteInput.focus();
+//   }
 
 
-
-}
+// }
 
 // 모든 필드가 올바르게 입력되었을 때 폼 제출 하기
 const form = document.querySelector('form');
@@ -681,7 +689,7 @@ function filterResults() {
 }
 
 // 공실 아닌 상가인 경우에만 상호명 입력하게 하기
-const radios = document.getElementsByName('tennantStatus');
+const radios = document.getElementsByName('isTenant');
 const productNameInput = document.getElementById('productName');
 
 radios.forEach(radio => {
@@ -767,6 +775,50 @@ function formatNumberWithCommas(event) {
 document.querySelectorAll('.budget').forEach(budgetInput => {
   budgetInput.addEventListener('input', formatNumberWithCommas);
   budgetInput.addEventListener('blur', formatNumberWithCommas);
+});
+
+// 입력한 금액들을 전달용 input으로 넣기
+const thisPremium = document.getElementById('premium');
+const thisPremiumInput = document.getElementById('premiumInput');
+
+thisPremium.addEventListener('input', function () {
+  thisPremiumInput.value = thisPremium.value;
+});// 입력 필드와 전달용 hidden 필드를 연결하는 함수
+function syncInputValue(inputId, hiddenInputId) {
+  const inputElement = document.getElementById(inputId);
+  const hiddenInputElement = document.getElementById(hiddenInputId);
+
+  inputElement.addEventListener('input', function () {
+    hiddenInputElement.value = inputElement.value;
+  });
+}
+
+// 각 입력 필드에 대해 syncInputValue 함수 호출
+syncInputValue('premium', 'premiumInput');
+syncInputValue('deposit', 'depositInput');
+syncInputValue('rent', 'rentInput');
+syncInputValue('adminCost', 'adminCostInput');
+
+
+const thisDeposit = document.getElementById('deposit');
+const thisDepositInput = document.getElementById('depositInput');
+
+thisDeposit.addEventListener('input', function () {
+  thisDepositInput.value = thisDeposit.value;
+});
+
+const thisRent = document.getElementById('rent');
+const thisRentInput = document.getElementById('rentInput');
+
+thisRent.addEventListener('input', function () {
+  thisRentInput.value = thisRent.value;
+});
+
+const thistAdminCost = document.getElementById('adminCost');
+const thistAdminCostInput = document.getElementById('adminCostInput');
+
+thistAdminCost.addEventListener('input', function () {
+  thistAdminCostInput.value = thistAdminCost.value;
 });
 
 // 사진 등록 모달 열기

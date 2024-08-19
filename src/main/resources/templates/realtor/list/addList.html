@@ -62,7 +62,7 @@
         <p>연락처 입력 <span style="color: red;">*</span> </p>
         <input type="text" id="contactWho" placeholder="관련인 정보(임차인, 임대인 등)">
         <input type="text" id="contactPhone" placeholder="연락처 입력">
-        <input type="text" name="contactInfo" id="contactInfo" >
+        <input type="text" name="contactInfo" id="contactInfo">
       </div>
 
       <div>
@@ -93,13 +93,13 @@
         <div class="budgetBox">
           <div class="budgetInput">
             <p>권리금 입력 <span style="color: red;">*</span> </p>
-            <div><input type="text" class="budget"> &nbsp; 만원</div>
+            <div><input type="text" class="budget" id="premium"> &nbsp; 만원</div>
             <input type="hidden" class="formattedBudget" name="premium" id="premiumInput">
           </div>
 
           <div class="budgetInput">
             <p>보증금 입력</p>
-            <div><input type="text" class="budget"> &nbsp; 만원</div>
+            <div><input type="text" class="budget" id="deposit"> &nbsp; 만원</div>
             <input type="hidden" class="formattedBudget" name="deposit" id="depositInput">
           </div>
         </div>
@@ -107,21 +107,21 @@
         <div class="budgetBox">
           <div class="budgetInput">
             <p>월세 입력</p>
-            <div><input type="text" class="budget"> &nbsp; 만원</div>
+            <div><input type="text" class="budget" id="rent"> &nbsp; 만원</div>
             <input type="hidden" class="formattedBudget" name="rent" id="rentInput">
           </div>
 
           <div class="budgetInput">
             <p>관리비 입력</p>
-            <div><input type="text" class="budget"> &nbsp; 만원</div>
+            <div><input type="text" class="budget" id="adminCost"> &nbsp; 만원</div>
             <input type="hidden" class="formattedBudget" name="adminCost" id="adminCostInput">
           </div>
         </div>
 
-        <div>
-          <p>기타 매물 특이사항 입력 <span style="color: red;">*</span> </p>
-          <textarea name="note" rows="4" cols="50" placeholder="매물 특이사항을 입력해 주세요" id="noteInput"></textarea>
-        </div>
+          <div>
+            <p>기타 매물 특이사항 입력 <span style="color: red;">*</span> </p>
+            <textarea name="note" rows="4" cols="50" placeholder="매물 특이사항을 입력해 주세요" id="noteInput"></textarea>
+          </div>
 
         <button id="prdInfoRealSubmit" type="submit"> 작성 aa하기 </button>
 
