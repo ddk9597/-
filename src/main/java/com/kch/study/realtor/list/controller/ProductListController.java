@@ -1,5 +1,7 @@
 package com.kch.study.realtor.list.controller;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -58,15 +60,35 @@ public class ProductListController {
 
 	// 사진 등록하기
 
-	// 사진을 저장할 디렉토리 설정 : 절대경로로 설정 
-	private static String uploadedPath = "uploaded/";
+	// 사진을 저장할 디렉토리 설정 : 절대경로로 설정
+	private static final String UPLOADED_PATH = "src/main/resources/static/images/realtor/listPic/";
 
 	@PostMapping("addPicture")
-	public String addPicture(
-			@RequestParam("picture") MultipartFile[] files,
-			RedirectAttributes ra
-			) {
+	public String addPicture(@RequestParam("picture") MultipartFile[] files, RedirectAttributes ra) {
+		try {
+			// 업로드된 파일을 저장하는 로직
+			for (MultipartFile file : files) {
+				// 원본 파일명 가져오기
+				String fileName = file.getOriginalFilename();
 
-		return null;
+				// 파일을 저장할 경로 설정
+				File dest = new File(UPLOADED_PATH + fileName);
+
+				// 파일 저장
+				file.transferTo(dest);
+
+				log.info("Uploaded file: " + fileName);
+			}
+
+			// 업로드 완료 메시지 설정
+			ra.addFlashAttribute("message", "사진이 성공적으로 업로드되었습니다.");
+		} catch (IOException e) {
+			// 업로드 실패 시 오류 메시지 설정
+			ra.addFlashAttribute("message", "사진 업로드 중 오류가 발생했습니다.");
+			log.error("File upload error: " + e.getMessage());
+		}
+
+		// 업로드 후 리다이렉트할 페이지
+		return "redirect:/realtor/list";
 	}
 }

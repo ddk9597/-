@@ -882,6 +882,7 @@ document.addEventListener('DOMContentLoaded', function () {
   contactPhone.addEventListener('input', updateContactInfo);
 });
 
+// 2개의 form 제출 버튼 하나로 합치기
 // 제출용 버튼 관련 Js
 const prdInfoRealSubmit = document.getElementById('prdInfoRealSubmit');
 // 1. 진짜 버튼 기능 숨기기
