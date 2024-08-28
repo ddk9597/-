@@ -271,3 +271,7 @@ button[type="submit"]:hover {
   background-color: #c97f1e;
   transition: all 0.3s ease;
 }
+
+#contactInfo{
+  user-select: none;
+}

@@ -495,37 +495,35 @@ const areaData = [
   { code: 1174011000, name: '서울특별시 강동구 강일동' }
 ];
 
+// 전역에서 checkAdd 객체를 선언
+const checkAdd = {
+  "locationTitle": false,
+  "addressNo": false,
+  "category": false,
+  "isTenant": false,
+  "shopName": false,
+  "contactInfo": false,
+  "floor": false,
+  "py": false,
+  "premium": false,
+  "deposit": false,
+  "rent": false,
+  "adminCost": false,
+  "note": false
+};
+
+// 검색 입력 필드의 이벤트 핸들러 설정
+const searchInput = document.getElementById("searchInput");
+if (searchInput) {
+  searchInput.addEventListener("input", () => {
+    const isInputed = searchInput.value.trim(); // 공백 제거 후 입력된 값 확인
+    checkAdd.locationTitle = isInputed !== "";
+  });
+}
 
 // 제출 시 값들이 제대로 입력 되었는지 체크
 const listInfoForm = document.getElementById('listInfoForm');
 listInfoForm.addEventListener('submit', (event) => {
-
-  const checkAdd = {
-    "locationTitle": false,
-    "addressNo": false,
-    "category": false,
-    "isTenant": false,
-    "shopName": false,
-    "contactInfo": false,
-    "floor": false,
-    "py": false,
-    "premium": false,
-    "deposit": false,
-    "rent": false,
-    "adminCost": false,
-    "note": false
-  }
-
-  // 법정동 유효성 검사 함수
-  const isLocationValid = (location) => areaData.some(area => area.name === location);
-
-  const searchInput = document.getElementById('searchInput');
-  searchInput.addEventListener('input', () => {
-    const locationTitle = searchInput.value.trim();
-    checkAdd.locationTitle = isLocationValid(locationTitle);
-    searchInput.style.borderColor = checkAdd.locationTitle ? '' : 'red';
-  });
-
   // 상세주소 유효성 검사
   const addressInput = document.getElementById('addressInput').value.trim();
   checkAdd.addressNo = addressInput.length !== 0;
@@ -592,6 +590,8 @@ listInfoForm.addEventListener('submit', (event) => {
     }
   }
 
+
+
   // 모든 필드가 올바르게 입력되었는지 확인
   const allValid = Object.values(checkAdd).every(value => value === true);
   if (!allValid) {
@@ -599,6 +599,7 @@ listInfoForm.addEventListener('submit', (event) => {
     alert('모든 필드를 올바르게 입력하세요.');
   }
 });
+
 
 
 
@@ -695,69 +696,33 @@ window.addEventListener('click', function (event) {
   }
 });
 
-// 금액 입력 시 콤마 추가하기
+// 금액 입력 시 콤마 추가하기 및 hidden 필드에 콤마 없는 값 설정하기
 function formatNumberWithCommas(event) {
   let input = event.target;
-  let value = input.value.replace(/,/g, '');
+  let value = input.value.replace(/,/g, ''); // 콤마 제거
 
   if (!isNaN(value) && value !== '') {
-    value = parseInt(value, 10).toLocaleString();
-    input.value = value;
+    value = parseInt(value, 10).toLocaleString(); // 콤마 추가
+    input.value = value; // 사용자에게 보여지는 값
   }
 
   // 서버에 보낼 때 콤마 제거하기
-  let hiddenInput = input.nextElementSibling;
-  hiddenInput.value = value.replace(/,/g, '');
+  let hiddenInput = document.getElementById(input.dataset.hiddenInputId);
+
+  // hiddenInput이 존재하는지 확인
+  if (hiddenInput) {
+    hiddenInput.value = value.replace(/,/g, ''); // 콤마 제거
+  }
 }
 
+// 모든 .budget 클래스를 가진 입력 필드에 이벤트 리스너 추가
 document.querySelectorAll('.budget').forEach(budgetInput => {
+  // `data-hidden-input-id` 속성 설정하여 hidden 필드의 ID를 지정
+  budgetInput.dataset.hiddenInputId = budgetInput.id + 'Input';
   budgetInput.addEventListener('input', formatNumberWithCommas);
   budgetInput.addEventListener('blur', formatNumberWithCommas);
 });
 
-// 입력한 금액들을 전달용 input으로 넣기
-const thisPremium = document.getElementById('premium');
-const thisPremiumInput = document.getElementById('premiumInput');
-
-thisPremium.addEventListener('input', function () {
-  thisPremiumInput.value = thisPremium.value;
-});// 입력 필드와 전달용 hidden 필드를 연결하는 함수
-function syncInputValue(inputId, hiddenInputId) {
-  const inputElement = document.getElementById(inputId);
-  const hiddenInputElement = document.getElementById(hiddenInputId);
-
-  inputElement.addEventListener('input', function () {
-    hiddenInputElement.value = inputElement.value;
-  });
-}
-
-// 각 입력 필드에 대해 syncInputValue 함수 호출
-syncInputValue('premium', 'premiumInput');
-syncInputValue('deposit', 'depositInput');
-syncInputValue('rent', 'rentInput');
-syncInputValue('adminCost', 'adminCostInput');
-
-
-const thisDeposit = document.getElementById('deposit');
-const thisDepositInput = document.getElementById('depositInput');
-
-thisDeposit.addEventListener('input', function () {
-  thisDepositInput.value = thisDeposit.value;
-});
-
-const thisRent = document.getElementById('rent');
-const thisRentInput = document.getElementById('rentInput');
-
-thisRent.addEventListener('input', function () {
-  thisRentInput.value = thisRent.value;
-});
-
-const thistAdminCost = document.getElementById('adminCost');
-const thistAdminCostInput = document.getElementById('adminCostInput');
-
-thistAdminCost.addEventListener('input', function () {
-  thistAdminCostInput.value = thistAdminCost.value;
-});
 
 // 사진 등록 모달 열기
 function openPicModal() {
@@ -883,11 +848,15 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 // 2개의 form 제출 버튼 하나로 합치기
+
 // 제출용 버튼 관련 Js
 const prdInfoRealSubmit = document.getElementById('prdInfoRealSubmit');
+// const prdInfo
 // 1. 진짜 버튼 기능 숨기기
 
 // 2. 내용 제출 버튼
+
+
 // 3. 사진 제출 버튼
 
-// 4. 둘이 합치기
+// 4. 둘이 합치기  f
