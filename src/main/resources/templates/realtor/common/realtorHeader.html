@@ -1,44 +1,44 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head>
-    <meta charset="UTF-8">
-    <title>Header</title>
-    
-    
+  <meta charset="UTF-8">
+  <title>Header</title>
+
+
 </head>
+
 <body>
-<header>
+  <header>
     <div class="container">
-        <h1>중개법인 가짜</h1>
-        <nav>
-            <ul>
-                <li onclick="toRealtorHome()">홈</li>
-                <li onclick="toAllList()">매물 목록</li>
-                <li><a href="#contact">문의하기</a></li>
-                <!-- 로그인 안된 경우 -->
-                <th:block th:if="${loginMember == null}">
-                    <li onclick="toJoinRealtor()">회원가입</li>
-                    <li onclick="toRealtorLogin()">로그인</li>
-                </th:block>
+      <h1>중개법인 가짜</h1>
+      <nav>
+        <ul>
+          <li onclick="toRealtorHome()">홈</li>
+          <li onclick="toAllList()">매물 목록</li>
+          <li><a href="#contact">문의하기</a></li>
+          <!-- 로그인 안된 경우 -->
+          <th:block th:if="${loginMember == null}">
+            <li onclick="toJoinRealtor()">회원가입</li>
+            <li onclick="toRealtorLogin()">로그인</li>
+          </th:block>
 
-                <!-- 로그인 된 경우 -->
-                <th:block th:if="${loginMember != null}">
-                    <li onclick="toRealtorMyPage()">마이페이지</li>
-                </th:block>
-                <!-- 로그인한 회원이 중개사 회원인 경우 -->
-                <th:block th:if="${loginMember != null and loginMember.memberKind == 3}">
-                    <li onclick="toRegisterProperty()">매물 등록하기</li>
-                </th:block>
-                <th:block th:if="${loginMember != null}">
-                    <li onclick="toLogOut()">로그아웃</li>
-                </th:block>
-            </ul>
-        </nav>
+          <!-- 로그인 된 경우 -->
+          <th:block th:if="${loginMember != null}">
+            <li onclick="toRealtorMyPage()">마이페이지</li>
+          </th:block>
+          <!-- 로그인한 회원이 중개사 회원인 경우 -->
+          <th:block th:if="${loginMember != null and loginMember.memberKind == 3}">
+            <li onclick="toRegisterProperty()">매물 등록하기</li>
+          </th:block>
+          <th:block th:if="${loginMember != null}">
+            <li onclick="toLogOut()">로그아웃</li>
+          </th:block>
+        </ul>
+      </nav>
     </div>
-    
-</header>
-</body>
 
-<script src="/js/realtor/list/addList.js"></script>
+  </header>
+</body>
 
 </html>

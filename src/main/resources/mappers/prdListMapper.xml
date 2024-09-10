@@ -21,4 +21,9 @@
 
 	</insert>
 
+	<select id="getThisProductNo">
+		SELECT MAX(PROPERTIES_NO)
+		FROM PRODUCT
+		WHERE MEMBER_NO = #{memberNo}
+	</select>
 </mapper>

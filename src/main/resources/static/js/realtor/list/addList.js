@@ -752,10 +752,7 @@ window.onclick = function (event) {
 
 document.addEventListener('DOMContentLoaded', () => {
   const modal = document.getElementById('picUploadModal');
-  const fileInput = document.getElementById('fileInput');
-  const uploadArea = document.getElementById('pictureUploadArea');
-  const uploadedPictureContainer = document.getElementById('uploadedPictureContainer');
-
+  
   // 모달 열기 함수
   function openPicModal() {
     modal.style.display = 'block';
@@ -766,44 +763,6 @@ document.addEventListener('DOMContentLoaded', () => {
     modal.style.display = 'none';
   }
 
-  // 파일 선택 핸들러
-  fileInput.addEventListener('change', (event) => {
-    handleFiles(event.target.files);
-  });
-
-  // 파일 드래그 앤 드롭 핸들러
-  uploadArea.addEventListener('dragover', (event) => {
-    event.preventDefault();
-    uploadArea.classList.add('drag-over');
-  });
-
-  uploadArea.addEventListener('dragleave', () => {
-    uploadArea.classList.remove('drag-over');
-  });
-
-  uploadArea.addEventListener('drop', (event) => {
-    event.preventDefault();
-    uploadArea.classList.remove('drag-over');
-    handleFiles(event.dataTransfer.files);
-  });
-
-  // 파일 처리 함수
-  function handleFiles(files) {
-    Array.from(files).forEach(file => {
-      if (file.type.startsWith('image/')) {
-        const reader = new FileReader();
-        reader.onload = (e) => {
-          const img = document.createElement('img');
-          img.src = e.target.result;
-          img.classList.add('uploadedPic');
-          uploadedPictureContainer.appendChild(img);
-        };
-        reader.readAsDataURL(file);
-      } else {
-        alert('이미지 파일만 업로드할 수 있습니다.');
-      }
-    });
-  }
 
   // 모달 닫기
   window.closePicModal = closePicModal;
@@ -851,7 +810,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
 // 제출용 버튼 관련 Js
 const prdInfoRealSubmit = document.getElementById('prdInfoRealSubmit');
-// const prdInfo
 // 1. 진짜 버튼 기능 숨기기
 
 // 2. 내용 제출 버튼

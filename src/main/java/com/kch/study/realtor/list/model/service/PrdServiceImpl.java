@@ -4,6 +4,7 @@ import org.springframework.stereotype.Service;
 
 import com.kch.study.realtor.list.model.dto.ProductInfoDTO;
 import com.kch.study.realtor.list.model.mapper.PrdListMapper;
+import com.kch.study.realtor.member.model.dto.rMember;
 
 import lombok.RequiredArgsConstructor;
 
@@ -20,5 +21,11 @@ public class PrdServiceImpl implements PrdListService{
 		int result = mapper.addList(productInfo);
 		
 		return result;
+	}
+	
+	@Override
+	public int getThisProductNo(int memberNo) {
+		
+		return mapper.getThisProductNo(memberNo);
 	}
 }

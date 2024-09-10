@@ -210,47 +210,6 @@ label {
   cursor: pointer;
 }
 
-/* 사진 업로드 영역 */
-#pictureUploadArea {
-  border: 2px dashed #ddd;
-  border-radius: 10px;
-  padding: 20px;
-  text-align: center;
-  background-color: #f9f9f9;
-  margin-bottom: 20px;
-}
-
-/* 업로드된 사진 컨테이너 */
-.uploadedPictureContainer {
-  border: 1px solid #ddd;
-  border-radius: 10px;
-  padding: 10px;
-  width: 100%;
-  height: 200px;
-  overflow-x: auto;
-  white-space: nowrap;
-  background-color: #f9f9f9;
-}
-
-/* 업로드된 사진 박스 */
-.uploadedPic {
-  display: inline-block;
-  border: 1px solid #ddd;
-  border-radius: 10px;
-  width: 100px; /* 사진 크기 조절 */
-  height: 100px;
-  margin: 5px;
-  overflow: hidden;
-  position: relative;
-}
-
-/* 업로드된 사진의 실제 이미지 */
-.uploadedPic img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
 /* 버튼 스타일 */
 button[type="submit"] {
   background-color: #977717; 
