@@ -73,6 +73,7 @@ public class ProductListController {
 
 		// 세션에서 loginMember 객체 가져오기
 		rMember loginMember = (rMember) session.getAttribute("loginMember");
+		
 		if (loginMember == null) {
 			// loginMember가 세션에 없으면 에러 페이지로 리다이렉트
 			ra.addFlashAttribute("message", "로그인이 필요합니다.");
@@ -82,14 +83,12 @@ public class ProductListController {
 		Integer thisProductNo = (Integer) session.getAttribute("thisProductNo"); // 세션에서 값 읽기
 		model.addAttribute("thisProductNo", thisProductNo); // 모델에 추가
 
-		// 모델에 메세지 추가
+		// 세션 -> 모델에 메세지 추가
 		String message = (String) session.getAttribute("message");
 		model.addAttribute("message", message);
-
-		// 메시지 제거
 		session.removeAttribute("message");
 
-		log.info("Login Member: {}", loginMember);
+//		log.info("Login Member: {}", loginMember);
 		return "realtor/list/postPhoto";
 	}
 
@@ -107,7 +106,7 @@ public class ProductListController {
 	        	directory.mkdirs(); 
 	        }
 
-	        // 업로드된 파일을 저장하는 로직
+	        // 업로드된 사진을 저장하는 로직
 	        for (MultipartFile file : files) {
 	            String originalFileName = file.getOriginalFilename();
 	            String newFileName = thisProductNo + "_" + originalFileName;
@@ -115,6 +114,7 @@ public class ProductListController {
 	            file.transferTo(dest);
 	            log.info("Uploaded file: " + newFileName);
 	        }
+	        
 
 	        ra.addFlashAttribute("message", "사진이 성공적으로 업로드되었습니다.");
 	    } catch (IOException e) {

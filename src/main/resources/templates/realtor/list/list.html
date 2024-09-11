@@ -27,9 +27,6 @@
     <div onclick="cleanFilter()">필터 초기화</div>
   </section>
 
-
-
-
   <!-- 메인 내용이 들어갈 자리 -->
   <div id="realtorListMainContent">
 
@@ -38,84 +35,80 @@
       여기엔 뭐가 들어가면 좋을까..
     </section>
 
-    <!-- 검색한 매물이 보여질 자릭 -->
-    <section id="searchResultList">
+    <!-- 반복되는 매물 리스트 -->
 
-      <!-- 반복되는 매물 리스트 -->
-      <div class="ProductListContainer">
+    <div class="ProductListContainer">
+      <div class="productInfo" th:each="product : ${productList}">
         <div class="productImageContainer">
           <!-- 이미지 표시 자리 -->
-          <div class="productImage"></div>
+          <div class="productImage">
+            <!-- 이미지가 있는 경우에만 표시, 이미지 필드가 DTO에 없으므로 주석 처리 -->
+            <!-- <img th:if="${product.imageName}" th:src="@{/images/listImages/{product.imageName}(productImage=${product.imageName})}" alt="Product Image"> -->
+          </div>
           <!-- 페이지네이션 버튼 자리 -->
           <div class="productPageBtnContainer">
             <!-- 이미지 뒤로가기 버튼 -->
             <span class="productImgBackBtn">◁</span>
-
             <!-- 이미지 앞으로 가기 버튼 -->
             <span class="productImageNextBtn">▷</span>
           </div>
-
         </div>
 
         <!-- 제목 자리 -->
         <div class="productTitleContainer">
           <!-- 매물번호 -->
           <div class="productNo">
-            매물번호 : 
+            매물번호 : <span th:text="${product.propertiesNo}"></span>
           </div>
           <!-- 매물 위치 -->
           <div class="productLocation">
-            매물 위치 :
+            매물 위치 : <span th:text="${product.locationTitle}"></span>
           </div>
-
         </div>
 
         <!-- 정보 자리 -->
         <div class="productInfoContainer">
-
-          <!-- 물리적 정보 -->
           <div class="productPhysicalInfo">
             <!-- 전용면적 -->
             <div class="product">
-              전용면적 : 평
+              전용면적 : <span th:text="${product.py}"></span> 평
             </div>
             <!-- 층수 -->
             <div class="productFloor">
-              층수 : 층
+              층수 : <span th:text="${product.floor}"></span> 층
             </div>
             <!-- 종류 -->
             <div class="productType">
-              종류 : 상가 / 사무실
+              종류 : <span th:text="${product.category}"></span>
             </div>
           </div>
 
           <div class="productCostInfo">
             <!-- 보증금 -->
             <div class="productDeposit">
-              보증금 : 만원
+              보증금 : <span th:text="${product.deposit}"></span> 만원
             </div>
             <!-- 월세 -->
             <div class="productRent">
-              월세 : 만원
+              월세 : <span th:text="${product.rent}"></span> 만원
             </div>
             <!-- 관리비 -->
             <div class="productAdminCost">
-              관리비 : 만원
+              관리비 : <span th:text="${product.adminCost}"></span> 만원
             </div>
             <!-- 권리금 유무 여부 -->
             <div class="productPremium">
-              권리금 : 없음 / 있음
+              권리금 : <span th:text="${product.premium == 0 ? '없음' : '있음'}"></span>
             </div>
           </div>
-
         </div>
-
       </div>
+    </div>
 
-      
 
 
-    </section>
+
+
 
   </div>
 
@@ -213,6 +206,7 @@
 
 
 <script src="/js/realtor/list/listMain.js"></script>
+
 <!-- 헤더 푸터 js -->
 <script src="/js/realtor/common/realtorHeader.js"></script>
 

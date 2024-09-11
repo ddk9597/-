@@ -14,7 +14,7 @@ import lombok.ToString;
 @ToString
 @Builder
 public class ProductInfoDTO {
-	private Integer productNo;
+	private Integer propertiesNo;
 	private Integer memberNo;
 	private Integer areaCode;
 	private String locationTitle;

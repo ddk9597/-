@@ -2,6 +2,7 @@ package com.kch.study.realtor.controller;
 
 import java.io.IOException;
 import java.lang.reflect.Member;
+import java.util.List;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.kch.study.realtor.list.model.dto.ProductInfoDTO;
 import com.kch.study.realtor.member.model.dto.rMember;
 import com.kch.study.realtor.model.service.rServiceImpl;
 
@@ -40,11 +42,17 @@ public class rMainController {
 		return "realtor/member/join";
 	}
 
-	// 매물 목록 페이지로 이동하기
 	@GetMapping("list")
 	public String toList(Model model, HttpSession session) {
 		rMember loginMember = (rMember) session.getAttribute("loginMember");
 		model.addAttribute("loginMember", loginMember);
+
+		// 매물 목록 가져오기
+		List<ProductInfoDTO> productList = service.getProductList();
+
+		// 모델에 매물 목록 추가
+		model.addAttribute("productList", productList);
+
 		return "realtor/list/list";
 	}
 
@@ -60,25 +68,25 @@ public class rMainController {
 		session.removeAttribute("loginMember");
 		return "redirect:/rMain";
 	}
-	
+
 	// 중개사회원의 매물 등록 페이지로 이동하기
 	@GetMapping("product/register")
 	public String toRegister(Model model, HttpSession session, HttpServletResponse response) throws IOException {
-	    rMember loginMember = (rMember) session.getAttribute("loginMember");
-	    
-	    if (loginMember == null) {
-	        response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "로그인이 필요합니다.");
-	        return null;
-	    }
-	    
-	    int memberKind = loginMember.getMemberKind();
-	    // 3 : 중개사 회원만 접근 가능
-	    if (memberKind != 3) {
-	        response.sendError(HttpServletResponse.SC_FORBIDDEN, "중개사 회원만 이용 가능합니다.");
-	        return null;
-	    }
-	    
-	    model.addAttribute("loginMember", loginMember);
-	    return "realtor/list/addList";
+		rMember loginMember = (rMember) session.getAttribute("loginMember");
+
+		if (loginMember == null) {
+			response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "로그인이 필요합니다.");
+			return null;
+		}
+
+		int memberKind = loginMember.getMemberKind();
+		// 3 : 중개사 회원만 접근 가능
+		if (memberKind != 3) {
+			response.sendError(HttpServletResponse.SC_FORBIDDEN, "중개사 회원만 이용 가능합니다.");
+			return null;
+		}
+
+		model.addAttribute("loginMember", loginMember);
+		return "realtor/list/addList";
 	}
 }
