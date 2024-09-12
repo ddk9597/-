@@ -12,5 +12,8 @@ public interface rMapper {
 	// 매물 목록 가져오기
 	List<ProductInfoDTO> getProductList();
 
+	// 매물에 맞는 사진 목록 가져오기
+	List<String> getPrdPhotoList(int prdNo);
+
 	
 }

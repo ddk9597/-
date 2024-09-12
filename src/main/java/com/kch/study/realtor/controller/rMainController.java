@@ -2,6 +2,7 @@ package com.kch.study.realtor.controller;
 
 import java.io.IOException;
 import java.lang.reflect.Member;
+import java.util.Collections;
 import java.util.List;
 
 import org.springframework.stereotype.Controller;
@@ -42,6 +43,7 @@ public class rMainController {
 		return "realtor/member/join";
 	}
 
+	// 매물 목록 페이지로 이동하기
 	@GetMapping("list")
 	public String toList(Model model, HttpSession session) {
 		rMember loginMember = (rMember) session.getAttribute("loginMember");
@@ -49,6 +51,23 @@ public class rMainController {
 
 		// 매물 목록 가져오기
 		List<ProductInfoDTO> productList = service.getProductList();
+
+		// 매물별로 번호를 추출해서
+		for (ProductInfoDTO product : productList) {
+			int prdNo = product.getPropertiesNo();
+
+			// 추출된 매물별 사진의 목록 가져오기
+			List<String> prdPhotoList = service.getPrdPhotoList(prdNo);
+
+			// 가져온 사진 목록을 model에 저장하기
+			if (prdPhotoList != null && !prdPhotoList.isEmpty()) {
+				product.setImageList(prdPhotoList);
+			} else {
+				// 사진 목록이 없는 경우를 처리 (옵션)
+				product.setImageList(Collections.emptyList());
+			}
+
+		}
 
 		// 모델에 매물 목록 추가
 		model.addAttribute("productList", productList);

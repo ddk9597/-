@@ -97,6 +97,7 @@ public class ProductListController {
 
 	// 사진을 저장할 디렉토리 : 절대경로로 설정
 	private static final String UPLOADED_PATH = "C:/Users/Galaxy Book Pro/Desktop/project/realtorProject/images/listImages/";
+	
 	@PostMapping("/addPicture")
 	public String addPicture(@RequestParam("picture") MultipartFile[] files, RedirectAttributes ra, Model model,
 	                         HttpSession session) {

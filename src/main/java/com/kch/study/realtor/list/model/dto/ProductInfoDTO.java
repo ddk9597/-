@@ -1,5 +1,7 @@
 package com.kch.study.realtor.list.model.dto;
 
+import java.util.List;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -31,6 +33,7 @@ public class ProductInfoDTO {
 	private Integer adminCost;
 	private String note;
 	private String photo;
+	private List<String> imageList;
 	
 	
 }

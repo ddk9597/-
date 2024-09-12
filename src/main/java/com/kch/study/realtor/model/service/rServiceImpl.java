@@ -28,5 +28,11 @@ public class rServiceImpl implements rService {
 		return mapper.getProductList();
 	}
 
+	// 매물에 맞는 사진 목록 가져오기
+	public List<String> getPrdPhotoList(int prdNo) {
+		
+		return mapper.getPrdPhotoList(prdNo);
+	}
+
 	
 }

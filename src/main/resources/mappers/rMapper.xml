@@ -3,12 +3,22 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.kch.study.realtor.model.mapper.rMapper">
+
+	<!-- 매물 목록 불러오는 기능 -->
 	<select id="getProductList"
 		resultType="com.kch.study.realtor.list.model.dto.ProductInfoDTO">
 		SELECT PROPERTIES_NO, MEMBER_NO, LOCATION_TITLE,
 		CATEGORY,
 		FLOOR, PY, DEPOSIT, RENT, ADMIN_COST, IS_TENANT
 		FROM PRODUCT p
-		ORDER BY PROPERTIES_NO ASC
+		ORDER BY
+		PROPERTIES_NO DESC
+	</select>
+
+	<!-- 매물에 맞는 사진 목록을 가져오는 쿼리 -->
+	<select id="getPrdPhotoList">
+		SELECT IMAGE_LIST
+		FROM PRODUCT_IMAGE
+		WHERE PROPERTIES_NO = #{prdNo}
 	</select>
 </mapper>

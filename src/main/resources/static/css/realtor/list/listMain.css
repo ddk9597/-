@@ -2,6 +2,16 @@
   /* user-select: none; */
 }
 
+/* currentPageWrappper */
+#currentPageWrappper{
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+  justify-content: center;
+
+}
+
 /* ---------------- 상단 navBar ---------------- */
 
 #listTopNav {
@@ -41,6 +51,7 @@
 /* ---------------- 매물 목록 스타일 ---------------- */
 /* 메인 내용 */
 #realtorListMainContent {
+  justify-content: center;
   display: flex;
   padding: 20px;
 }
@@ -60,13 +71,13 @@
   border-radius: 8px;
   overflow: hidden;
 
- display: flex;
- flex-wrap: wrap;
- gap: 20px;
- padding: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding: 10px;
 
- justify-content: center;
- align-items: center;
+  justify-content: center;
+  align-items: center;
 }
 
 /* 반복되는 제품 컨테이너 */
@@ -76,11 +87,10 @@
   flex-direction: column;
   border: 2px dotted red;
   border-radius: 10px;
-  width: 30%;
+  width: 20%;
 }
 
-/* --------------- */
-
+/* ------ 컨테이너 내부 스타일 ------- */
 
 /* productInfo 제품 이미지 컨테이너 */
 .productImageContainer {
@@ -171,7 +181,7 @@
   text-overflow: ellipsis;
 }
 
-/* 제품 컨테이너 반응형 */
+/* 제품 컨테이너 반응형 -- > 나중에 맞게 고칠 예정*/
 @media (max-width: 900px) {
   .ProductListContainer {
     grid-template-columns: repeat(3, 1fr); /* 화면이 작아지면 3개 열로 변경 */
@@ -238,4 +248,48 @@
   padding: 10px 0;
   border-top: 1px solid #ddd;
   text-align: right;
+}
+
+/* --------------- 페이지네이션 관련 스타일 ---------------- */
+.pagination {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  max-width: 50%;
+  text-align: center;
+  margin-top: 20px;
+}
+
+.pageNumbers{
+  min-width: 500px;
+}
+
+.pageNumber {
+  cursor: pointer;
+  padding: 10px;
+  margin: 0 5px;
+  background-color: #f1f1f1;
+  border: 1px solid #ddd;
+}
+
+.pageNumber.active {
+  background-color: #4CAF50; /* 현재 활성화된 페이지의 색상 */
+  color: white;
+}
+
+.pageNumber:hover {
+  background-color: #ddd;
+}
+
+.prevPage, .nextPage, .prevPageGroup, .nextPageGroup {
+  cursor: pointer;
+  padding: 10px;
+  background-color: #f1f1f1;
+  border: 1px solid #ddd;
+  margin: 0 5px;
+}
+
+.prevPage:hover, .nextPage:hover, .prevPageGroup:hover, .nextPageGroup:hover {
+  background-color: #ddd;
 }
