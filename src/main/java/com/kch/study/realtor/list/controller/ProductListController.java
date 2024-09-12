@@ -2,6 +2,11 @@ package com.kch.study.realtor.list.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.sql.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -76,7 +81,7 @@ public class ProductListController {
 
 		// 세션에서 loginMember 객체 가져오기
 		rMember loginMember = (rMember) session.getAttribute("loginMember");
-		
+
 		if (loginMember == null) {
 			// loginMember가 세션에 없으면 에러 페이지로 리다이렉트
 			ra.addFlashAttribute("message", "로그인이 필요합니다.");
@@ -95,50 +100,40 @@ public class ProductListController {
 		return "realtor/list/postPhoto";
 	}
 
-	// 사진을 저장할 디렉토리 : 절대경로로 설정
-	private static final String UPLOADED_PATH = "C:/Users/Galaxy Book Pro/Desktop/project/realtorProject/images/listImages/";
-	
-	@PostMapping("/addPicture")
-	public String addPicture(@RequestParam("picture") MultipartFile[] files, RedirectAttributes ra, Model model,
-	                         HttpSession session) {
-		
-		 Integer thisProductNo = (Integer) session.getAttribute("thisProductNo");
+	// 상대 경로 설정
+	private static final Path UPLOADED_PATH = Paths.get("src/main/resources/static/images/realtor/listPic");
+
+	@PostMapping("addPicture")
+	public String addPicture(@RequestParam("pictures") MultipartFile[] files, RedirectAttributes ra, HttpSession session) {
+	    Integer thisProductNo = (Integer) session.getAttribute("thisProductNo");
+	    List<String> photoList = new ArrayList<>();
+
 	    try {
-	        File directory = new File(UPLOADED_PATH);
-	        if (!directory.exists()) {
-	        	// 경로가 없으면 생성
-	        	directory.mkdirs(); 
+	        if (!Files.exists(UPLOADED_PATH)) {
+	            Files.createDirectories(UPLOADED_PATH);
 	        }
 
-	        // 업로드된 사진을 저장하는 로직
-	        // 사진을 보낼 list 생성
-	        List<String> photoList = new ArrayList<>();
-	        
-	        // 반복문으로 
 	        for (MultipartFile file : files) {
+	            if (file.isEmpty()) continue;
+
 	            String originalFileName = file.getOriginalFilename();
 	            String newFileName = thisProductNo + "_" + originalFileName;
-	            File dest = new File(UPLOADED_PATH + newFileName);
-	            file.transferTo(dest);
-	            
-	            // 파일 이름 list를 사용하여 db에 저장하기
-	            // array를 사용하지 않는 이유 : 연속적으로 표시하기 위해서
-	            
-	            // 
+	            Path destinationFile = UPLOADED_PATH.resolve(Paths.get(newFileName)).normalize().toAbsolutePath();
+
+	            try (InputStream inputStream = file.getInputStream()) {
+	                Files.copy(inputStream, destinationFile, StandardCopyOption.REPLACE_EXISTING);
+	            }
+
 	            photoList.add(newFileName);
-	            
-	            
-	            log.info("Uploaded file: " + newFileName);
 	        }
-	        
-	        // 종료 후 db 에저장하기
-	        service.listUpPhoto(thisProductNo, photoList);
-	        
+
+	        // 서비스 호출로 데이터베이스에 파일 정보 저장
+	        // service.listUpPhoto(thisProductNo, photoList);
 
 	        ra.addFlashAttribute("message", "사진이 성공적으로 업로드되었습니다.");
 	    } catch (IOException e) {
 	        ra.addFlashAttribute("message", "사진 업로드 중 오류가 발생했습니다.");
-	        log.error("File upload error: " + e.getMessage());
+	        e.printStackTrace();
 	    }
 
 	    return "redirect:/rMain/list";
