@@ -2,7 +2,10 @@ package com.kch.study.realtor.list.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.sql.Array;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.stereotype.Controller;
@@ -107,13 +110,28 @@ public class ProductListController {
 	        }
 
 	        // 업로드된 사진을 저장하는 로직
+	        // 사진을 보낼 list 생성
+	        List<String> photoList = new ArrayList<>();
+	        
+	        // 반복문으로 
 	        for (MultipartFile file : files) {
 	            String originalFileName = file.getOriginalFilename();
 	            String newFileName = thisProductNo + "_" + originalFileName;
 	            File dest = new File(UPLOADED_PATH + newFileName);
 	            file.transferTo(dest);
+	            
+	            // 파일 이름 list를 사용하여 db에 저장하기
+	            // array를 사용하지 않는 이유 : 연속적으로 표시하기 위해서
+	            
+	            // 
+	            photoList.add(newFileName);
+	            
+	            
 	            log.info("Uploaded file: " + newFileName);
 	        }
+	        
+	        // 종료 후 db 에저장하기
+	        service.listUpPhoto(thisProductNo, photoList);
 	        
 
 	        ra.addFlashAttribute("message", "사진이 성공적으로 업로드되었습니다.");

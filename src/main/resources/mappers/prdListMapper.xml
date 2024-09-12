@@ -6,24 +6,35 @@
 	namespace="com.kch.study.realtor.list.model.mapper.PrdListMapper">
 
 	<insert id="addList">
-		 INSERT INTO PRODUCT (
-        PROPERTIES_NO, MEMBER_NO, LOCATION_TITLE, ADDRESS_NO, 
-        SHOP_NAME, CATEGORY, CONTACT_INFO, FLOOR, PY, 
-        PREMIUM, DEPOSIT, RENT, ADMIN_COST, NOTE, 
-        AREA_CODE, IS_TENANT
-    )
-    VALUES (
-        properties_no_seq.NEXTVAL, #{memberNo}, #{locationTitle}, #{addressNo}, #{shopName},
-        #{category}, #{contactInfo}, #{floor}, #{py}, 
-        #{premium}, #{deposit}, #{rent}, #{adminCost}, #{note}, 
-        #{areaCode}, #{isTenant}
-    )
+		INSERT INTO PRODUCT (
+		PROPERTIES_NO, MEMBER_NO,
+		LOCATION_TITLE, ADDRESS_NO,
+		SHOP_NAME, CATEGORY, CONTACT_INFO, FLOOR,
+		PY,
+		PREMIUM, DEPOSIT, RENT, ADMIN_COST, NOTE,
+		AREA_CODE, IS_TENANT
+		)
+		VALUES (
+		properties_no_seq.NEXTVAL, #{memberNo}, #{locationTitle},
+		#{addressNo}, #{shopName},
+		#{category}, #{contactInfo}, #{floor},
+		#{py},
+		#{premium}, #{deposit}, #{rent}, #{adminCost}, #{note},
+		#{areaCode}, #{isTenant}
+		)
 
 	</insert>
 
 	<select id="getThisProductNo">
 		SELECT MAX(PROPERTIES_NO)
 		FROM PRODUCT
-		WHERE MEMBER_NO = #{memberNo}
+		WHERE MEMBER_NO
+		= #{memberNo}
 	</select>
+
+	<insert id="listUpPhoto">
+		INSERT INTO PRODUCT_IMAGE (PROPERTIES_NO, IMAGE_LIST)
+		VALUES (#{thisProductNo}, #{photoList})
+	</insert>
+
 </mapper>

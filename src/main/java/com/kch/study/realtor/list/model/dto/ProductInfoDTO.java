@@ -30,6 +30,7 @@ public class ProductInfoDTO {
 	private Integer rent;
 	private Integer adminCost;
 	private String note;
+	private String photo;
 	
 	
 }
