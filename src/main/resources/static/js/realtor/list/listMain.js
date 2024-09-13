@@ -140,32 +140,6 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 
-// ---------- 매물이미지 관련 페이지네이션 함수 --------- //
-document.addEventListener("DOMContentLoaded", function () {
-  document.querySelectorAll('.productImage').forEach(container => {
-    const images = container.querySelectorAll('img');
-    let currentIndex = 0;
-
-    const showImage = (index) => {
-      images.forEach((img, i) => {
-        img.style.display = i === index ? 'block' : 'none';
-      });
-    };
-
-    showImage(currentIndex);
-
-    container.querySelector('.productImgBackBtn').addEventListener('click', () => {
-      currentIndex = (currentIndex > 0) ? currentIndex - 1 : images.length - 1;
-      showImage(currentIndex);
-    });
-
-    container.querySelector('.productImageNextBtn').addEventListener('click', () => {
-      currentIndex = (currentIndex < images.length - 1) ? currentIndex + 1 : 0;
-      showImage(currentIndex);
-    });
-  });
-});
-
 
 // --------- 상단 nav bar 관련 함수 --------- //
 

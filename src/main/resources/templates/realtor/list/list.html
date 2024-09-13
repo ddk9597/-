@@ -15,7 +15,7 @@
 <body>
 
   <!-- 공통 헤더 -->
-  <div th:replace="realtor/common/realtorHeader :: header"></div>
+  <div th:replace="~{realtor/common/realtorHeader :: header}"></div>
 
   <!-- list 전용 상단네비게이션 바 -->
   <section id="listTopNav">
@@ -49,21 +49,15 @@
 
             <div class="productImage">
 
-              <!-- 이미지가 있는 경우에만 표시 -->
+              <!-- 이미지 리스트를 순회하면서 각 이미지를 개별적으로 출력 -->
               <div th:each="image : ${product.imageList}">
-                <img th:src="@{/images/realtor/listPic/{image}(image=${image})}" th:alt="'Product Image ' + ${image}">
+                <img th:src="@{/images/realtor/listPic/{thisImage}(thisImage=${image})}"
+                  th:alt="'Product Image: ' + ${image}" style="max-width: 100%; max-height: 200px;" />
               </div>
 
             </div>
 
 
-            <!-- 페이지네이션 버튼 자리 -->
-            <div class="productPageBtnContainer">
-              <!-- 이미지 뒤로가기 버튼 -->
-              <span class="productImgBackBtn">◁</span>
-              <!-- 이미지 앞으로 가기 버튼 -->
-              <span class="productImageNextBtn">▷</span>
-            </div>
           </div>
 
           <!-- 제목 자리 -->
@@ -138,7 +132,7 @@
 
 
   <!-- 공용 푸터 -->
-  <div th:replace="realtor/common/realtorFooter :: footer"></div>
+  <div th:replace="~{realtor/common/realtorFooter :: footer}"></div>
 
 
 

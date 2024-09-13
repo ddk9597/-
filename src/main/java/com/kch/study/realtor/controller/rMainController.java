@@ -5,6 +5,8 @@ import java.lang.reflect.Member;
 import java.util.Collections;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,6 +30,7 @@ import lombok.extern.slf4j.Slf4j;
 public class rMainController {
 
 	private final rServiceImpl service;
+	private static final Logger logger = LoggerFactory.getLogger(rMainController.class);
 
 	// 메인 페이지로 이동하기
 	@GetMapping
@@ -56,17 +59,21 @@ public class rMainController {
 		for (ProductInfoDTO product : productList) {
 			int prdNo = product.getPropertiesNo();
 
-			// 추출된 매물별 사진의 목록 가져오기
+			// 추출된 매물별 사진의 목록 중 첫번째 가져오기
 			List<String> prdPhotoList = service.getPrdPhotoList(prdNo);
 
 			// 가져온 사진 목록을 model에 저장하기
 			if (prdPhotoList != null && !prdPhotoList.isEmpty()) {
-				product.setImageList(prdPhotoList);
+				for (String photo : prdPhotoList) {
+					product.setImageList(prdPhotoList);
+				}
 			} else {
-				// 사진 목록이 없는 경우를 처리 (옵션)
 				product.setImageList(Collections.emptyList());
 			}
+			if (prdNo == 512) {
 
+				logger.info("이미지 확인용 Product No: {}, Image List: {}", prdNo, product.getImageList());
+			}
 		}
 
 		// 모델에 매물 목록 추가

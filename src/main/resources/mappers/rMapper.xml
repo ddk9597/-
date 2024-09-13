@@ -15,9 +15,10 @@
 		PROPERTIES_NO DESC
 	</select>
 
-	<!-- 매물에 맞는 사진 목록을 가져오는 쿼리 -->
+	<!-- 매물에 맞는 사진 목록중 첫번째를 가져오는 쿼리 -->
 	<select id="getPrdPhotoList">
-		SELECT IMAGE_LIST
+		SELECT REGEXP_SUBSTR(IMAGE_LIST, '[^,]+', 1, 1) AS
+		FIRST_IMAGE
 		FROM PRODUCT_IMAGE
 		WHERE PROPERTIES_NO = #{prdNo}
 	</select>
