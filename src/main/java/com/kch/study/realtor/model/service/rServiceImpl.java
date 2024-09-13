@@ -18,19 +18,16 @@ public class rServiceImpl implements rService {
 	
 	// 회원가입
 	public int signUp(Member inputMember) {
-		
 		return 0;
 	}
 
 	// 매물 목록 가져오기
 	public List<ProductInfoDTO> getProductList() {
-		
 		return mapper.getProductList();
 	}
 
 	// 매물에 맞는 사진 목록 가져오기
 	public List<String> getPrdPhotoList(int prdNo) {
-		
 		return mapper.getPrdPhotoList(prdNo);
 	}
 

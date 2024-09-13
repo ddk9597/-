@@ -104,39 +104,41 @@ public class ProductListController {
 	private static final Path UPLOADED_PATH = Paths.get("src/main/resources/static/images/realtor/listPic");
 
 	@PostMapping("addPicture")
-	public String addPicture(@RequestParam("pictures") MultipartFile[] files, RedirectAttributes ra, HttpSession session) {
-	    Integer thisProductNo = (Integer) session.getAttribute("thisProductNo");
-	    List<String> photoList = new ArrayList<>();
+	public String addPicture(@RequestParam("pictures") MultipartFile[] files, RedirectAttributes ra,
+			HttpSession session) {
+		Integer thisProductNo = (Integer) session.getAttribute("thisProductNo");
+		List<String> photoList = new ArrayList<>();
 
-	    try {
-	        if (!Files.exists(UPLOADED_PATH)) {
-	            Files.createDirectories(UPLOADED_PATH);
-	        }
+		try {
+			if (!Files.exists(UPLOADED_PATH)) {
+				Files.createDirectories(UPLOADED_PATH);
+			}
 
-	        for (MultipartFile file : files) {
-	            if (file.isEmpty()) continue;
+			for (MultipartFile file : files) {
+				if (file.isEmpty())
+					continue;
 
-	            String originalFileName = file.getOriginalFilename();
-	            String newFileName = thisProductNo + "_" + originalFileName;
-	            Path destinationFile = UPLOADED_PATH.resolve(Paths.get(newFileName)).normalize().toAbsolutePath();
+				String originalFileName = file.getOriginalFilename();
+				String newFileName = thisProductNo + "_" + originalFileName;
+				Path destinationFile = UPLOADED_PATH.resolve(Paths.get(newFileName)).normalize().toAbsolutePath();
 
-	            try (InputStream inputStream = file.getInputStream()) {
-	                Files.copy(inputStream, destinationFile, StandardCopyOption.REPLACE_EXISTING);
-	            }
+				try (InputStream inputStream = file.getInputStream()) {
+					Files.copy(inputStream, destinationFile, StandardCopyOption.REPLACE_EXISTING);
+				}
 
-	            photoList.add(newFileName);
-	        }
+				photoList.add(newFileName);
+			}
 
-	        // 서비스 호출로 데이터베이스에 파일 정보 저장
-	        // service.listUpPhoto(thisProductNo, photoList);
+			// 서비스 호출로 데이터베이스에 파일 정보 저장
+			service.listUpPhoto(thisProductNo, photoList);
 
-	        ra.addFlashAttribute("message", "사진이 성공적으로 업로드되었습니다.");
-	    } catch (IOException e) {
-	        ra.addFlashAttribute("message", "사진 업로드 중 오류가 발생했습니다.");
-	        e.printStackTrace();
-	    }
+			ra.addFlashAttribute("message", "사진이 성공적으로 업로드되었습니다.");
+		} catch (IOException e) {
+			ra.addFlashAttribute("message", "사진 업로드 중 오류가 발생했습니다.");
+			e.printStackTrace();
+		}
 
-	    return "redirect:/rMain/list";
+		return "redirect:/rMain/list";
 	}
 
 }

@@ -39,15 +39,24 @@
       </section>
 
       <!-- 반복되는 매물 리스트 -->
+      <!-- <img src="/images/realtor/listPic/505_teset.png" alt=""> -->
 
       <div class="ProductListContainer">
         <div class="productInfo" th:each="product : ${productList}">
           <div class="productImageContainer">
+
             <!-- 이미지 표시 자리 -->
+
             <div class="productImage">
-              <!-- 이미지가 있는 경우에만 표시, 이미지 필드가 DTO에 없으므로 주석 처리 -->
-              <!-- <img th:if="${product.imageName}" th:src="@{/images/listImages/{product.imageName}(productImage=${product.imageName})}" alt="Product Image"> -->
+
+              <!-- 이미지가 있는 경우에만 표시 -->
+              <div th:each="image : ${product.imageList}">
+                <img th:src="@{/images/realtor/listPic/{image}(image=${image})}" th:alt="'Product Image ' + ${image}">
+              </div>
+
             </div>
+
+
             <!-- 페이지네이션 버튼 자리 -->
             <div class="productPageBtnContainer">
               <!-- 이미지 뒤로가기 버튼 -->
