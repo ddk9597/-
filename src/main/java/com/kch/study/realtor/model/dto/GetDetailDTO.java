@@ -23,6 +23,8 @@ public class GetDetailDTO {
 	// 매물정보
 	// 매물 주소 
 	private String locationTitle;
+	private String addressNo;
+	
 	// 매물 종류
 	private String category;
 	// 층
