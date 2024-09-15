@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -44,6 +45,7 @@ public class ProductListController {
 	// 중개사가 게시물 등록하기
 	// 1. 게시물 내용 등록하기
 	@PostMapping("/addList")
+	@Transactional
 	public String register(Model model, ProductInfoDTO productInfo, RedirectAttributes ra, HttpSession session) {
 
 		// 세션에서 loginMember 객체 가져오기
@@ -69,7 +71,16 @@ public class ProductListController {
 		}
 
 		model.addAttribute("message", "게시물이 성공적으로 등록되었습니다.");
+		
+		
 		int thisProductNo = service.getThisProductNo(memberNo);
+		String noteForCustomer = productInfo.getNoteForCustomer();
+		
+		Map<String, Object> map = new HashMap<>();
+		map.put("thisProductNo", thisProductNo);
+		map.put("noteForCustomer", noteForCustomer);
+		int addNoteForCustomer = service.addNoteForCustomer(map);
+		
 		session.setAttribute("thisProductNo", thisProductNo); // 세션에 저장
 		System.out.println("thisProductNo : " + thisProductNo);
 		return "redirect:/realtor/list/showPostPhoto"; // 성공 페이지로 리다이렉트

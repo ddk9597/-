@@ -25,6 +25,15 @@
 
 	</insert>
 
+	<insert id="addNoteForCustomer">
+		INSERT INTO PRODUCT_NOTE (
+		PROPERTIES_NO,
+		NOTE_FOR_CUSTOMER
+		) VALUES (
+		#{thisProductNo}, #{noteForCustomer}
+		)
+	</insert>
+
 	<select id="getThisProductNo">
 		SELECT MAX(PROPERTIES_NO)
 		FROM PRODUCT
@@ -38,10 +47,19 @@
 	</insert>
 
 	<select id="getDetailInfo">
-		SELECT PROPERTIES_NO, MEMBER_NO, LOCATION_TITLE,
-		CATEGORY, FLOOR, PREMIUM, DEPOSIT, RENT, ADMIN_COST
-		FROM PRODUCT
-		WHERE PROPERTIES_NO = #{productNo}
+		SELECT
+		p.PROPERTIES_NO, p.MEMBER_NO, p.LOCATION_TITLE, p.CATEGORY, p.FLOOR,
+		p.PREMIUM,	p.DEPOSIT,	p.RENT,	p.ADMIN_COST,	p.NOTE,
+		pn.NOTE_FOR_CUSTOMER
+		FROM
+		PRODUCT p
+		LEFT JOIN
+		PRODUCT_NOTE pn
+		ON
+		p.PROPERTIES_NO = pn.PROPERTIES_NO
+		WHERE
+		p.PROPERTIES_NO = #{productNo}
+
 
 	</select>
 

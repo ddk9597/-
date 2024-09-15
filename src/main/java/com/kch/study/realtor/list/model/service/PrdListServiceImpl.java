@@ -26,6 +26,12 @@ public class PrdListServiceImpl implements PrdListService {
 
 		return result;
 	}
+	
+	@Override
+	public int addNoteForCustomer(Map<String, Object> map) {
+		int result = mapper.addNoteForCustomer(map);
+		return result;
+	}
 
 	@Override
 	public int getThisProductNo(int memberNo) {
@@ -46,13 +52,14 @@ public class PrdListServiceImpl implements PrdListService {
 
 		mapper.listUpPhoto(map);
 	}
-	
+
 	// 고객에게 보여줄 매물 정보 불러오기
 	@Override
 	public GetDetailDTO getDetailInfo(String productNo) {
-		
-		
+
 		return mapper.getDetailInfo(productNo);
 	}
+
+	
 
 }

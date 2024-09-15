@@ -35,5 +35,6 @@ public class ProductInfoDTO {
 	private String photo;
 	private List<String> imageList;
 	
+	private String noteForCustomer;
 	
 }

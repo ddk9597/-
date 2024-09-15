@@ -34,6 +34,9 @@ public class GetDetailDTO {
 	private String rent;
 	private String adminCost;
 	
+	// 매물 상세 정보
+	private String noteForCustomer;
+	
 	
 	
 	

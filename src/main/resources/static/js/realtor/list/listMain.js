@@ -163,7 +163,7 @@ productInfo.forEach(item => {
       .then(response => response.json())
       .then(data => {
 
-        // console.log("data : ", data);
+        console.log("data : ", data.note);
 
         document.getElementById('detailInfoUploader').innerText = data.memberNo;
         document.getElementById('detailInfoCategory').innerText = data.category;
@@ -172,6 +172,7 @@ productInfo.forEach(item => {
         document.getElementById('detailInfoRent').innerText = data.rent;
         document.getElementById('detailInfoAdminCost').innerText = data.adminCost;
         document.getElementById('detailInfoPremium').innerText = data.premium;
+        document.getElementById('detailInfoNote').innerText = data.noteForCustomer;
 
       })
       .catch(error => console.error('Error:', error));

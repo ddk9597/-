@@ -13,7 +13,10 @@ public interface PrdListMapper {
 
 	// 게시글 추가하기
 	int addList(ProductInfoDTO productInfo);
-
+	
+	// 고객에게 보여질 메모 등록
+	int addNoteForCustomer(Map<String, Object> map);
+	
 	// 사진 등록을 위해 위에서 등록한 게시물의 번호 가져오기
 	int getThisProductNo(int memberNo);
 
@@ -22,5 +25,7 @@ public interface PrdListMapper {
 
 	// 고객에게 보여줄 매물 정보 불러오기
 	GetDetailDTO getDetailInfo(String productNo);
+
+	
 
 }
