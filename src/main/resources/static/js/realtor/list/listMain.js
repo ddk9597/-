@@ -48,6 +48,10 @@ function openPremiumlModal(event) {
   openModal('premeiumModal', event.target);
 }
 
+function openFloorModal(event) {
+  openModal('floorModal', event.target);
+}
+
 
 // 전체 페이지네이션 관련 기능
 document.addEventListener("DOMContentLoaded", function () {
@@ -148,10 +152,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
 // --------- 매물 상세 조회 관련 함수 --------- //
 const productInfo = document.querySelectorAll('.productInfo');
+const prodcutDetailModalWrapper = document.getElementById('prodcutDetailModalWrapper');
+
 
 productInfo.forEach(item => {
   item.addEventListener('click', () => {
     let productNo = item.querySelector('.productNo span').innerText;
+    prodcutDetailModalWrapper.style.display = 'flex';
 
     // 클릭된 매물 번호를 clickedProductNo에 반영
     document.getElementById('clickedProductNo').innerText = productNo;

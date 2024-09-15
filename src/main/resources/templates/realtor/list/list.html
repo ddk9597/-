@@ -219,85 +219,127 @@
   <!-- 상단 navBar 모달 끝 -->
 
   <!-- 매물 상세 정보 모달 -->
-  <div id="productDetailModal">
+  <div id="prodcutDetailModalWrapper" class="modal">
+    <div id="productDetailModal">
 
-    <!-- 왼쪽  -->
+      <!-- 왼쪽  -->
 
-    <div id="detailLeftSection">
-      <div><span id="clickedProductNo"></span> <span>번 매물 관련 정보 입니다.</span></div>
+      <div id="detailLeftSection">
+        <div><span id="clickedProductNo"></span> <span>번 매물 관련 정보 입니다.</span></div>
 
-      <!-- 기본 정보 -->
-      <div>
-        <div style="font-weight: bold;">기본 정보</div>
-        <div> 게시자 : <span id="detailInfoUploader"></span> 번 회원님 </div>
-        <hr>
+        <!-- 기본 정보 -->
         <div>
-          <table>
-            <tr>
-              <th>매물 종류</th>
-              <td><span id="detailInfoCategory"></span></td>
-            </tr>
-            </tr>
-            <tr>
-              <th>위치</th>
-              <td><span id="detailInfoLocation"></span></td>
-            </tr>
-
-            <tr>
-              <th>보증금</th>
-              <td><span id="detailInfoDeposit"></span>만 원</td>
-            </tr>
-            <tr>
-              <th>월세</th>
-              <td><span id="detailInfoRent"></span>만 원</td>
-            </tr>
-            <tr>
-              <th>관리비</th>
-              <td><span id="detailInfoAdminCost"></span>만 원</td>
-            </tr>
-            <tr>
-              <th>권리금</th>
-              <td><span id="detailInfoPremium"></span>만 원</td>
-            </tr>
-
-          </table>
-          
+          <div> 게시자 : <span id="detailInfoUploader"></span> 번 회원님 </div>
           <hr>
-          
+
+          <!-- 사진 나오는 자리 -->
+          <div id="detailInfoImages">
+
+
+          </div>
+
           <div>
-            <div>상세 정보</div>
+            <div class="infoSectionTitle">매물 개요</div>
+            <table>
+              <tr>
+                <th>매물 종류</th>
+                <td><span id="detailInfoCategory"></span></td>
+              </tr>
+              </tr>
+              <tr>
+                <th>위치</th>
+                <td><span id="detailInfoLocation"></span></td>
+              </tr>
+            </table>
+            <hr>
+
+            <div class="infoSectionTitle">금액 정보</div>
+            <table>
+              <tr>
+                <th>보증금</th>
+                <td><span id="detailInfoDeposit"></span>만 원</td>
+              </tr>
+              <tr>
+                <th>월세</th>
+                <td><span id="detailInfoRent"></span>만 원</td>
+              </tr>
+              <tr>
+                <th>관리비</th>
+                <td><span id="detailInfoAdminCost"></span>만 원</td>
+              </tr>
+              <tr>
+                <th>권리금</th>
+                <td><span id="detailInfoPremium"></span>만 원</td>
+              </tr>
+
+            </table>
+
+            <hr>
+
             <div>
-              <span id="detailInfoNote"></span>
+              <div class="infoSectionTitle">상세 정보</div>
+              <div>
+                <span id="detailInfoNote"></span>
+              </div>
+            </div>
+
+            <hr>
+
+            <!-- 지도로 표시되는 부분 -->
+            <div class="infoSectionTitle">kakaoMap을 활용한 위치 표시</div>
+            <div id="mapSeciton">
+
+              <div id="map" style="width:500px;height:400px;"></div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+
+      <!-- 오른쪽 -->
+      <div id="detailRightSection">
+        <div class="infoSectionTitle">주요 정보</div>
+        <div>
+          <div class="detailLeftRow">보증금 &nbsp; <span></span>만원 | 월 임대료 &nbsp; <span></span>만원</div>
+
+          <hr>
+
+          <div class="detailLeftRow">
+            <div>
+              <div>임대면적</div>
+              <div><span></span>평</div>
+            </div>
+
+            <div>
+              <div>전용면적</div>
+              <div><span></span>평</div>
             </div>
           </div>
 
-          <!-- 지도로 표시되는 부분 -->
-          <div>
-            <div>kakaoMap을 활용한 위치 표시</div>
-            <div id="map" style="width:500px;height:400px;"></div>
-          </div>
+
+        </div>
+        <hr>
+        <div>
+
+
         </div>
       </div>
 
     </div>
 
-
-    <!-- 오른쪽 -->
-    <div id="detailRightSection">
-      <div>주요 정보</div>
-      <hr>
-      <div>
-
-
-      </div>
-    </div>
-
   </div>
+
+
+
+
+
   <!-- 공용 푸터 -->
   <div th:replace="~{realtor/common/realtorFooter :: footer}"></div>
-  
+
   <!-- 카카오 지도 api 키 -->
-  <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=6f98e355ec222c2b0b0723e64beacf17&libraries=services"></script>
+  <script type="text/javascript"
+    src="//dapi.kakao.com/v2/maps/sdk.js?appkey=6f98e355ec222c2b0b0723e64beacf17&libraries=services"></script>
 
 </body>
 
