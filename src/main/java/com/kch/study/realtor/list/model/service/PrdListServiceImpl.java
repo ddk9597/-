@@ -9,12 +9,13 @@ import org.springframework.stereotype.Service;
 import com.kch.study.realtor.list.model.dto.ProductInfoDTO;
 import com.kch.study.realtor.list.model.mapper.PrdListMapper;
 import com.kch.study.realtor.member.model.dto.rMember;
+import com.kch.study.realtor.model.dto.GetDetailDTO;
 
 import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
-public class PrdServiceImpl implements PrdListService {
+public class PrdListServiceImpl implements PrdListService {
 
 	private final PrdListMapper mapper;
 
@@ -44,6 +45,14 @@ public class PrdServiceImpl implements PrdListService {
 		map.put("photoList", photoListString);
 
 		mapper.listUpPhoto(map);
+	}
+	
+	// 고객에게 보여줄 매물 정보 불러오기
+	@Override
+	public GetDetailDTO getDetailInfo(String productNo) {
+		
+		
+		return mapper.getDetailInfo(productNo);
 	}
 
 }

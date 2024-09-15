@@ -144,3 +144,37 @@ document.addEventListener("DOMContentLoaded", function () {
 // --------- 상단 nav bar 관련 함수 --------- //
 
 
+
+
+// --------- 매물 상세 조회 관련 함수 --------- //
+const productInfo = document.querySelectorAll('.productInfo');
+
+productInfo.forEach(item => {
+  item.addEventListener('click', () => {
+    let productNo = item.querySelector('.productNo span').innerText;
+
+    // 클릭된 매물 번호를 clickedProductNo에 반영
+    document.getElementById('clickedProductNo').innerText = productNo;
+
+    console.log("클릭된 매물번호:", productNo);
+
+    // 클릭된 매물 번호를 기준으로 fetch 진행하여 비동기로 정보 받아옴
+    fetch('/realtor/list/getDetailInfo?productNo=' + productNo)
+      .then(response => response.json())
+      .then(data => {
+
+        // console.log("data : ", data);
+
+        document.getElementById('detailInfoUploader').innerText = data.memberNo;
+        document.getElementById('detailInfoCategory').innerText = data.category;
+        document.getElementById('detailInfoLocation').innerText = data.locationTitle;
+        document.getElementById('detailInfoDeposit').innerText = data.deposit;
+        document.getElementById('detailInfoRent').innerText = data.rent;
+        document.getElementById('detailInfoAdminCost').innerText = data.adminCost;
+        document.getElementById('detailInfoPremium').innerText = data.premium;
+
+      })
+      .catch(error => console.error('Error:', error));
+
+  });
+});

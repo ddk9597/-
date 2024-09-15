@@ -19,13 +19,15 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kch.study.realtor.list.model.dto.ProductInfoDTO;
 import com.kch.study.realtor.list.model.service.PrdListService;
-import com.kch.study.realtor.list.model.service.PrdServiceImpl;
+import com.kch.study.realtor.list.model.service.PrdListServiceImpl;
 import com.kch.study.realtor.member.model.dto.rMember;
+import com.kch.study.realtor.model.dto.GetDetailDTO;
 
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
@@ -139,6 +141,14 @@ public class ProductListController {
 		}
 
 		return "redirect:/rMain/list";
+	}
+	
+	// map을 이용해서 
+	@GetMapping("getDetailInfo")
+	@ResponseBody
+	public GetDetailDTO getDetailInfo(@RequestParam("productNo") String productNo) {
+		
+		return service.getDetailInfo(productNo);
 	}
 
 }

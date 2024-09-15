@@ -39,7 +39,6 @@
       </section>
 
       <!-- 반복되는 매물 리스트 -->
-      <!-- <img src="/images/realtor/listPic/505_teset.png" alt=""> -->
 
       <div class="ProductListContainer">
         <div class="productInfo" th:each="product : ${productList}">
@@ -49,7 +48,6 @@
 
             <div class="productImage">
 
-              <!-- 이미지 리스트를 순회하면서 각 이미지를 개별적으로 출력 -->
               <div th:each="image : ${product.imageList}">
                 <img th:src="@{/images/realtor/listPic/{thisImage}(thisImage=${image})}"
                   th:alt="'Product Image: ' + ${image}" style="max-width: 100%; max-height: 200px;" />
@@ -131,8 +129,7 @@
   </div>
 
 
-  <!-- 공용 푸터 -->
-  <div th:replace="~{realtor/common/realtorFooter :: footer}"></div>
+
 
 
 
@@ -221,6 +218,69 @@
 
   <!-- 상단 navBar 모달 끝 -->
 
+  <!-- 매물 상세 정보 모달 -->
+  <div id="productDetailModal">
+
+    <!-- 왼쪽  -->
+
+    <div id="detailLeftSection">
+      <div><span id="clickedProductNo"></span> <span>번 매물 관련 정보 입니다.</span></div>
+
+      <!-- 기본 정보 -->
+      <div>
+        <div>기본 정보</div>
+        <div> 게시자 : <span id="detailInfoUploader"></span> 번 회원님 </div>
+        <hr>
+        <div>
+          <table>
+            <tr>
+              <th>매물 종류</th>
+              <td><span id="detailInfoCategory"></span></td>
+            </tr>
+            </tr>
+            <tr>
+              <th>위치</th>
+              <td><span id="detailInfoLocation"></span></td>
+            </tr>
+
+            <tr>
+              <th>보증금</th>
+              <td><span id="detailInfoDeposit"></span>만 원</td>
+            </tr>
+            <tr>
+              <th>월세</th>
+              <td><span id="detailInfoRent"></span>만 원</td>
+            </tr>
+            <tr>
+              <th>관리비</th>
+              <td><span id="detailInfoAdminCost"></span>만 원</td>
+            </tr>
+            <tr>
+              <th>권리금</th>
+              <td><span id="detailInfoPremium"></span>만 원</td>
+            </tr>
+
+            
+          </table>
+        </div>
+      </div>
+
+    </div>
+
+
+    <!-- 오른쪽 -->
+    <div id="detailRightSection">
+      <div>주요 정보</div>
+      <hr>
+      <div>
+
+
+      </div>
+    </div>
+
+  </div>
+  <!-- 공용 푸터 -->
+  <div th:replace="~{realtor/common/realtorFooter :: footer}"></div>
 </body>
 
 

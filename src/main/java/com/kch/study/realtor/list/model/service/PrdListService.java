@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.kch.study.realtor.list.model.dto.ProductInfoDTO;
 import com.kch.study.realtor.member.model.dto.rMember;
+import com.kch.study.realtor.model.dto.GetDetailDTO;
 
 public interface PrdListService {
 
@@ -15,5 +16,9 @@ public interface PrdListService {
 
 	// 등록한 사진의 이름을 db에 저장하기
 	void listUpPhoto(Integer thisProductNo, List<String> photoList);
+
+	// 고객에게 보여줄 매물 정보 불러오기
+	GetDetailDTO getDetailInfo(String productNo);
+
 
 }

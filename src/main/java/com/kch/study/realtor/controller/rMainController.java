@@ -70,10 +70,6 @@ public class rMainController {
 			} else {
 				product.setImageList(Collections.emptyList());
 			}
-			if (prdNo == 512) {
-
-				logger.info("이미지 확인용 Product No: {}, Image List: {}", prdNo, product.getImageList());
-			}
 		}
 
 		// 모델에 매물 목록 추가

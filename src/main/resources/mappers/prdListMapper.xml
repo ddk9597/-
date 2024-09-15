@@ -37,4 +37,12 @@
 		VALUES (#{thisProductNo}, #{photoList})
 	</insert>
 
+	<select id="getDetailInfo">
+		SELECT PROPERTIES_NO, MEMBER_NO, LOCATION_TITLE,
+		CATEGORY, FLOOR, PREMIUM, DEPOSIT, RENT, ADMIN_COST
+		FROM PRODUCT
+		WHERE PROPERTIES_NO = #{productNo}
+
+	</select>
+
 </mapper>

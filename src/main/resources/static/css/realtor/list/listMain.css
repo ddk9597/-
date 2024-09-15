@@ -67,7 +67,7 @@
 
 /* ------ 제품 리스트 컨테이너 ------ */
 .ProductListContainer {
-  border: 1px solid red;
+  border: 3px solid red;
   border-radius: 8px;
   overflow: hidden;
 
@@ -276,4 +276,40 @@
 
 .prevPage:hover, .nextPage:hover, .prevPageGroup:hover, .nextPageGroup:hover {
   background-color: #ddd;
+}
+
+/* ----------- 매물 상세정보 모달 관련 스타일 ----------- */
+#productDetailModal{
+  
+  border: 1px solid black;
+  border-radius: 5px;
+
+
+  display: flex;
+  flex-direction: row;
+
+  align-items: center;
+  justify-content: center;
+
+
+}
+
+#detailLeftSection{
+  border: 1px solid red;
+  margin: 3px;
+
+  display: flex;
+  flex-direction: column;
+}
+
+#detailRightSection{
+  border: 1px dotted green;
+  margin: 3px;
+
+  flex-direction: column;
+}
+
+th{
+  text-align: left;
+  margin-right: 50px;
 }
