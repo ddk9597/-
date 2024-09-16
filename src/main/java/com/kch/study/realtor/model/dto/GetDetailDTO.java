@@ -29,6 +29,8 @@ public class GetDetailDTO {
 	private String category;
 	// 층
 	private String floor;
+	// 면적
+	private String py;
 	// 권리금 유무 여부
 	private String premium;
 	// 보증금

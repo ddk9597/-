@@ -178,8 +178,15 @@ productInfo.forEach(item => {
         document.getElementById('detailInfoDeposit').innerText = data.deposit;
         document.getElementById('detailInfoRent').innerText = data.rent;
         document.getElementById('detailInfoAdminCost').innerText = data.adminCost;
-        document.getElementById('detailInfoPremium').innerText = data.premium;
+        // document.getElementById('detailInfoPremium').innerText = data.premium;
         document.getElementById('detailInfoNote').innerText = data.noteForCustomer;
+        document.getElementById('detailInfoDeposit2').innerText = data.deposit;
+        document.getElementById('detailInfoRent2').innerText = data.rent;
+        // document.getElementById('detailInfoAdminCost2').innerText = data.adminCost;
+        document.getElementById('detailInfoFloor').innerText = data.floor;
+        document.getElementById('detailInfoPy').innerText = data.py;
+
+
 
         // 법정동 + 상세주소 조합
         let detailAddress = data.locationTitle + " " + data.addressNo;
