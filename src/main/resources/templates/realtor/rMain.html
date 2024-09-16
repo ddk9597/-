@@ -6,6 +6,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>부동산 중개 사이트</title>
   <link rel="stylesheet" href="/css/rMain.css">
+
+  <!-- 스와이퍼 css -->
+  <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
   <!-- 헤더 스타일 -->
   <link rel="stylesheet" href="/css/realtor/common/realtorHeader.css">
 </head>
@@ -24,10 +27,72 @@
   </section>
 
   <section id="listings" class="listings">
-
+    <h2>최신 매물 목록</h2>
     <div class="container">
-      <h2>최신 매물 목록</h2>
       
+
+      <div class="swiper-container">
+        <div class="swiper-wrapper">
+          <div class="swiper-slide" th:each="product : ${productList}">
+            <div class="productInfo">
+              <div class="productImageContainer">
+                <div class="productImage">
+                  <div th:each="image : ${product.imageList}">
+                    <img th:src="@{/images/realtor/listPic/{thisImage}(thisImage=${image})}"
+                      th:alt="'Product Image: ' + ${image}" style="max-width: 100%; max-height: 200px;" />
+                  </div>
+                </div>
+              </div>
+
+              <div class="productTitleContainer">
+                <div class="productNo">
+                  매물번호 : <span th:text="${product.propertiesNo}"></span>
+                </div>
+                <div class="productLocation">
+                  매물 위치 : <span th:text="${product.locationTitle}"></span>
+                </div>
+              </div>
+
+              <div class="productInfoContainer">
+                <div class="productPhysicalInfo">
+                  <div class="product">
+                    전용면적 : <span th:text="${product.py}"></span> 평
+                  </div>
+                  <div class="productFloor">
+                    층수 : <span th:text="${product.floor}"></span> 층
+                  </div>
+                  <div class="productType">
+                    종류 : <span th:text="${product.category}"></span>
+                  </div>
+                </div>
+
+                <div class="productCostInfo">
+                  <div class="productDeposit">
+                    보증금 : <span th:text="${product.deposit}"></span> 만원
+                  </div>
+                  <div class="productRent">
+                    월세 : <span th:text="${product.rent}"></span> 만원
+                  </div>
+                  <div class="productAdminCost">
+                    관리비 : <span th:text="${product.adminCost}"></span> 만원
+                  </div>
+                  <div class="productPremium">
+                    권리금 : <span th:text="${product.premium == 0 ? '없음' : '있음'}"></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 네비게이션 버튼 -->
+        <div class="swiper-button-next"></div>
+        <div class="swiper-button-prev"></div>
+
+        <!-- 페이지네이션 -->
+        <div class="swiper-pagination"></div>
+      </div>
+
 
 
 
@@ -50,7 +115,7 @@
   </section>
 
   <!-- realtor공용 푸터 -->
-    <div th:replace="realtor/common/realtorFooter :: footer"></div>
+  <div th:replace="realtor/common/realtorFooter :: footer"></div>
 
   <!-- 이 사이트가 연습용 가짜 사이트임을 알리는 모달 설정 -->
   <div id="myModal" class="modal">
@@ -67,5 +132,22 @@
 <script src="/js/rMain.js"></script>
 <!-- 헤더 js -->
 <script src="/js/realtor/common/realtorHeader.js"></script>
+<!-- 스와이퍼 js -->
+<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+<script>
+  var swiper = new Swiper('.swiper-container', {
+    slidesPerView: 5, // 한 번에 보여질 슬라이드 개수
+    spaceBetween: 1, // 슬라이드 사이 간격
+    loop: true, // 슬라이드가 끝까지 가면 다시 처음으로 돌아가는 기능
+    pagination: {
+      el: '.swiper-pagination',
+      clickable: true,
+    },
+    navigation: {
+      nextEl: '.swiper-button-next',
+      prevEl: '.swiper-button-prev',
+    },
+  });
+</script>
 
 </html>

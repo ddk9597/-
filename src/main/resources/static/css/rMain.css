@@ -273,3 +273,104 @@
 .modal-content button:hover {
   background-color: #555;
 }
+
+/* --------- 최신 제품 목록 관련 css --------- */
+/* ------ 제품 리스트 컨테이너 ------ */
+.ProductListContainer {
+  border: 3px solid red;
+  border-radius: 8px;
+  overflow: hidden;
+
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding: 10px;
+
+  justify-content: center;
+  align-items: center;
+}
+
+/* 반복되는 제품 컨테이너 */
+
+.productInfo{
+  display: flex;
+  flex-direction: column;
+  border: 2px dotted red;
+  border-radius: 10px;
+  width: 90%;
+}
+
+/* ------ 컨테이너 내부 스타일 ------- */
+
+/* productInfo 제품 이미지 컨테이너 */
+.productImageContainer {
+  position: relative;
+  width: 100%;
+  height: 200px;
+  background-color: #eaeaea;
+  overflow: hidden;
+}
+
+.productImage {
+  position: relative;
+}
+
+.productImage img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* 제품 제목 컨테이너 */
+.productTitleContainer {
+  padding: 10px;
+  background-color: #fff;
+  border-bottom: 1px solid #ccc;
+}
+
+.productTitleContainer .productNo {
+  font-size: 12px;
+  color: #888;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.productTitleContainer .productLocation {
+  font-size: 14px;
+  font-weight: bold;
+  margin-top: 5px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* 제품 정보 컨테이너 */
+.productInfoContainer {
+  display: flex;
+  justify-content: space-between;
+  padding: 5px;
+  background-color: #f9f9f9;
+}
+
+.productPhysicalInfo, .productCostInfo {
+  width: 48%;
+}
+
+.productPhysicalInfo > div, .productCostInfo > div {
+  margin-bottom: 5px;
+}
+
+.productPhysicalInfo > div:last-child, .productCostInfo > div:last-child {
+  margin-bottom: 0;
+}
+
+/* 각 정보 섹션 스타일 */
+.productPhysicalInfo .product, .productPhysicalInfo .productFloor, .productPhysicalInfo .productType,
+.productCostInfo .productDeposit, .productCostInfo .productRent, .productCostInfo .productAdminCost, .productCostInfo .productPremium {
+  font-size: 12px;
+  color: #333;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

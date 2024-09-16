@@ -31,5 +31,10 @@ public class rServiceImpl implements rService {
 		return mapper.getPrdPhotoList(prdNo);
 	}
 
+	// 매물 목록 15개만 가져오기
+	public List<ProductInfoDTO> get15ProductList() {
+		return mapper.get15ProductList();
+	}
+
 	
 }

@@ -10,7 +10,7 @@ function setModalDontShowToday() {
 // 모달 열기
 function openModal() {
   const dontShowModal = localStorage.getItem('dontShowModal');
-  
+
   if (dontShowModal && new Date().getTime() < dontShowModal) {
     // '오늘 하루 열지 않기'가 설정된 경우 모달을 열지 않음
     return;
@@ -48,6 +48,9 @@ document.addEventListener('DOMContentLoaded', (event) => {
 // 페이지 로딩 시 최신 매물 목록 불러오기
 document.addEventListener("DOMContentLoaded", function () {
 
-
-
+  fetch("/realtor/list/getList")
+    .then(response => response.json())
+    .then(data => {
+      
+    });
 });

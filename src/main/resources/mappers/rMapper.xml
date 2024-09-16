@@ -22,4 +22,13 @@
 		FROM PRODUCT_IMAGE
 		WHERE PROPERTIES_NO = #{prdNo}
 	</select>
+
+	<select id="get15ProductList"
+		resultType="com.kch.study.realtor.list.model.dto.ProductInfoDTO">
+		SELECT PROPERTIES_NO, MEMBER_NO, LOCATION_TITLE,
+		CATEGORY, FLOOR, PY, DEPOSIT, RENT, ADMIN_COST, IS_TENANT
+		FROM PRODUCT p
+		ORDER BY PROPERTIES_NO DESC
+		FETCH FIRST 15 ROWS ONLY
+	</select>
 </mapper>

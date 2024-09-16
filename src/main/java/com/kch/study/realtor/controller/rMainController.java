@@ -37,6 +37,29 @@ public class rMainController {
 	public String mainPage(Model model, HttpSession session) {
 		rMember loginMember = (rMember) session.getAttribute("loginMember");
 		model.addAttribute("loginMember", loginMember);
+
+		// 최신 매물 목록 10개만 가져오기
+		List<ProductInfoDTO> productList = service.get15ProductList();
+
+		// 매물별로 번호를 추출해서
+		for (ProductInfoDTO product : productList) {
+			int prdNo = product.getPropertiesNo();
+
+			// 추출된 매물별 사진의 목록 중 첫번째 가져오기
+			List<String> prdPhotoList = service.getPrdPhotoList(prdNo);
+
+			// 가져온 사진 목록을 model에 저장하기
+			if (prdPhotoList != null && !prdPhotoList.isEmpty()) {
+				for (String photo : prdPhotoList) {
+					product.setImageList(prdPhotoList);
+				}
+			} else {
+				product.setImageList(Collections.emptyList());
+			}
+		}
+
+		model.addAttribute("productList", productList);
+
 		return "realtor/rMain";
 	}
 
