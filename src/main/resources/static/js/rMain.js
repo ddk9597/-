@@ -44,13 +44,3 @@ document.addEventListener('DOMContentLoaded', (event) => {
 });
 
 
-
-// 페이지 로딩 시 최신 매물 목록 불러오기
-document.addEventListener("DOMContentLoaded", function () {
-
-  fetch("/realtor/list/getList")
-    .then(response => response.json())
-    .then(data => {
-      
-    });
-});

@@ -33,7 +33,7 @@
 
 
 .listings {
-  padding: 20px 0;
+  padding: 20px 10px;
   background: #f4f4f4;
 }
 
@@ -42,27 +42,6 @@
   margin-bottom: 20px;
 }
 
-.property {
-  background: #fff;
-  margin: 10px;
-  padding: 10px;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  float: left;
-  width: 45%;
-  box-sizing: border-box;
-}
-
-.property img {
-  max-width: 100%;
-  border-bottom: 1px solid #ddd;
-  padding-bottom: 10px;
-}
-
-.property h3, 
-.property p {
-  margin: 10px 0;
-}
 
 .contact {
   padding: 20px 0;
@@ -373,4 +352,54 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+
+/* 스와이퍼 버튼 관련 CSS  */
+/* Swiper 컨테이너의 상대적 위치를 설정 */
+.swiper-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+
+.swiper-slide{
+  display: flex;
+  flex-direction: row;
+
+  align-items: center;
+  justify-content: center;
+
+
+  padding-bottom: 50px;
+}
+
+
+/* 페이지네이션 상태 버튼 관련 css */
+/* 페이지네이션 위치 조정 */
+.swiper-pagination {
+  position: absolute;
+  /* bottom: -50px;  */
+  left: 50%;
+  transform: translateX(-50%); /* 가로축 중앙 맞춤 */
+  z-index: 10;
+  text-align: center;
+}
+
+/* 페이지네이션 점 스타일링 */
+.swiper-pagination-bullet {
+  background-color: #333; /* 기본 점 색상 */
+  opacity: 0.5;
+}
+
+/* 현재 활성화된 페이지네이션 점 */
+.swiper-pagination-bullet-active {
+  background-color: #007aff; /* 활성화된 점 색상 */
+  opacity: 1;
+}
+
+.row{
+  display: flex;
+  flex-direction: row;
 }
