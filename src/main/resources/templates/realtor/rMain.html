@@ -5,10 +5,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>부동산 중개 사이트</title>
-  <link rel="stylesheet" href="/css/rMain.css">
-
+  
   <!-- 스와이퍼 css -->
   <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
+  <!-- 현재 페이지 css -->
+  <link rel="stylesheet" href="/css/rMain.css">
   <!-- 헤더 스타일 -->
   <link rel="stylesheet" href="/css/realtor/common/realtorHeader.css">
 </head>
@@ -89,8 +90,8 @@
         
         <!-- 네비게이션 버튼 -->
         <div class="swiperNavBtnContainer">
-          <div class="swiper-button-next"> ▷ </div>
-          <div class="swiper-button-prev">◁</div>
+          <div class="swiper-button-next">▶</div>
+          <div class="swiper-button-prev">◀</div>
           
         </div>
         <!-- 페이지네이션 -->
@@ -119,14 +120,42 @@
 
   <section id="contact" class="contact">
     <div class="container">
-      <h2>문의하기</h2>
-      <form>
-        <label for="name">이름:</label>
+      <h2>빠른 문의하기</h2>
+      <form action="/realtor/contact" method="post">
+        <!-- 이름 -->
+        <label for="name">성함:</label>
         <input type="text" id="name" name="name" required>
-        <label for="email">이메일:</label>
-        <input type="email" id="email" name="email" required>
-        <label for="message">메시지:</label>
-        <textarea id="message" name="message" required></textarea>
+
+        <!-- 연락처 -->
+        <label for="phone">연락처:</label>
+        <input type="email" id="phone" name="phone" >
+        
+        <!-- 찾는 물건 종류 -->
+        <label for="prdKind">매물 종류</label>
+        <input type="text" id="prdKind" name="prdKind"  >
+        
+        <!-- 금액 -->
+        <label for="maxBudget">최대 보증금 + 권리금:</label>
+        <input type="text" id="maxBudget" name="maxBudget" >
+        
+        <!-- 예산 -->
+        <label for="maxMonthPay">최대 월세 + 권리금</label>
+        <input type="text" id="maxMonthPay" name="maxMonthPay" >
+
+        <!-- 면적 -->
+        <label for="minPy">최소 면적 :</label>
+        <input type="text" id="minPy" name="minPy" > 평 이상 ~
+        
+        <label for="maxPy">최대 면적 :</label>
+        <input type="text" id="maxPy" name="maxPy" > 평 이하
+
+        <!-- 위치 -->
+        <label for="location">선호 지역</label>
+        <input type="text" id="location" name="location" placeholder="선호 지역을 입력하세요">
+
+        <!-- 메세지 -->
+        <label for="contactMessage">메시지:</label>
+        <textarea id="contactMessage" name="contactMessage" ></textarea>
         <button type="submit">전송</button>
       </form>
     </div>

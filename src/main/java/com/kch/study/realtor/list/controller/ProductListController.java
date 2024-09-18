@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -118,7 +119,7 @@ public class ProductListController {
 
 	@PostMapping("addPicture")
 	public String addPicture(@RequestParam("pictures") MultipartFile[] files, RedirectAttributes ra,
-			HttpSession session) {
+			HttpSession session, @SessionAttribute("loginMember") rMember loginMember) {
 		Integer thisProductNo = (Integer) session.getAttribute("thisProductNo");
 		List<String> photoList = new ArrayList<>();
 
