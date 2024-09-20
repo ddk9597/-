@@ -30,6 +30,7 @@
           <!-- 로그인한 회원이 중개사 회원인 경우 -->
           <th:block th:if="${loginMember != null and loginMember.memberKind == 3}">
             <li onclick="toRegisterProperty()">매물 등록하기</li>
+            <li onclick="toContactList()">요청 목록 확인하기</li>
           </th:block>
           <th:block th:if="${loginMember != null}">
             <li onclick="toLogOut()">로그아웃</li>

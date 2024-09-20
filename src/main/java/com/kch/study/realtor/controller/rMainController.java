@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kch.study.realtor.list.model.dto.ProductInfoDTO;
@@ -133,5 +134,24 @@ public class rMainController {
 
 		model.addAttribute("loginMember", loginMember);
 		return "realtor/list/addList";
+	}
+
+	// 중개사회원의 contact 확인 페이지로 이동하기
+	@GetMapping("toContactList")
+	public String toCheckContact(@SessionAttribute("loginMember") rMember loginMember, Model model) {
+
+		int memberKind = loginMember.getMemberKind();
+		String result = null;
+		String message = null;
+		// 3 : 중개사 회원만 접근 가능
+		if (memberKind == 3) {
+			result = "realtor/contact/contactList";
+		} else {
+			result = "redirect:/realtor/rMain";
+			message = "중개사 회원만 이용 가능합니다.";
+			
+		}
+		model.addAttribute("message", message);
+		return result;
 	}
 }
