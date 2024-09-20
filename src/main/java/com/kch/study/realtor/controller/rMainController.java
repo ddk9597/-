@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.kch.study.realtor.contact.model.dto.ContactDTO;
 import com.kch.study.realtor.list.model.dto.ProductInfoDTO;
 import com.kch.study.realtor.member.model.dto.rMember;
 import com.kch.study.realtor.model.service.rServiceImpl;
@@ -145,6 +146,12 @@ public class rMainController {
 		String message = null;
 		// 3 : 중개사 회원만 접근 가능
 		if (memberKind == 3) {
+			
+			// contactList 담아서 가져오기
+			List<ContactDTO> requestList = service.getContactList(); 
+			// model에 담아서 보낸 후 타임리프로 표시하기
+			model.addAttribute("requestList", requestList);
+			
 			result = "realtor/contact/contactList";
 		} else {
 			result = "redirect:/realtor/rMain";

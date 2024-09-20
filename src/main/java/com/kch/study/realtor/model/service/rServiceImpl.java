@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.kch.study.realtor.contact.model.dto.ContactDTO;
 import com.kch.study.realtor.list.model.dto.ProductInfoDTO;
 import com.kch.study.realtor.model.mapper.rMapper;
 
@@ -34,6 +35,10 @@ public class rServiceImpl implements rService {
 	// 매물 목록 15개만 가져오기
 	public List<ProductInfoDTO> get15ProductList() {
 		return mapper.get15ProductList();
+	}
+
+	public List<ContactDTO> getContactList() {
+		return mapper.getContactList();
 	}
 
 	
