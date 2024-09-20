@@ -10,14 +10,14 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ContactDTO {
-	
+
 	private String name;
 	private String phone;
 	private String prdKind;
 	private String maxBudget;
+	private String maxMonthPay; 
 	private String minPy;
 	private String maxPy;
 	private String location;
-	private String availDate;
-	private String contactMessage;
+	private String message; 
 }

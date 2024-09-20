@@ -121,14 +121,14 @@
   <section id="contact" class="contact">
     <div class="container">
       <h2>빠른 문의하기</h2>
-      <form action="/realtor/contact" method="post">
+      <form action="/realtor/contact/makeContactRequest" method="post">
         <!-- 이름 -->
         <label for="name">성함:</label>
         <input type="text" id="name" name="name" required>
 
         <!-- 연락처 -->
         <label for="phone">연락처:</label>
-        <input type="email" id="phone" name="phone" >
+        <input type="text" id="phone" name="phone" >
         
         <!-- 찾는 물건 종류 -->
         <label for="prdKind">매물 종류</label>
@@ -155,7 +155,8 @@
 
         <!-- 메세지 -->
         <label for="contactMessage">메시지:</label>
-        <textarea id="contactMessage" name="contactMessage" ></textarea>
+        <textarea id="contactMessage" name="message" ></textarea>
+
         <button type="submit">전송</button>
       </form>
     </div>
