@@ -17,7 +17,12 @@ public class ContactImpl implements ContactService {
 	@Override
 	public int saveContactRequest(ContactDTO contactDTO) {
 		
-		int result = mapper.saveContactRequest(contactDTO);
+		int result = 0;
+		int saveContactRequest = mapper.saveContactRequest(contactDTO);
+		if(saveContactRequest == 1) {
+			int curContactNo = mapper.getContactNo();
+			result = mapper.addContractProcess(curContactNo);
+		}
 		
 		return result;
 	}

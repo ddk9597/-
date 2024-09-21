@@ -36,9 +36,23 @@
 
 	<select id="getContactList"
 		resultType="com.kch.study.realtor.contact.model.dto.ContactDTO">
-		SELECT NAME, PHONE, PRD_KIND , MAX_BUDGET, MAX_MONTH_PAY,
-		MIN_PY, MAX_PY,LOCATION,MESSAGE
-		FROM CONTACT
+		SELECT
+		c.CONTACT_NO,
+		c.NAME,
+		c.PHONE,
+		c.PRD_KIND,
+		c.MAX_BUDGET,
+		c.MAX_MONTH_PAY,
+		c.MIN_PY,
+		c.MAX_PY,
+		c.LOCATION,
+		c.MESSAGE,
+		cp.MEMBER_NO,
+		cp.PROCESS
+		FROM
+		CONTACT c
+		JOIN
+		CONTACT_PROCESS cp ON c.CONTACT_NO = cp.CONTACT_NO
 	</select>
-	
+
 </mapper>

@@ -2,35 +2,47 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.kch.study.realtor.contact.model.mapper.ContactMapper">
-	
+<mapper
+	namespace="com.kch.study.realtor.contact.model.mapper.ContactMapper">
+
 	<!-- ContactDTO 객체를 데이터베이스에 삽입하는 INSERT 쿼리 -->
-    <insert id="saveContactRequest" parameterType="com.kch.study.realtor.contact.model.dto.ContactDTO">
-       INSERT INTO Contact (
-       		contactNo,
-            name,
-            phone,
-            prd_kind,
-            max_budget,
-            max_month_pay, 
-            min_py,
-            max_py,
-            location,
-            message  
-        ) VALUES (
-        
-        	contact_no_seq.NEXTVAL,
-            #{name},
-            #{phone},
-            #{prdKind},
-            #{maxBudget},
-            #{maxMonthPay},  
-            #{minPy},
-            #{maxPy},
-            #{location},
-            #{message}  
-        )
-    </insert>
-   
+	<insert id="saveContactRequest"
+		parameterType="com.kch.study.realtor.contact.model.dto.ContactDTO">
+		INSERT INTO Contact (
+		CONTACT_NO,
+		NAME,
+		PHONE,
+		PRD_KIND,
+		MAX_BUDGET,
+		MAX_MONTH_PAY,
+		MIN_PY,
+		MAX_PY,
+		LOCATION,
+		MESSAGE
+		) VALUES (
+
+		contact_no_seq.NEXTVAL,
+		#{name},
+		#{phone},
+		#{prdKind},
+		#{maxBudget},
+		#{maxMonthPay},
+		#{minPy},
+		#{maxPy},
+		#{location},
+		#{message}
+		)
+	</insert>
+
+	<select id="getContactNo" resultType="int">
+		SELECT MAX(CONTACT_NO)
+		FROM CONTACT
+	</select>
+
+	<insert id="addContractProcess" parameterType="com.kch.study.realtor.contact.model.dto.ContactDTO">
+		INSERT INTO CONTACT_PROCESS (CONTACT_NO, MEMBER_NO)
+		VALUES (#{curContactNo})
+	</insert>
+
 
 </mapper>
