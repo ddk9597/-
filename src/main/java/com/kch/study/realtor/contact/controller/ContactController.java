@@ -62,7 +62,7 @@ public class ContactController {
 	}
 
 	// 중개사 회원만 접근 가능함
-	// contactProcess 상태 업데이트 하기
+	// contactProcess 상태 업데이트 하기 (0 -> 1)
 	// 접수한 contactNo = contactNo
 	// curProcessStat : 현재 클릭한 매물의 접수 상태
 	// status : 0: 접수 안함, 1: 접수함 : 2: 완료됨s
@@ -70,19 +70,19 @@ public class ContactController {
 	@PostMapping("/updateContactProcess")
 	public String updateContactProcess(
 			@RequestParam(name = "contactNo") int contactNo,
-			@RequestParam(name = "processStat") int processStat, 
+			@RequestParam(name = "process") int processStat, 
 			RedirectAttributes ra,
 			@SessionAttribute("loginMember") rMember loginMember) {
 		
 		System.out.println("현재 접수 번호 : " + contactNo);
-		System.out.printf("현재 processStat : " + processStat);
+		System.out.println("현재 processStat : " + processStat);
 		
 		String message = null;
 		String path = null;
 		int memberNo = loginMember.getMemberNo();
 		// 중개사 회원만 조작 가능하게 함
 		int memberKind = loginMember.getMemberKind();
-
+		
 		
 		// 로그인 안된 경우
 		if (loginMember == null) {
@@ -102,12 +102,32 @@ public class ContactController {
 				
 				// 업데이트 진행 시 필요한 것 : 현재 회원 번호, 업데이트 할 contactNo
 				
-				Map<String, Object> map = new HashMap<>();
-				map.put("contactNo", contactNo);
-				map.put("memberNo", memberNo);
+				// 0 -> 1업데이트 진행
+				if(processStat == 0) {
+					Map<String, Object> map = new HashMap<>();
+					map.put("contactNo", contactNo);
+					map.put("memberNo", memberNo);
 
-				// 업데이트를 진행한다.
-				int processUpdate = service.processUpdate(map);
+					// 업데이트를 진행한다.
+					int processUpdate = service.processUpdate(map);
+				}
+				
+				// 1->2 업데이트 진행
+				if(processStat == 1) {
+					// 현재 checker로 등록된 멤버만 조정 가능하게 한다
+					int currentChecker = mapper.getCurrentChecker(contactNo);
+					
+					// 해당할 경우에만 진행
+					if(currentChecker == memberNo) {
+						Map<String, Object> map = new HashMap<>();
+						map.put("contactNo", contactNo);
+						map.put("memberNo", memberNo);
+						int updateToTwo = service.updateToTwo(map);
+						
+					}
+					
+				}
+				
 				
 			}
 

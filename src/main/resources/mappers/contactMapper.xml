@@ -36,18 +36,32 @@
 
 	<select id="getContactNo" resultType="int">
 		SELECT MAX(CONTACT_NO)
-		FROM CONTACT
+		FROM
+		CONTACT
 	</select>
 
-	<insert id="addContractProcess" parameterType="com.kch.study.realtor.contact.model.dto.ContactDTO">
+	<insert id="addContractProcess"
+		parameterType="com.kch.study.realtor.contact.model.dto.ContactDTO">
 		INSERT INTO CONTACT_PROCESS (CONTACT_NO, REQUESTER)
 		VALUES (#{contactNo}, #{requester})
 	</insert>
-	
+
 	<update id="processUpdate">
-	
-		
+		UPDATE CONTACT_PROCESS
+		SET CHECKER = #{memberNo}, PROCESS = 1
+		WHERE CONTACT_NO = #{contactNo}
 	</update>
 
+	<select id="getCurrentChecker">
+		SELECT CHECKER
+		FROM CONTACT_PROCESS
+		WHERE CONTACT_NO = #{contactNo}
+	</select>
+	
+	<update id="updateToTwo">
+		UPDATE CONTACT_PROCESS
+		SET PROCESS = 2
+		WHERE CONTACT_NO = #{contactNo}
+	</update>
 
 </mapper>

@@ -16,8 +16,15 @@ public interface ContactMapper {
 	int getContactNo();
 	int addContractProcess(ContactDTO contactDTO);
 	
-	// 업데이트를 진행한다.
+	// 0->1 업데이트를 진행한다.
 	int processUpdate(Map<String, Object> map);
+	
+	
+	// 1->2 업데이트 진행
+		// 현재 checker가 누군지 가져오기
+		int getCurrentChecker(int contactNo);
+		// 업데이트 진행
+		int updateToTwo(Map<String, Object> map);
 
 
 

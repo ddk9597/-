@@ -32,11 +32,19 @@ public class ContactImpl implements ContactService {
 	}
 	
 	
-	// 업데이트를 진행한다.
+	// 0 -> 1업데이트를 진행한다.
 	@Override
 	public int processUpdate(Map<String, Object> map) {
 		
 		int result = mapper.processUpdate(map);
+		return 0;
+	}
+	
+	// 1 -> 2 업데이트 진행
+	@Override
+	public int updateToTwo(Map<String, Object> map) {
+		
+		int result = mapper.updateToTwo(map);
 		return 0;
 	}
 }

@@ -11,11 +11,11 @@ function changeReceiveStatus(event) {
 
   // ㄱㄱ
   if (gogo) {
-    fetch(`/realtor/contact/updateContactProcess?contactNo=${contactNo}&processStat=${curProcessStat}`, {
+    fetch(`/realtor/contact/updateContactProcess?contactNo=${contactNo}&process=${curProcessStat}`, {
       method: 'POST',
       headers: { "Content-Type": "application/json" },
     })
-      .then(response => {
+      .then(response => { 
         if (response.ok) {
           return response.text();
         }
@@ -34,9 +34,13 @@ function changeReceiveStatus(event) {
   }
 }
 
-let notReceived = document.querySelectorAll('.notReceived');
-
+const notReceived = document.querySelectorAll('.notReceived');
+const received = document.querySelectorAll('.received');
 // 각 요소에 이벤트 리스너 추가
 notReceived.forEach(item => {
+  item.addEventListener('click', changeReceiveStatus);
+});
+
+received.forEach(item => {
   item.addEventListener('click', changeReceiveStatus);
 });
