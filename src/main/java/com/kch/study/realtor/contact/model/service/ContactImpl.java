@@ -21,7 +21,9 @@ public class ContactImpl implements ContactService {
 		int saveContactRequest = mapper.saveContactRequest(contactDTO);
 		if(saveContactRequest == 1) {
 			int curContactNo = mapper.getContactNo();
-			result = mapper.addContractProcess(curContactNo);
+			contactDTO.setContactNo(curContactNo);
+			
+			result = mapper.addContractProcess(contactDTO);
 		}
 		
 		return result;
