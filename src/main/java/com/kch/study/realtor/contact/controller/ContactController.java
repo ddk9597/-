@@ -30,7 +30,7 @@ public class ContactController {
 		
 		// loginMember가 null인 경우 requester를 4로 설정
 	    if (loginMember == null) {
-	    	requester = 4;
+	    	requester = -500;
 	    } else {
 	    	requester = loginMember.getMemberNo(); // loginMember가 null이 아닐 경우 memberNo 설정
 	    }
