@@ -15,9 +15,11 @@ import com.kch.study.realtor.contact.model.service.ContactService;
 import com.kch.study.realtor.member.model.dto.rMember;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 @Controller
 @RequiredArgsConstructor
+@Slf4j
 @RequestMapping("/realtor/contact")
 public class ContactController {
 
@@ -56,9 +58,22 @@ public class ContactController {
 	}
 	
 	// contactProcess 상태 업데이트 하기
-	@PutMapping("updateContactProcess")
-	public String updateContactProcess(@RequestParam int contactNo) {
+	// 접수한 contactNo = contactNo
+	// curProcessStat : 현재 클릭한 매물의 접수 상태
+	// status : 0: 접수 안함, 1: 접수함 : 2: 완료됨
+	// 업데이트한 회원의 번호 : loginMember.memberNo
+	@PutMapping("/updateContactProcess")
+	public String updateContactProcess(
+			@RequestParam int contactNo, 
+			RedirectAttributes ra, 
+			@SessionAttribute("loginMember") rMember loginMember,
+			ContactDTO contactDTO) {
 		
+		int memberNo = loginMember.getMemberNo();
+		System.out.println("업데이트 요청한 회원 : " + memberNo);
+		ra.addFlashAttribute("message", "청구 접수의 상태 업데이트");
+		
+		 	
 		
 		return "redirect:/rMain/toContactList";
 	}

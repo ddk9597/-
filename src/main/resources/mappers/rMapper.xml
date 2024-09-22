@@ -49,11 +49,14 @@
 		c.MESSAGE,
 		cp.REQUESTER,
 		cp.CHECKER,
-		cp.PROCESS
+		cp.PROCESS, 
+		rm.MEMBER_NAME
 		FROM
 		CONTACT c
 		JOIN
 		CONTACT_PROCESS cp ON c.CONTACT_NO = cp.CONTACT_NO
+		LEFT JOIN
+		REALTOR_MEMBER rm ON cp.CHECKER = rm.MEMBER_NO
 	</select>
 
 </mapper>

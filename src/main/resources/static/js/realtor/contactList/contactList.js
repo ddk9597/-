@@ -1,7 +1,7 @@
 function changeReceiveStatus(event) {
-  const contactNo = event.currentTarget.getAttribute('data-contactNo'); // 수정된 부분
+  const contactNo = event.currentTarget.getAttribute('data-contactNo');
   fetch('/realtor/contact/updateContactProcess?contactNo=' + contactNo, {
-    method: 'PUT', // 대문자로 수정
+    method: 'PUT', 
     headers: { "Content-Type": "application/json" },
   })
     .then(response => {
