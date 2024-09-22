@@ -39,8 +39,8 @@
 		FROM CONTACT
 	</select>
 
-	<insert id="addContractProcess" parameterType="com.kch.study.realtor.contact.model.dto.ContactDTO">
-		INSERT INTO CONTACT_PROCESS (CONTACT_NO, MEMBER_NO)
+	<insert id="addContractProcess" parameterType="int">
+		INSERT INTO CONTACT_PROCESS (CONTACT_NO)
 		VALUES (#{curContactNo})
 	</insert>
 

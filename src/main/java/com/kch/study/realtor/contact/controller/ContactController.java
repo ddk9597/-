@@ -41,6 +41,7 @@ public class ContactController {
 		int result = service.saveContactRequest(contactDTO); 
 		String message = null;
 		
+		// contact, contactProcess 테이블에 삽입이 잘 되었다면
 		if(result == 1) {
 			
 			message = "요청이 성공적으로 등록 되었습니다.";
