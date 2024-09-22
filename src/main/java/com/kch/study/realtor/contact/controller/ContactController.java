@@ -4,6 +4,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttribute;
@@ -23,7 +24,7 @@ public class ContactController {
 	private final ContactService service;
 
 	@PostMapping("/makeContactRequest")
-	public String contact(Model model, @ModelAttribute ContactDTO contactDTO, RedirectAttributes ra, 
+	public String contact(RedirectAttributes ra, @ModelAttribute ContactDTO contactDTO, 
 			@SessionAttribute(value = "loginMember", required = false) rMember loginMember) {
 		
 		int requester;
@@ -49,9 +50,18 @@ public class ContactController {
 			message = "요청 등록 실패.. 관리자에게 문의하세요";
 		}
 
-		model.addAttribute("message", message);
+		ra.addFlashAttribute("message", message);
 		
-		return "redirect:/contact"; 
+		return "redirect:/rMain"; 
 	}
+	
+	// contactProcess 상태 업데이트 하기
+	@PutMapping("updateContactProcess")
+	public String updateContactProcess(@RequestParam int contactNo) {
+		
+		
+		return "redirect:/rMain/toContactList";
+	}
+	
 
 }

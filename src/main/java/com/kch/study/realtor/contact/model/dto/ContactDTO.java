@@ -26,4 +26,5 @@ public class ContactDTO {
 	private int requester;
 	private int checker;
 	private int process; //0 : 접수안함, 1: 접수함, 2: 완료됨
+	private String memberName;
 }

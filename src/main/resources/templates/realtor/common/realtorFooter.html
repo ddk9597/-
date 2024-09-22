@@ -16,5 +16,14 @@
     </div>
   </footer>
 </body>
-
+  <script>
+    // 메세지가 있는 경우 메세지 출력
+    window.onload = function() {
+            // Check if the message is present
+            const message = /*[[${message}]]*/ '';
+            if (message) {
+                alert(message);
+            }
+        }
+  </script>
 </html>

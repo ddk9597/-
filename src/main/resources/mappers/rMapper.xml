@@ -47,7 +47,8 @@
 		c.MAX_PY,
 		c.LOCATION,
 		c.MESSAGE,
-		cp.MEMBER_NO,
+		cp.REQUESTER,
+		cp.CHECKER,
 		cp.PROCESS
 		FROM
 		CONTACT c

@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>contactList</title>
   <!-- 현재 페이지 스타일 -->
-   <link rel="stylesheet" href="/css/realtor/contactList/contactList.css">
+  <link rel="stylesheet" href="/css/realtor/contactList/contactList.css">
 
   <!-- 헤더 스타일 -->
   <link rel="stylesheet" href="/css/realtor/common/realtorHeader.css">
@@ -22,25 +22,53 @@
   <h1>요청 목록</h1>
 
   <div class="request-list">
-      <div class="request-item" th:each="request : ${requestList}">
-          <div class="request-header">
-              <h2 th:text="${request.name}"></h2>
-              <span th:text="${request.phone}"></span>
-          </div>
-          <div class="request-details">
-              <p><strong>매물 종류:</strong> <span th:text="${request.prdKind}"></span></p>
-              <p><strong>최대 보증금:</strong> <span th:text="${request.maxBudget}"></span></p>
-              <p><strong>최대 월세:</strong> <span th:text="${request.maxMonthPay}"></span></p>
-              <p><strong>최소 면적:</strong> <span th:text="${request.minPy}"></span> 평 이상</p>
-              <p><strong>최대 면적:</strong> <span th:text="${request.maxPy}"></span> 평 이하</p>
-              <p><strong>선호 지역:</strong> <span th:text="${request.location}"></span></p>
-              <p><strong>메시지:</strong> <span th:text="${request.message}"></span></p>
-              <p><strong>회원 번호:</strong> <span th:text="${request.memberNo}"></span></p>
-              <p><strong>접수 상태:</strong> <span th:text="${request.process}"></span></p>
-          </div>
+    <div class="request-item" th:each="request : ${requestList}">
+      <div class="request-header">
+        <h2 th:text="${request.name}"></h2>
+        <span th:text="${request.phone}"></span>
       </div>
+      <div class="requestDetails">
+
+        <div class="requestInfoLeft">
+          <p class="liner"><strong>접수 번호:</strong> <span th:text="${request.contactNo}"></span></p>
+          <p class="liner"><strong>매물 종류:</strong> <span th:text="${request.prdKind}"></span></p>
+          <p class="liner"><strong>최대 보증금:</strong> <span th:text="${request.maxBudget}"></span></p>
+          <p class="liner"><strong>최대 월세:</strong> <span th:text="${request.maxMonthPay}"></span></p>
+          <p class="liner"><strong>최소 면적:</strong> <span th:text="${request.minPy}"></span> 평 이상</p>
+          <p class="liner"><strong>최대 면적:</strong> <span th:text="${request.maxPy}"></span> 평 이하</p>
+          <p class="liner"><strong>선호 지역:</strong> <span th:text="${request.location}"></span></p>
+        </div>
+
+        <div class="requestInfoRight">
+          <p class="liner"><strong>요청자:</strong> <span
+              th:text="${request.requester == -500 ? '비회원' : request.requester}"></span></p>
+          <p class="liner"><strong>접수자:</strong> <span th:text="${request.checker}"></span></p>
+          <p class="liner"><strong>접수 상태:</strong> <span th:text="${request.process}"></span></p>
+        </div>
+
+      </div>
+      <p class="liner"><strong>메시지:</strong> <span th:text="${request.message}"></span></p>
+
+      <!-- status -->
+      <div id="request">
+
+        <!-- 0, 1, 2 에 따라 상태를 다르게 표시 -->
+        <div class="bigBox">
+
+          <div class="mediumBox" th:switch="${request.process}">
+            <span th:case="0" id="notReceived" data-contactNo="${request.contactNo}"
+              onclick="changeReceiveStatus(event)">미접수</span>
+            <span th:case="1" id="received">처리 중. </span>
+            <span th:case="2" id="processDone">처리 완료</span>
+            <span th:case="*" id="processFail">알 수 없음</span>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
   </div>
-  
+
 
   <!-- 요청을 표시할 모달 -->
 
@@ -48,6 +76,9 @@
   <!-- realtor공용 푸터 -->
   <div th:replace="realtor/common/realtorFooter :: footer"></div>
 </body>
+<!-- 현재 문서의 js -->
+<script src="/js/realtor/contactList/contactList.js"></script>
+
 
 <!-- 헤더 js -->
 <script src="/js/realtor/common/realtorHeader.js"></script>
