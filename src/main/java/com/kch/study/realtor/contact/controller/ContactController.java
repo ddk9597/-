@@ -63,10 +63,10 @@ public class ContactController {
 	// 업데이트한 회원의 번호 : loginMember.memberNo
 	@PostMapping("/updateContactProcess")
 	public String updateContactProcess(
-	        @RequestParam int contactNo, 
+			@RequestParam(name = "contactNo") int contactNo,
 	        RedirectAttributes ra, 
-	        @SessionAttribute("loginMember") rMember loginMember,
-	        ContactDTO contactDTO) {
+	        @SessionAttribute("loginMember") rMember loginMember
+	        ) {
 		System.out.println("tlqkfhodksehla?");
 		
 	    if (loginMember == null) {

@@ -1,11 +1,9 @@
-const notReceived = document.getElementById('notReceived');
-notReceived.addEventListener('click', changeReceiveStatus);
-
 function changeReceiveStatus(event) {
   const contactNo = event.currentTarget.getAttribute('data-contactNo');
+  console.log(contactNo);
 
   fetch(`/realtor/contact/updateContactProcess?contactNo=${contactNo}`, {
-    method: 'PUT',
+    method: 'POST',
     headers: { "Content-Type": "application/json" },
   })
   .then(response => {
@@ -21,3 +19,10 @@ function changeReceiveStatus(event) {
     console.error("Error:", error);
   });
 }
+
+let notReceived = document.querySelectorAll('.notReceived');
+
+// 각 요소에 이벤트 리스너 추가
+notReceived.forEach(item => {
+  item.addEventListener('click', changeReceiveStatus);
+});
