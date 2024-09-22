@@ -1,23 +1,37 @@
+
+
+// 미접수 버튼 클릭 시 -> 처리중 상태로 변경하기
 function changeReceiveStatus(event) {
   const contactNo = event.currentTarget.getAttribute('data-contactNo');
-  console.log(contactNo);
+  const curProcessStat = event.currentTarget.getAttribute('data-processStat');
+  console.log("contactNo : ", contactNo, "curProcessStat : ", curProcessStat);
 
-  fetch(`/realtor/contact/updateContactProcess?contactNo=${contactNo}`, {
-    method: 'POST',
-    headers: { "Content-Type": "application/json" },
-  })
-  .then(response => {
-    if (response.ok) {
-      return response.text();
-    }
-    throw new Error('업데이트 실패');
-  })
-  .then(data => {
-    console.log(data);  
-  })
-  .catch(error => {
-    console.error("Error:", error);
-  });
+  // confirm 진행
+  const gogo = confirm("의뢰를 접수하시겠습니까?");
+
+  // ㄱㄱ
+  if (gogo) {
+    fetch(`/realtor/contact/updateContactProcess?contactNo=${contactNo}&processStat=${curProcessStat}`, {
+      method: 'POST',
+      headers: { "Content-Type": "application/json" },
+    })
+      .then(response => {
+        if (response.ok) {
+          return response.text();
+        }
+        throw new Error('업데이트 실패');
+      })
+      .then(data => {
+        console.log(data);
+      })
+      .catch(error => {
+        console.error("Error:", error);
+      });
+  }
+
+  else {
+    alert("의뢰가 접수되었습니다.");
+  }
 }
 
 let notReceived = document.querySelectorAll('.notReceived');

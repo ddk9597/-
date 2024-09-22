@@ -1,5 +1,7 @@
 package com.kch.study.realtor.contact.model.service;
 
+import java.util.Map;
+
 import org.springframework.stereotype.Service;
 
 import com.kch.study.realtor.contact.model.dto.ContactDTO;
@@ -30,4 +32,11 @@ public class ContactImpl implements ContactService {
 	}
 	
 	
+	// 업데이트를 진행한다.
+	@Override
+	public int processUpdate(Map<String, Object> map) {
+		
+		int result = mapper.processUpdate(map);
+		return 0;
+	}
 }

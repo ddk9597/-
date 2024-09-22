@@ -1,5 +1,7 @@
 package com.kch.study.realtor.contact.model.mapper;
 
+import java.util.Map;
+
 import org.apache.ibatis.annotations.Mapper;
 
 import com.kch.study.realtor.contact.model.dto.ContactDTO;
@@ -13,6 +15,10 @@ public interface ContactMapper {
 	// 요청이 성공적으로 등록되면 contractProcess테이블에 추가하기
 	int getContactNo();
 	int addContractProcess(ContactDTO contactDTO);
+	
+	// 업데이트를 진행한다.
+	int processUpdate(Map<String, Object> map);
+
 
 
 

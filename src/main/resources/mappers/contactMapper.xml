@@ -43,6 +43,11 @@
 		INSERT INTO CONTACT_PROCESS (CONTACT_NO, REQUESTER)
 		VALUES (#{contactNo}, #{requester})
 	</insert>
+	
+	<update id="processUpdate">
+	
+		
+	</update>
 
 
 </mapper>
