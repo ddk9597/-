@@ -11,22 +11,24 @@ function changeReceiveStatus(event) {
 
   // ㄱㄱ
   if (gogo) {
-    fetch(`/realtor/contact/updateContactProcess?contactNo=${contactNo}&process=${curProcessStat}`, {
+    fetch('/realtor/contact/updateContactProcess', {
       method: 'POST',
-      headers: { "Content-Type": "application/json" },
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ contactNo, processStat: curProcessStat })
     })
-      .then(response => { 
-        if (response.ok) {
-          return response.text();
-        }
-        throw new Error('업데이트 실패');
-      })
-      .then(data => {
-        console.log(data);
-      })
-      .catch(error => {
-        console.error("Error:", error);
-      });
+    .then(response => response.json())  // JSON 응답을 기대
+    .then(data => {
+      if (data.success) {
+        alert('업데이트가 완료되었습니다.');
+        // 필요 시 페이지를 리로드하거나 다른 동작 수행
+        window.location.reload();
+      } else {
+        alert(data.message || '업데이트 실패');
+      }
+    })
+    .catch(error => {
+      console.error('Error:', error);
+    });
   }
 
   else {

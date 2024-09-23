@@ -27,6 +27,4 @@ public interface ContactMapper {
 		int updateToTwo(Map<String, Object> map);
 
 
-
-
 }

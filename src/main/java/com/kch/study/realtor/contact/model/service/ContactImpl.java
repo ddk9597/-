@@ -37,7 +37,7 @@ public class ContactImpl implements ContactService {
 	public int processUpdate(Map<String, Object> map) {
 		
 		int result = mapper.processUpdate(map);
-		return 0;
+		return result;
 	}
 	
 	// 1 -> 2 업데이트 진행
@@ -45,6 +45,6 @@ public class ContactImpl implements ContactService {
 	public int updateToTwo(Map<String, Object> map) {
 		
 		int result = mapper.updateToTwo(map);
-		return 0;
+		return result;
 	}
 }
