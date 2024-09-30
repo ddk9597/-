@@ -9,18 +9,20 @@ import org.springframework.web.socket.config.annotation.WebSocketConfigurer;
 import org.springframework.web.socket.config.annotation.WebSocketHandlerRegistry;
 import org.springframework.web.socket.server.HandshakeInterceptor;
 
-import edu.kh.project.websocket.handler.ChattingWebsocketHandler;
-import edu.kh.project.websocket.handler.NotificationWebsocketHandler;
-import edu.kh.project.websocket.handler.TestWebsocketHandler;
+import com.kch.study.websocket.handler.ChattingWebsocketHandler;
+import com.kch.study.websocket.handler.NotificationWebsocketHandler;
+import com.kch.study.websocket.handler.TestWebSocketHandler;
+
 import lombok.RequiredArgsConstructor;
+
 
 @Configuration // 서버 실행 시 작성된 메서드를 모두 수행
 @EnableWebSocket // 웹소켓 활성화 설정
 @RequiredArgsConstructor
-public class WebSocketConfig implements WebSocketConfigurer {
+public class WebsocketConfig implements WebSocketConfigurer {
 
 	// 웹소켓 처리 동작이 작성된 객체 의존성 주입(DI)
-	private final TestWebsocketHandler testWebsocketHandler;
+	private final TestWebSocketHandler testWebsocketHandler;
 
 	// bean으로 등록된 sessionHandshakeInterceptor 가 의존성 주입된다
 	private final HandshakeInterceptor handshakeInterceptor;
